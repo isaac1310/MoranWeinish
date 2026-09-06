@@ -1,0 +1,38 @@
+# Launch checklist — moran-weinish.vercel.app
+
+## A. Moran supplies (Figma exports → drop into the folder, tell Itzik)
+- [ ] TravelHub screens, PNG 2× (632×1292), into `assets/img/travelhub/`:
+      `screen-01-trips-home.png` · `screen-02-trip-detail.png` · `screen-03-itinerary-day.png` ·
+      `screen-04-itinerary-map.png` · `screen-05-budget.png` · `screen-06-bookings.png` · `screen-07-group.png`
+      (Figma: select the phone "Background" frame inside each Container component → Export → PNG 2x)
+- [ ] Suzuki icon row, PNG 2× → `assets/img/suzuki/icons.png` (frame "Frame 1739340856", 716×41)
+- [ ] Hero accent colour: select "simple." in Figma, read the Fill hex. `8A2C46` = OK, otherwise send the hex
+- [ ] Suzuki gallery captions, slides 2–8: read and correct wording (`work/suzuki.html`, the `data-cap` texts)
+- [ ] (Optional) Bara card thumbnail at higher resolution (source is 600×320) → `assets/img/card-bara.webp` 750×400
+
+## B. Review together — phone (Moran's) and desktop
+Home
+- [ ] Hero: text wraps well on phone, cards animation OK, buttons reachable
+- [ ] "What I do" strip: two rows on phone is acceptable
+- [ ] Four cards: images, order (KKL · TravelHub · Bara · Suzuki), hover on desktop
+- [ ] About photo and text; skills grid; footer email opens mail app; LinkedIn opens; CV downloads
+Case studies (each of the four)
+- [ ] Reads top to bottom on phone without horizontal scroll
+- [ ] Screenshots crop sensibly (top of image shown); tap → lightbox opens and closes
+- [ ] Suzuki video autoplays muted on iPhone; prev/next gallery works
+- [ ] "Back to portfolio" and "Next case study" go to the right place
+- [ ] Copy: any typo or wording Moran wants changed → note page + section number
+
+## C. Itzik, after A and B
+- [ ] Wire in the exports, apply the review notes, push
+- [ ] Add `robots.txt` + `sitemap.xml`
+- [ ] Lighthouse (mobile) on the live URL: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95 → record in README
+- [ ] Link preview: paste the URL into LinkedIn's post composer (don't post) → card shows title + og image
+- [ ] Final `diff` that nav/footer are identical across all five `.html` files
+
+## D. Parked (decided, not now)
+- CV PDF: "Portfolio" link inside it points to the old Wix site; phone number is public. Replace the file when ready.
+- Custom domain, analytics, contact form: out of scope.
+
+## Go-live
+- [ ] Moran puts `https://moran-weinish.vercel.app` in the CV as a link **and** as plain text
