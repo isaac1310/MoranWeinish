@@ -335,3 +335,29 @@ body.case .footer { padding-top: 64px; }
 .takeaway { display: grid; gap: 16px; padding: 54px 0 10px; }
 .takeaway p { font-weight: 700; font-size: clamp(26px, 2.2vw, 42px); line-height: 1.3; color: var(--ink); max-width: 900px; }
 @media (min-width: 1024px) { .takeaway { grid-template-columns: 300px 1fr; gap: 40px; padding-left: 120px; } }
+
+/* ===================== Bara-specific blocks ===================== */
+.bara-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin-top: 28px; }
+.bara-flow span { background: var(--cs-accent-a); color: #fff; border-radius: 11px; padding: 18px 16px; font-weight: 700; font-size: 18px; min-width: 150px; text-align: center; }
+.bara-flow span.end { background: var(--cs-accent); }
+.bara-flow i { color: var(--cs-line-2); font-style: normal; font-size: 34px; line-height: 1; }
+.two-cards { display: grid; gap: 40px; margin-top: 44px; }
+@media (min-width: 900px) { .two-cards { grid-template-columns: 1fr 1fr; } }
+.two-cards div { background: #fff; border-radius: 12px; padding: 30px 34px; box-shadow: 0 4px 4px rgba(0,0,0,.06); }
+.two-cards h4 { font-family: var(--mono); font-size: 16px; letter-spacing: .7px; text-transform: uppercase; color: #02a7bb; }
+.two-cards p { margin-top: 14px; font-size: 20px; line-height: 32px; color: #185a6b; }
+.cs-section.blue { background: #5889a8; border-color: transparent; }
+.blue .cs-num { color: #185a6b; border-color: #185a6b; }
+.blue .cs-h2 { color: #173f46; font-size: clamp(32px, 3.3vw, 64px); }
+.blue .cs-body-text { color: #014f40; font-size: clamp(17px, 1.25vw, 24px); }
+.blue .shot figcaption { color: #185a6b; }
+.insight-wide { background: #fff; border: 1px solid var(--cs-line); border-radius: 12px; padding: 30px 32px; margin-top: 20px; }
+.insight-wide .n { font-family: var(--mono); font-size: 34px; color: var(--cs-accent); }
+.insight-wide p { margin-top: 12px; font-weight: 600; font-size: clamp(22px, 1.8vw, 34px); line-height: 1.35; color: var(--cs-ink); }
+.annot { position: relative; }
+.annot .badge { position: absolute; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: 14px; color: #fff; box-shadow: 0 6px 12px -4px rgba(0,0,0,.4); transform: translate(-50%, -50%); }
+.callouts { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 12px 24px; font-size: 16px; line-height: 21px; color: var(--cs-body); }
+@media (min-width: 900px) { .callouts { grid-template-columns: 1fr 1fr; } }
+.callouts li { display: flex; gap: 9px; align-items: flex-start; }
+.callouts .badge { position: static; transform: none; width: 22px; height: 22px; font-size: 12px; flex: none; box-shadow: none; }
+.summary.blue { background: #5889a8; border-color: #5889a8; color: #243b41; }
