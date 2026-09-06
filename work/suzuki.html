@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suzuki Israel — refreshing the digital experience · Moran Weinish</title>
+  <meta name="description" content="Case study: a visual refresh of Suzuki Israel's website. Clearer hierarchy, one consistent design system and a mobile-first experience, live on suzuki.co.il. UX/UI by Moran Weinish at Comrax.">
+  <link rel="canonical" href="https://moran-weinish.vercel.app/work/suzuki">
+  <meta name="theme-color" content="#f8f8f7">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Suzuki Israel — refreshing the digital experience">
+  <meta property="og:description" content="A visual refresh of Suzuki Israel's website. Case study by Moran Weinish.">
+  <meta property="og:url" content="https://moran-weinish.vercel.app/work/suzuki">
+  <meta property="og:image" content="https://moran-weinish.vercel.app/assets/img/suzuki/hero.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&family=Open+Sans:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/case.css">
+  <style>
+    /* Suzuki palette — from the Figma "suzuki" frame */
+    body.case {
+      --cs-bg: #f8f8f7; --cs-hero-from: #f2f2f1;
+      --cs-ink: #1d2b45; --cs-body: #4d5860; --cs-body-2: #6b757d;
+      --cs-line: #e7e7e4; --cs-line-2: #acb0b9;
+      --cs-accent: #c8102e; --cs-accent-a: #003399; --cs-tint-a: #eef1f3; --cs-accent-b: #c8102e; --cs-tint-b: #fdeaed;
+    }
+    .cs-hero h1 { font-size: clamp(40px, 4.8vw, 92px); line-height: 1; }
+    .cs-meta { border-color: #acb0b9; } .cs-meta > div { border-color: #1d2b45 !important; }
+    .ncards .n { color: #003399; }
+    .stats b { color: #c8102e; }
+    .cs-section.grey { background: #f2f2f1; }
+    .jp { position: absolute; right: 0; top: -20px; width: 173px; opacity: .25; display: none; } @media (min-width: 1200px) { .jp { display: block; } }
+  </style>
+</head>
+<body class="case">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Moran Weinish — home"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
+    <ul class="nav-links">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a class="btn btn-dark" href="mailto:mweinish@gmail.com">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
+  </div>
+  <nav class="nav-drawer" id="drawer" aria-label="Mobile">
+    <ul class="wrap">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a class="btn btn-dark" href="mailto:mweinish@gmail.com">Get in touch</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HEADER ============ -->
+  <header class="cs-hero">
+    <div class="wrap">
+      <p class="cs-brand" style="color:#c8102e;font-family:'Open Sans',var(--sans);font-weight:700;letter-spacing:.12em;font-size:22px">SUZUKI</p>
+      <h1>Refreshing Suzuki’s<br>Digital Experience</h1>
+      <p class="lede">A visual refresh of Suzuki Israel’s website, designed to bring the brand’s digital presence up to date while staying true to its familiar identity. The new UI creates a cleaner, more consistent experience across pages, components, and screen sizes, with a stronger focus on clarity, usability, and the cars themselves.</p>
+      <dl class="cs-meta">
+        <div><dt>Role</dt><dd>Product Designer - UX/UI</dd></div>
+        <div><dt>Timeline</dt><dd>2024</dd></div>
+        <div><dt>Platform</dt><dd>Web · Responsive</dd></div>
+        <div><dt>Client</dt><dd>SUZUKI</dd></div>
+        <div><dt>Tools</dt><dd>Figma</dd></div>
+      </dl>
+      <div class="cs-hero-shot reveal">
+        <img src="/assets/img/suzuki/hero.webp" alt="Suzuki Israel homepage after the refresh" width="1660" height="937" style="aspect-ratio:1660/817;object-fit:cover;object-position:top">
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 01 OVERVIEW ============ -->
+  <section class="cs-section alt" style="position:relative;overflow:hidden">
+    <div class="wrap" style="position:relative">
+      <img class="jp" src="/assets/img/suzuki/japanese-text.webp" alt="" aria-hidden="true" width="173" height="287">
+      <div class="cs-head reveal">
+        <span class="cs-num">01 / Overview</span>
+        <div>
+          <h2 class="cs-h2">Bringing Suzuki’s Brand Into the Digital Experience</h2>
+          <div class="cs-body-text">
+            <p>As part of the Comrax team, I led the visual refresh of Suzuki Israel’s website, with the goal of creating a more modern, clear, and consistent digital experience while keeping the brand familiar and recognizable.</p>
+            <p>The project covered the visual language across the full website. From the homepage and model pages to trade-in, services, forms, content, and mobile. The challenge was to bring all these different areas together under one design approach, while giving the vehicles a stronger presence and making information and key actions easier to find.</p>
+            <p>The new UI builds on Suzuki’s practical and approachable character through clear hierarchy, strong imagery, focused use of the brand colors, and a consistent set of components that works across pages and screen sizes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 WHY REFRESH ============ -->
+  <section class="cs-section grey">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">02 / Why Refresh?</span>
+        <div>
+          <h2 class="cs-h2">Evolving the Experience, Not Replacing It</h2>
+          <div class="cs-body-text">
+            <p>Suzuki Israel already had a familiar digital presence and a clear brand identity. The goal wasn’t to redesign everything from scratch, but to improve how that identity works across a large and content-rich website.</p>
+            <p>The refresh focused on clearer hierarchy, stronger consistency, better use of space, and a more modern visual language, while keeping the experience familiar for existing users.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cs-content reveal">
+        <ol class="ncards">
+          <li><span class="n">01</span><h3>Clearer Hierarchy</h3><p>Give vehicles, key information, and primary actions a clear place in every screen.</p></li>
+          <li><span class="n">02</span><h3>More Consistency</h3><p>Create a shared visual language across model pages, services, trade-in, forms, and content.</p></li>
+          <li><span class="n">03</span><h3>Still Suzuki</h3><p>Modernize the digital experience while keeping the colors, character, and familiarity of the Suzuki brand.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 APPROACH ============ -->
+  <section class="cs-section dark navy">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">03 / Approach</span>
+        <div>
+          <h2 class="cs-h2">What Guided the Design</h2>
+          <div class="cs-body-text"><p>The visual refresh was built around a set of clear design principles: keeping Suzuki’s identity recognizable while creating a cleaner, more consistent, and easier-to-use experience across the site.</p></div>
+        </div>
+      </div>
+      <ul class="approach cs-content reveal">
+        <li><h3>Brand-Led Visual Language</h3><p>Suzuki’s red, logo, typography, imagery, and graphic elements were brought together into a clear and consistent digital language, with the vehicles always at the center.</p></li>
+        <li><h3>Clear Visual Hierarchy</h3><p>Page layouts were designed to make content easier to scan, with clear sections, strong headings, and visible actions that help users understand where to go next.</p></li>
+        <li><h3>Responsive by Design</h3><p>Layouts and components adapt across desktop, tablet, and mobile, with spacing, navigation, and interactions adjusted for smaller screens and touch.</p></li>
+        <li><h3>Accessibility</h3><p>Contrast, text sizes, interaction states, and touch targets were considered throughout the UI to support an accessible and comfortable browsing experience.</p></li>
+        <li><h3>Interactive Components</h3><p>Complex information such as model comparisons, price lists, specifications, and emission ratings was designed to be easier to explore and understand.</p></li>
+        <li><h3>Responsive Media</h3><p>Video and visual content were integrated into the page layouts without interrupting the browsing experience, adapting naturally across screen sizes.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 04 DESIGN (gallery with video) ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">04 / Design</span>
+        <div>
+          <h2 class="cs-h2">Bringing the New Visual Language to Life</h2>
+          <div class="cs-body-text"><p>Suzuki’s red is used with purpose, highlighting key actions and important elements without taking over the interface. The layouts combine strong vehicle imagery, clear typography, and generous spacing to create a clean, recognizable Suzuki experience across the site.</p></div>
+        </div>
+      </div>
+      <div class="gallery reveal" aria-roledescription="carousel" aria-label="Refreshed Suzuki Israel screens">
+        <div class="stage">
+          <div class="slide on" data-cap="<b>Homepage / Brand Experience</b> A full width driving video creates an immediate sense of motion and brand experience, supported by a clear primary action that guides users to the next step.">
+            <video muted loop playsinline preload="metadata" poster="/assets/img/suzuki/home-new.webp" aria-label="Suzuki Swift driving video on the refreshed homepage">
+              <source src="/assets/video/suzuki-swift.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="slide" data-cap="<b>Homepage</b> Model highlights and clear entry points to the main sections."><img src="/assets/img/suzuki/slide-2.webp" alt="Refreshed homepage: model highlights" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Model page</b> Bold imagery with the key facts up front."><img src="/assets/img/suzuki/slide-3.webp" alt="Refreshed model page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Model page</b> Specifications and comparisons designed to be explored."><img src="/assets/img/suzuki/slide-4.webp" alt="Model page: specifications" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Content</b> Editorial layouts for services and magazine content."><img src="/assets/img/suzuki/slide-5.webp" alt="Content page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Services</b> One consistent structure for trade-in, service and forms."><img src="/assets/img/suzuki/slide-6.webp" alt="Services page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Showrooms</b> Locations and contact made easy to find."><img src="/assets/img/suzuki/slide-8.webp" alt="Showrooms page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Forms</b> Clear, accessible forms across the site."><img src="/assets/img/suzuki/slide-9.webp" alt="Forms page" loading="lazy"></div>
+        </div>
+        <div class="bar">
+          <p class="cap" aria-live="polite"></p>
+          <div class="ctrl">
+            <button type="button" class="prev" aria-label="Previous screen"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" class="next" aria-label="Next screen"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+        </div>
+        <div class="dots" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 TRANSFORMATION ============ -->
+  <section class="cs-section grey">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">05 / The Transformation</span>
+        <div>
+          <h2 class="cs-h2">Seeing the Refresh Side by Side</h2>
+          <div class="cs-body-text"><p>Looking at the old and refreshed experiences side by side shows how small, focused design decisions changed the overall feel of the site. Stronger hierarchy, more space, clearer actions, and a more consistent use of Suzuki’s visual language created a cleaner experience without losing the familiarity of the original.</p></div>
+        </div>
+      </div>
+
+      <h3 class="ba-title reveal">01 / Homepage - Giving the Main Experience More Focus</h3>
+      <div class="ba shot reveal">
+        <figure><div class="frame"><img src="/assets/img/suzuki/home-old.webp" alt="Old Suzuki Israel homepage" loading="lazy"></div><figcaption><b>Old Website.</b> Multiple visual elements competed for attention, making the vehicle, key message, and primary action less clear.</figcaption></figure>
+        <figure><div class="frame"><img src="/assets/img/suzuki/home-new.webp" alt="Refreshed Suzuki Israel homepage" loading="lazy"></div><figcaption><b class="new">Refreshed Website.</b> A stronger visual hierarchy puts the vehicle, key message, and primary action at the center of the experience.</figcaption></figure>
+      </div>
+
+      <h3 class="ba-title reveal">02 / Model Page - Making Vehicle Information Easier to Explore</h3>
+      <div class="ba shot reveal">
+        <figure><div class="frame"><img src="/assets/img/suzuki/model-old.webp" alt="Old model page" loading="lazy"></div><figcaption><b>Old Website.</b> The model page presented the essential vehicle information in a more traditional, functional layout.</figcaption></figure>
+        <figure><div class="frame"><img src="/assets/img/suzuki/model-new.webp" alt="Refreshed model page" loading="lazy"></div><figcaption><b class="new">Refreshed Website.</b> A more visual and interactive experience brings the model to life, combining bold imagery, intuitive interactions, and engaging moments throughout the journey.</figcaption></figure>
+      </div>
+
+      <h3 class="ba-title reveal">03 / Mobile - Designed for the Mobile Experience</h3>
+      <div class="ba shot reveal">
+        <figure><div class="phones3"><img src="/assets/img/suzuki/mobile-old-1.webp" alt="Old mobile screen 1" loading="lazy"><img src="/assets/img/suzuki/mobile-old-2.webp" alt="Old mobile screen 2" loading="lazy"><img src="/assets/img/suzuki/mobile-old-3.webp" alt="Old mobile screen 3" loading="lazy"></div><figcaption><b>Old Website.</b> The mobile experience felt closer to a scaled down desktop layout, with limited consideration for touch, spacing, and content flow.</figcaption></figure>
+        <figure><div class="phones3"><img src="/assets/img/suzuki/mobile-new-1.webp" alt="Refreshed mobile screen 1" loading="lazy"><img src="/assets/img/suzuki/mobile-new-2.webp" alt="Refreshed mobile screen 2" loading="lazy"><img src="/assets/img/suzuki/mobile-new-3.webp" alt="Refreshed mobile screen 3" loading="lazy"></div><figcaption><b class="new">Refreshed Website.</b> A mobile first approach creates a more intuitive experience, with clearer content hierarchy, optimized spacing, and touch-friendly interactions.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 DESIGN SYSTEM ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">06 / Design system</span>
+        <div>
+          <h2 class="cs-h2">A Consistent System for Suzuki</h2>
+          <div class="cs-body-text"><p>The design system brings Suzuki’s digital language into one consistent set of colors, typography, icons, buttons, cards, and UI components. Suzuki red is used as the main action color, supported by a neutral palette, a clear type scale, and a custom icon set designed for vehicle specs and key information.</p></div>
+        </div>
+      </div>
+      <div class="ds reveal">
+        <div>
+          <h4 style="color:#8a9199">Palette</h4>
+          <div class="sw-big">
+            <span style="background:#c8102e">#C8102E</span>
+            <span style="background:#1d2b45">#1F262E</span>
+            <span style="background:#003399">#003399</span>
+          </div>
+          <div class="sw-small">
+            <span style="background:#56657d">Slate</span>
+            <span style="background:#e7e7e4;color:#56657d">Line</span>
+            <span style="background:#f2f2f1;color:#56657d;border:1px solid #9e9e9e">Surface</span>
+            <span style="background:#fff;color:#56657d;border:1px solid #e7e7e4">Paper</span>
+          </div>
+          <h4 style="color:#8a9199">Type &amp; scale</h4>
+          <div class="panel type-sample">
+            <div class="face" style="font-family:'Open Sans',var(--sans)">Open Sans</div>
+            <div class="sub" style="color:#8a9199">Hebrew-first · headings, body and data</div>
+            <div class="scale"><span style="color:#1d2b45">34</span><span style="color:#1d2b45">22</span><span style="color:#4d5860">16</span><span style="color:#6b757d">14</span><span>13 · caption</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:#8a9199">Buttons &amp; Components</h4>
+          <div class="panel">
+            <div class="ds-row">
+              <span class="ds-btn" style="background:#e20a17;color:#fff;border-radius:11px">Search</span>
+              <span class="ds-btn" style="background:#003399;color:#fff;border-radius:12px">Book a drive</span>
+              <span class="ds-btn" style="border:1px solid #b9b9b9;color:#1d2b45;border-radius:8px">Model comparison</span>
+            </div>
+            <div class="ds-row">
+              <span class="ds-tag" style="background:#fdeaed;color:#c8102e;font-weight:700">New</span>
+              <span class="ds-tag" style="background:#eef1f3;color:#4d5860">Hybrid</span>
+              <span class="ds-tag" style="background:#003399;color:#fff;font-weight:700">₪91,000</span>
+              <span style="margin-left:auto;width:49px;height:72px;border-radius:6px;background:#fff;box-shadow:0 4px 8px rgba(0,0,0,.15);display:grid;place-items:center"><span style="width:33px;height:55px;border-radius:4px;background:#e20a17;display:block"></span></span>
+            </div>
+          </div>
+          <h4 style="color:#8a9199">Iconography</h4>
+          <!-- GAP: the nine Suzuki service icons (Hebrew-labelled, 55×41) are vectors that need exporting from Figma. -->
+          <div class="panel" style="min-height:114px;display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:#8a9199;text-align:center;line-height:1.6">Custom icon set for vehicle specs and services<br><span style="font-size:11px">Export from Figma → assets/img/suzuki/icons.png</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 IMPACT ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">07 / Impact</span>
+        <div><h2 class="cs-h2">A Clearer Digital Experience</h2></div>
+      </div>
+      <ul class="stats reveal" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <li style="background:#fff"><b>Live</b><p>Designed, developed, and running on <a href="https://www.suzuki.co.il" rel="noopener" target="_blank" style="text-decoration:underline">suzuki.co.il</a>.</p></li>
+        <li style="background:#fff"><b>AA</b><p>Accessibility considered across components, interactions, and screen sizes.</p></li>
+        <li style="background:#fff"><b>1 System</b><p>One visual language connecting the experience from desktop to mobile.</p></li>
+      </ul>
+      <p class="summary reveal" style="background:#fff;border-color:#e7e7e4;color:#1d2b45">The refresh gave Suzuki Israel a clearer and more consistent digital presence while keeping the brand familiar. Stronger hierarchy and clearer actions make it easier to explore models, find information, access services, and move between different areas of the site. The result is a responsive, accessible experience that feels recognizably Suzuki.</p>
+      <nav class="cs-nav" aria-label="Case studies">
+        <a href="/#work">Back to portfolio</a>
+        <a class="next" href="/work/kkl">Next case study <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="reveal">
+        <span class="label">Let's talk</span>
+        <h2 class="h2">Have a role<br>in mind?</h2>
+        <a class="btn btn-rose" href="mailto:mweinish@gmail.com">mweinish@gmail.com
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.83" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M10.5 5 16 10l-5.5 5"/></svg>
+        </a>
+      </div>
+      <div class="elsewhere reveal" data-delay="1">
+        <span class="label">Elsewhere</span>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/moran-weinish" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="/assets/Moran-Weinish-CV.pdf" download>Resume (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
+      <small>© 2026 · Designed &amp; built by me</small>
+    </div>
+  </div>
+</footer>
+
+<a class="to-top" href="#" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>

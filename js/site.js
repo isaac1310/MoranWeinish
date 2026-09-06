@@ -85,3 +85,25 @@
     if (im.complete && im.naturalWidth === 0) fallback(); else im.addEventListener('error', fallback);
   });
 })();
+
+/* 6. simple gallery (Suzuki): prev/next, dots, plays the video only on its slide */
+(function () {
+  'use strict';
+  document.querySelectorAll('.gallery').forEach(function (g) {
+    var slides = g.querySelectorAll('.slide'), cap = g.querySelector('.cap'), dots = g.querySelector('.dots'), i = 0;
+    if (!slides.length) return;
+    slides.forEach(function (_, k) { var d = document.createElement('i'); if (!k) d.className = 'on'; dots.appendChild(d); });
+    function show(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) {
+        s.classList.toggle('on', k === i);
+        var v = s.querySelector('video'); if (v) { if (k === i) { v.play().catch(function () {}); } else { v.pause(); } }
+      });
+      dots.querySelectorAll('i').forEach(function (d, k) { d.classList.toggle('on', k === i); });
+      cap.innerHTML = slides[i].getAttribute('data-cap') || '';
+    }
+    g.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
+    g.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    show(0);
+  });
+})();

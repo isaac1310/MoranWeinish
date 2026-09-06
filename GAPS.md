@@ -15,6 +15,9 @@ Each item blocks or degrades a part of the site until answered.
 
 | 13 | **TravelHub: 7 screen exports** | Section "07 / The interface" shows seven phone screens that are Figma-drawn components, not images. Please export each at 2× as PNG (632×1292) into `assets/img/travelhub/` with these exact names: `screen-01-trips-home.png`, `screen-02-trip-detail.png`, `screen-03-itinerary-day.png`, `screen-04-itinerary-map.png`, `screen-05-budget.png`, `screen-06-bookings.png`, `screen-07-group.png`. Figma: select the phone "Background" frame inside each Container component → Export → PNG 2x. Until then the site shows labelled placeholders. |
 
+| 14 | **Suzuki: icon set export** | Section "06 / Design system → Iconography" shows nine Hebrew-labelled service icons drawn as vectors. Export the icon row (Frame 1739340856, 716×41) as PNG 2× to `assets/img/suzuki/icons.png`. Placeholder shown until then. |
+| 15 | **Suzuki gallery captions** | The Figma carousel has 9 slides but only slide 1 has a caption. I wrote short captions for slides 2–8 from what the screenshots show; Moran should check the wording. Slide 7 duplicated slide 6 and was dropped. |
+
 ## Quality / decide together
 
 | # | Gap | Detail |
