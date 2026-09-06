@@ -9,7 +9,7 @@ Each item blocks or degrades a part of the site until answered.
 |---|-----|----------------|-------------|
 | 1 | ~~LinkedIn URL~~ | Done 2026-09-06 → linkedin.com/in/moran-weinish | — |
 | 2 | ~~Resume PDF~~ | Done 2026-09-06, `assets/Moran-Weinish-CV.pdf` (1 page, 683 KB). **It contains the phone number 050-7510663**; anyone with the link can download it. Moran accepted this; swap in a phone-less copy any time. |
-| 3 | **Hero accent colour** | "feel *simple.*" | The colour comes from a shared Figma style I can't read from the file. I used `#8a2c46` (same as the "Selected work" label). Confirm or give the hex. |
+| 3 | ~~Hero accent colour~~ | Confirmed `#8a2c46` by Moran 2026-09-06 | — |
 
 | 12 | **CV "Portfolio" link points to the old Wix site** | The PDF's link goes to mweinish.wixsite.com/moranweinish. Update it to https://moran-weinish.vercel.app in the source document and re-export, then replace `assets/Moran-Weinish-CV.pdf`. |
 

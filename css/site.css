@@ -120,10 +120,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* hero cards — float, rotate, fade in */
-.hero-art .card { transform-box: fill-box; transform-origin: center; opacity: 0; animation: card-in .9s var(--ease) forwards; }
-.hero-art .c1 { animation-delay: .05s; }
-.hero-art .c2 { animation-delay: .2s; }
-.hero-art .c3 { animation-delay: .35s; }
+.hero-art .card { transform-box: fill-box; transform-origin: center; opacity: 0; animation: card-in 1.5s var(--ease) forwards; }
+.hero-art .c1 { animation-delay: .1s; }
+.hero-art .c2 { animation-delay: .35s; }
+.hero-art .c3 { animation-delay: .6s; }
 .hero-art .float { animation: float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 .hero-art .f2 { animation-duration: 7s; animation-delay: -2s; }
 .hero-art .f3 { animation-duration: 8s; animation-delay: -4s; }
@@ -186,10 +186,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ---------- about ---------- */
 .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0 80px; }
-.about-grid { display: grid; gap: 40px; margin-top: 60px; align-items: center; }
+.about-grid { display: grid; gap: 40px; margin-top: 60px; align-items: stretch; }
 .about-photo { position: relative; width: min(340px, 100%); margin-inline: auto; }
 .about-photo::before { content: ""; position: absolute; inset: 12px -12px -12px 12px; border-radius: var(--r-photo); background: var(--bg); border: 1px solid var(--border); }
-.about-photo img { position: relative; width: 100%; height: auto; aspect-ratio: 340 / 420; object-fit: cover; border-radius: var(--r-photo); }
+.about-photo img { position: relative; width: 100%; height: auto; aspect-ratio: 340 / 420; object-fit: cover; object-position: center top; border-radius: var(--r-photo); }
 .about-text .h2 { font-size: clamp(32px, 2.6vw, 50px); line-height: 1.12; max-width: 835px; }
 .about-text p { margin-top: 32px; font-size: clamp(18px, 1.15vw, 22px); line-height: 1.6; color: var(--body); max-width: 1200px; }
 .about-text .strong { font-weight: 600; }
@@ -197,10 +197,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .skill { padding: 28px 0 0; }
 .skill dt { font-family: var(--mono); font-size: 14px; letter-spacing: .78px; text-transform: uppercase; color: var(--muted); }
 .skill dd { margin: 16px 0 0; font-size: 20px; line-height: 30px; color: var(--body-2); }
+.skill dd span { white-space: nowrap; }
 @media (min-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); gap: 0 40px; } }
 @media (min-width: 1024px) {
   .about { padding: 96px 0 115px; }
-  .about-grid { grid-template-columns: 340px 1fr; gap: 64px; padding-left: clamp(0px, 5vw, 0px); }
+  .about-grid { grid-template-columns: 340px 1fr; gap: 64px; align-items: stretch; }
+  /* photo takes exactly the text block's height: absolutely positioned so it never drives the row */
+  .about-photo { height: 100%; min-height: 300px; }
+  .about-photo img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
   .skills { grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 86px; }
   .skill { padding: 36px 40px 0; }
   .skill:first-child { padding-left: 0; }
@@ -208,21 +212,23 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ---------- footer / contact ---------- */
-.footer { background: var(--plum); color: var(--on-plum); padding: 96px 0 60px; }
+.footer { background: var(--plum); color: var(--on-plum); padding: 96px 0 36px; }
 .footer-top { display: grid; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid var(--plum-border); }
 .footer .label { border: 0; padding: 0; font-size: 20px; color: var(--rose); }
 .footer .h2 { color: var(--on-plum); font-weight: 800; font-size: clamp(44px, 3.85vw, 74px); line-height: 1; letter-spacing: -0.03em; margin: 22px 0 30px; }
-.footer .btn-rose svg { width: 20px; height: 20px; }
+.footer .btn-rose svg { width: 20px; height: 20px; animation: nudge 2.2s ease-in-out infinite; transition: transform .3s var(--ease); }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@media (hover: hover) { .footer .btn-rose:hover svg { animation: none; transform: translateX(8px); } }
 .elsewhere .label { color: var(--rose-muted); letter-spacing: 1.04px; }
 .elsewhere ul { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 16px; }
 .elsewhere a { font-size: 19px; color: var(--on-plum-link); transition: color .2s; }
 @media (hover: hover) { .elsewhere a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; } }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 30px; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 30px; padding-bottom: 0; }
 .footer-bottom .brand { color: var(--on-plum); font-size: 22px; }
 .footer-bottom .brand-mark { background: var(--rose); color: var(--plum); width: 37px; height: 37px; }
 .footer-bottom small { font-size: 18px; color: var(--rose-muted); }
 @media (min-width: 1024px) {
-  .footer { padding: 155px 0 103px; }
+  .footer { padding: 155px 0 44px; }
   .footer-top { grid-template-columns: 1fr auto; gap: 196px; padding-bottom: 70px; }
   .footer-bottom small { font-size: 22px; }
 }
@@ -231,8 +237,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .to-top {
   position: fixed; left: 28px; bottom: 28px; z-index: 40;
   width: 59px; height: 59px; border-radius: 50%;
-  background: rgba(255,255,255,.9); border: 3px solid var(--accent); color: var(--accent);
-  display: grid; place-items: center; box-shadow: 0 8px 12px -6px rgba(46,26,34,.3);
+  background: rgba(255,255,255,.28); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
+  border: 3px solid var(--accent); color: var(--accent);
+  display: grid; place-items: center; box-shadow: 0 8px 12px -6px rgba(46,26,34,.3), inset 0 1px 0 rgba(255,255,255,.6);
   opacity: 0; transform: translateY(12px); pointer-events: none;
   transition: opacity .3s, transform .3s var(--ease);
 }
