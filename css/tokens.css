@@ -1,0 +1,50 @@
+/* Design tokens — extracted from Portfolio.fig (frame "main page" 18:457).
+   Values are the exact Figma hex codes; do not "round" them. */
+:root {
+  /* surfaces */
+  --bg: #f7f0ef;
+  --surface: #ffffff;
+  --border: #ecdedd;
+  --plum: #4a1a2e;
+  --plum-border: rgba(244, 239, 230, 0.18); /* #f4efe6 hairline on plum */
+
+  /* text */
+  --ink: #2e1a22;
+  --body: #544e45;
+  --body-2: #3f3a32;
+  --nav: #4a453d;
+  --muted: #a19a8c;
+  --muted-2: #8a8577;
+  --muted-3: #6f6a60;
+  --accent: #8a2c46;
+  --rose: #e5a3a0;
+  --rose-muted: #b78e93;
+  --on-plum: #f7f0ef;
+  --on-plum-link: #ecd7d6;
+  --outline-btn: #e2cfce;
+
+  /* hero illustration */
+  --card-1: #ecc9cd;
+  --card-2: #dda3ad;
+  --card-3: #c8788a;
+  --card-fill: #f7e9e9;
+  --card-line: #e0a7b0;
+
+  /* type */
+  --sans: "Assistant", "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* layout — 1920 design width, 130px gutters, 1660px content */
+  --content: 1660px;
+  --gutter: clamp(20px, 6.77vw, 130px);
+  --nav-h: 89px;
+
+  /* radii */
+  --r-card: 20px;
+  --r-photo: 24px;
+  --r-pill: 999px;
+
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.6s;
+}

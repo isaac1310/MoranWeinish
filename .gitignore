@@ -1,0 +1,8 @@
+# Source design — 67 MB, lives in Figma/Drive, not in git
+Portfolio.fig
+*.fig
+
+.DS_Store
+node_modules/
+.vercel/
+.claude/
