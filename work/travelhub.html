@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TravelHub — plan the whole trip · Moran Weinish</title>
+  <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
+  <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
+  <meta name="theme-color" content="#f7f0ef">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TravelHub — plan the whole trip">
+  <meta property="og:description" content="An end-to-end mobile trip planner. Case study by Moran Weinish.">
+  <meta property="og:url" content="https://moran-weinish.vercel.app/work/travelhub">
+  <meta property="og:image" content="https://moran-weinish.vercel.app/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/case.css">
+  <style>
+    /* TravelHub palette — from the Figma "travel hub" frame */
+    body.case {
+      --cs-bg: #f7f0ef; --cs-hero-from: #f7f0ef;
+      --cs-ink: #2e1a22; --cs-body: #544e45; --cs-body-2: #6f6a60;
+      --cs-line: #ecdedd; --cs-line-2: #c9c4b8;
+      --cs-accent: #cf5a43; --cs-accent-a: #e87a6a; --cs-tint-a: #f9d9d1; --cs-accent-b: #4a9d7f; --cs-tint-b: #eaf5f0;
+    }
+    .cs-hero h1 { font-weight: 600; }
+    .cs-h2 { font-weight: 700; }
+    .cs-h2.semi { font-weight: 600; }
+  </style>
+</head>
+<body class="case">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Moran Weinish — home"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
+    <ul class="nav-links">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a class="btn btn-dark" href="mailto:mweinish@gmail.com">Get in touch</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
+  </div>
+  <nav class="nav-drawer" id="drawer" aria-label="Mobile">
+    <ul class="wrap">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a class="btn btn-dark" href="mailto:mweinish@gmail.com">Get in touch</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HEADER ============ -->
+  <header class="cs-hero" style="padding-bottom:64px">
+    <div class="wrap th-hero-grid">
+      <div>
+        <p class="cs-brand"><span class="cs-mark" style="background:#ef8e7f"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f7f0ef" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/><circle cx="12" cy="12" r="9"/></svg></span>TravelHub</p>
+        <h1>Plan the<br>whole trip.</h1>
+        <p class="lede">TravelHub started as a planner I built for myself. One simple place to keep track of the trip, from daily plans and bookings to who's coming and how much we're spending.</p>
+        <dl class="cs-meta">
+          <div><dt>Role</dt><dd>Product Designer - UX/UI</dd></div>
+          <div><dt>Timeline</dt><dd>2025</dd></div>
+          <div><dt>Platform</dt><dd>Mobile App</dd></div>
+          <div><dt>Tools</dt><dd>Figma</dd></div>
+        </dl>
+      </div>
+      <div class="th-phone reveal" aria-label="TravelHub welcome screen" role="img">
+        <div class="scr">
+          <div class="status"><span>9:41</span><i></i></div>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="copy">
+            <h3>Your whole trip<br>in one place.</h3>
+            <p>Plans, bookings, people and budget organized from day one.</p>
+            <div class="cta">Get started</div>
+            <small>I already have an account</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 01 OVERVIEW ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">01 / Overview</span>
+        <div>
+          <h2 class="cs-h2 semi">It started as my own itch to scratch</h2>
+          <div class="cs-body-text">
+            <p>I plan a lot of trips for myself, with my partner, and for the whole group. Every time, I ended up stitching the plan together across a spreadsheet, my inbox and three chat threads.</p>
+            <p>TravelHub is the tool I wished existed: one place to plan the whole trip, day by day, with the budget sitting quietly alongside.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cs-content trio reveal">
+        <div><span class="n">01</span><h3>The plan lives in five places</h3><p>Flights in email, hotels in chat, ideas in notes. Nothing shows the whole trip in one view.</p></div>
+        <div><span class="n">02</span><h3>No day-by-day view</h3><p>It's hard to see what actually happens on each day, or what's still missing before you go.</p></div>
+        <div><span class="n">03</span><h3>Trips get out of sync fast.</h3><p>Who’s coming, what’s booked, what’s left to spend - everyone keeps asking instead of having one place to see it all.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 RESEARCH ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">02 / Research</span>
+        <div>
+          <h2 class="cs-h2 semi">Validating the problem</h2>
+          <div class="cs-body-text"><p>To understand whether others faced similar challenges, I spoke with six people who had recently planned a trip and explored the tools they used along the way. Their insights revealed four recurring patterns that helped shape the direction of the product.</p></div>
+        </div>
+      </div>
+      <div class="research reveal">
+        <div class="statbar">
+          <div><b>6</b><span>interviews</span></div>
+          <div><b>5/6</b><span>used a spreadsheet</span></div>
+          <div><b>+3</b><span>apps per trip</span></div>
+        </div>
+        <ol class="findings">
+          <li data-n="1"><span><b>Planning is where the complexity starts.</b> People want to see the full trip at a glance.</span></li>
+          <li data-n="2"><span><b>Trips are shared, but planning tools are not.</b> Planning happens together, yet most tools are still built around individual users.</span></li>
+          <li data-n="3"><span><b>Planning happens in everyday moments.</b> People make trip decisions throughout the day, making mobile the natural place to plan.</span></li>
+          <li data-n="4"><span><b>Budget belongs in the trip.</b> Knowing what’s been spent and what’s left is most useful when it sits alongside the actual plans.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 USER TYPES ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">03 / User Types</span>
+        <div>
+          <h2 class="cs-h2 semi">Travelers Plan Differently</h2>
+          <div class="cs-body-text"><p>The interviews revealed similar planning needs across different types of travelers. Whether traveling solo, as a couple, or in a group, the need to keep plans and spending connected remained consistent.</p></div>
+        </div>
+      </div>
+      <div class="personas reveal">
+        <article class="persona">
+          <header><span class="av"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11.2V16h6v-1.8A6 6 0 0 0 12 3z"/></svg></span><div><h3>The Organiser</h3><span>Plans for a group</span></div></header>
+          <dl><div><dt>Context</dt><dd>Takes the lead on planning for the group - coordinating bookings, payments, and keeping everyone up to date.</dd></div>
+              <div><dt>Needs</dt><dd>A shared view of the trip that keeps everyone informed, with plans, bookings, and spending clearly tracked in one place.</dd></div></dl>
+        </article>
+        <article class="persona">
+          <header><span class="av"><svg viewBox="0 0 24 24"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20a5 5 0 0 1 10 0M12 20a5 5 0 0 1 10 0"/></svg></span><div><h3>The Duo</h3><span>Couple or two friends</span></div></header>
+          <dl><div><dt>Context</dt><dd>Plans the trip together, with both people involved in decisions, bookings, and day-to-day plans.</dd></div>
+              <div><dt>Needs</dt><dd>A shared view that keeps both people aligned on the itinerary, decisions, and spending throughout the trip.</dd></div></dl>
+        </article>
+        <article class="persona">
+          <header><span class="av"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></span><div><h3>The Solo Planner</h3><span>Travels independently</span></div></header>
+          <dl><div><dt>Context</dt><dd>Plans trips independently, often managing more than one upcoming trip and handling every detail from start to finish.</dd></div>
+              <div><dt>Needs</dt><dd>A clear, structured view of each trip, with plans, bookings, and spending easy to manage throughout the journey.</dd></div></dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 STRUCTURE & FLOW ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">04 / Structure &amp; flow</span>
+        <div>
+          <h2 class="cs-h2 semi">Five tabs, one connected experience</h2>
+          <div class="cs-body-text"><p>The trip serves as the app’s central hub, bringing the itinerary, bookings, and budget into one connected planning flow. Instead of treating them as separate tools, the experience keeps every decision within the context of the trip.</p></div>
+        </div>
+      </div>
+      <div class="tabs5 reveal">
+        <div><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><h3>Trips</h3><p>Home &amp; overview</p></div>
+        <div class="on"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><h3>Itinerary</h3><p>The heart of it</p></div>
+        <div><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 11h20"/><circle cx="17" cy="15" r="1"/></svg><h3>Budget</h3><p>Alongside the plan</p></div>
+        <div><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v5"/></svg><h3>Bookings</h3><p>Flights &amp; docs</p></div>
+        <div><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M17 6v6M20 9h-6"/></svg><h3>Group</h3><p>Who &amp; tasks</p></div>
+      </div>
+      <p class="cs-label reveal" style="margin-top:40px;letter-spacing:1.12px">Core flow: build the day-by-day plan</p>
+      <div class="flow4 reveal">
+        <div><span class="n">01</span><h3>Open the trip</h3><p>from Trips home</p></div>
+        <div><span class="n">02</span><h3>Open the itinerary</h3><p>pick a day</p></div>
+        <div><span class="n">03</span><h3>Add a flight, stay or activity</h3><p>a few taps</p></div>
+        <div><span class="n">✓</span><h3>It lands on the timeline</h3><p>and its cost rolls into the budget</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 WIREFRAMES ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">05 / Wireframes</span>
+        <div>
+          <h2 class="cs-h2">Structure before style</h2>
+          <div class="cs-body-text"><p>Low-fidelity wireframes helped define the app’s hierarchy and navigation early on - placing the day-by-day itinerary at the center, with bookings and budget supporting the planning flow.</p></div>
+        </div>
+      </div>
+      <div class="wires reveal">
+        <div class="wire-row" aria-hidden="true">
+          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:84px">Next trip</div><i style="height:46px"></i><i style="height:46px"></i><i class="btn-w"></i></div><span>Trips</span></div>
+          <div class="wire"><div class="fr"><i class="bar"></i><div class="row"><i></i><i></i></div><div class="row"><i></i><i></i></div><div class="row"><i></i><i></i></div><i class="btn-w"></i></div><span>Itinerary</span></div>
+          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:70px">Left</div><i style="height:34px"></i><i style="height:34px"></i><i style="height:34px"></i><i class="btn-w"></i></div><span>Budget</span></div>
+        </div>
+        <div class="changes">
+          <span class="cs-label" style="letter-spacing:1.12px">What changed after lo-fi</span>
+          <ul>
+            <li>Each trip now opens directly into the day-by-day plan, keeping the core task front and center.</li>
+            <li>Reduced budget visibility to one key number - money left, with the full breakdown one tap away.</li>
+            <li>A persistent action keeps adding plans, bookings, and expenses within reach throughout the trip.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 DESIGN SYSTEM ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">06 / Design system</span>
+        <div>
+          <h2 class="cs-h2">Designed for consistency</h2>
+          <div class="cs-body-text"><p>A consistent design system keeps the experience clear and familiar, while creating a sense of ease and anticipation throughout the journey.</p></div>
+        </div>
+      </div>
+      <div class="ds th reveal">
+        <div>
+          <h4>Palette</h4>
+          <div class="swatches th" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+            <span style="background:#ef8e7f">Coral · primary</span>
+            <span style="background:#f3d9c6;color:#8a6a52">Peach</span>
+            <span style="background:#f5e7db;color:#8a6a52">Cream</span>
+            <span style="background:#fbf7f3;color:#9a9089">Surface</span>
+            <span style="background:#33302e">Ink</span>
+            <span style="background:#d9534f">Danger</span>
+            <span style="background:#4a9d7f">Success</span>
+            <span style="background:#d9903f">Warn</span>
+          </div>
+          <h4>Typography: the product</h4>
+          <div class="panel type-sample">
+            <div class="face">Assistant</div>
+            <div class="sub" style="font-size:19px;color:#4a453d;margin-top:14px">Used for body copy and UI labels, with clear readability at small sizes.</div>
+          </div>
+        </div>
+        <div>
+          <h4>Components</h4>
+          <div class="panel">
+            <div class="ds-row">
+              <span class="ds-btn" style="background:#ef8e7f;color:#fff;border-radius:999px;padding:12px 26px;font-weight:600;font-size:17px;box-shadow:0 8px 12px -6px rgba(232,122,106,.6)">Primary</span>
+              <span class="ds-btn" style="background:#f3d9c6;color:#33302e;border-radius:999px;padding:12px 26px;font-weight:600;font-size:17px">Secondary</span>
+              <span class="ds-btn" style="border:1px solid #e2ddd4;color:#6f645c;border-radius:999px;padding:12px 22px;font-weight:600;font-size:17px">Ghost</span>
+            </div>
+            <div class="ds-row">
+              <span class="ds-tag" style="background:#f9d9d1;color:#e87a6a;font-size:15px;padding:8px 18px">Active chip</span>
+              <span class="ds-tag" style="background:#eaf5f0;color:#4a9d7f;font-size:15px;padding:8px 16px">Paid</span>
+              <span class="ds-tag" style="background:#efe9f3;color:#6f5a8c;font-size:15px;padding:8px 16px">Booked</span>
+            </div>
+            <div class="ds-row">
+              <span class="ds-tag" style="background:#efe6f5;color:#7c5aa6;border-radius:7px">Hotel</span>
+              <span class="ds-tag" style="background:#dcefef;color:#3d8a8f;border-radius:7px">Flight</span>
+              <span class="ds-tag" style="background:#f7e6d6;color:#b5713e;border-radius:7px">Food</span>
+              <span class="ds-tag" style="background:#e2efe4;color:#4f8a63;border-radius:7px">Transport</span>
+            </div>
+          </div>
+          <h4>Icons &amp; shape</h4>
+          <div class="panel icons" style="gap:39px;--cs-ink:#e87a6a">
+            <svg viewBox="0 0 24 24" style="stroke:#e87a6a;stroke-width:2.2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <svg viewBox="0 0 24 24" style="stroke:#e87a6a;stroke-width:2.2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <svg viewBox="0 0 24 24" style="stroke:#e87a6a;stroke-width:2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <svg viewBox="0 0 24 24" style="stroke:#e87a6a;stroke-width:2.2"><path d="M4 7h16l-2 12H6z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            <svg viewBox="0 0 24 24" style="stroke:#e87a6a;stroke-width:2.2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M17 6v6M20 9h-6"/></svg>
+            <span class="note" style="letter-spacing:0">16px radius</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 THE INTERFACE ============ -->
+  <section class="cs-section dark th">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">07 / The interface</span>
+        <div>
+          <h2 class="cs-h2">The trip, screen by screen</h2>
+          <div class="cs-body-text"><p>The final interface brings the planning experience together - keeping each trip, its daily plans, bookings, and shared details connected and easy to navigate.</p></div>
+        </div>
+      </div>
+      <!-- Screens are exported from Figma as PNG (632×1292, 2x). Until they arrive the frames show a placeholder. -->
+      <div class="screens reveal">
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-01-trips-home.png" alt="TravelHub: Trips home screen" loading="lazy"></div><span>Trips home</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-02-trip-detail.png" alt="TravelHub: Trip detail screen, Paris 2026" loading="lazy"></div><span>Trip detail</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-03-itinerary-day.png" alt="TravelHub: Itinerary, day by day" loading="lazy"></div><span>Itinerary · day by day</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-04-itinerary-map.png" alt="TravelHub: Itinerary map view" loading="lazy"></div><span>Itinerary · maps</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-05-budget.png" alt="TravelHub: Budget screen" loading="lazy"></div><span>Budget · alongside</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-06-bookings.png" alt="TravelHub: Bookings and documents" loading="lazy"></div><span>Bookings &amp; docs</span></figure>
+        <figure class="screen"><div class="ph"><img src="/assets/img/travelhub/screen-07-group.png" alt="TravelHub: Group and checklist" loading="lazy"></div><span>Group &amp; checklist</span></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 INTERACTIONS ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">08 / Interactions</span>
+        <div>
+          <h2 class="cs-h2">Small interactions, smoother planning</h2>
+          <div class="cs-body-text"><p>Thoughtful interactions keep planning quick, connected, and predictable with every action reflected across the trip.</p></div>
+        </div>
+      </div>
+      <div class="inter reveal">
+        <div><span class="ic" style="background:#f9d9d1"><svg viewBox="0 0 24 24" style="stroke:#e87a6a"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div><h3>One trip, one timeline</h3><p>Flights, stays, and activities come together in a single day-by-day and map view, making the entire trip easy to scan.</p></div></div>
+        <div><span class="ic" style="background:#dcefef"><svg viewBox="0 0 24 24" style="stroke:#3d8a8f"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span><div><h3>Everything stays in sync</h3><p>Add a booking and it lands on the right day automatically, while its cost updates the remaining budget in the background.</p></div></div>
+        <div><span class="ic" style="background:#eaf5f0"><svg viewBox="0 0 24 24" style="stroke:#4a9d7f"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-2.7L7 19l1-6-4-4 5.5-.5z"/></svg></span><div><h3>Smart defaults</h3><p>Common choices are pre-selected and recent preferences remembered, reducing repetitive input and making adding plans faster.</p></div></div>
+        <div><span class="ic" style="background:#efe6f5"><svg viewBox="0 0 24 24" style="stroke:#7c5aa6"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M12 8v8"/></svg></span><div><h3>Helpful empty states</h3><p>Empty days and sections guide users toward the next action instead of leaving them at a dead end.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 TESTING ============ -->
+  <section class="cs-section alt">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num">09 / Testing &amp; iteration</span>
+        <div>
+          <h2 class="cs-h2">What testing changed</h2>
+          <div class="cs-body-text"><p>Five unmoderated usability tests helped uncover friction in navigation, planning, and budget comprehension. Each finding directly informed the final experience.</p></div>
+        </div>
+      </div>
+      <div class="testing reveal">
+        <div class="tstats">
+          <div><b>5</b><span>participants</span></div>
+          <div><b class="good">4/5</b><span>Planned a day successfully on their first attempt</span></div>
+          <div><b>3</b><span>Design iterations</span></div>
+        </div>
+        <div class="obs">
+          <div><div><span class="cs-label o">Observed</span><p>Users struggled to switch between trips.</p></div><span class="arrow" aria-hidden="true">→</span><div><span class="cs-label c">Changed</span><p>Made the trip switcher persistent and visible at the top of every screen.</p></div></div>
+          <div><div><span class="cs-label o">Observed</span><p>Users struggled to connect new bookings with the right day.</p></div><span class="arrow" aria-hidden="true">→</span><div><span class="cs-label c">Changed</span><p>Let users add bookings directly to a day, keeping the action within the planning flow.</p></div></div>
+          <div><div><span class="cs-label o">Observed</span><p>“Committed” vs. “Paid” caused confusion.</p></div><span class="arrow" aria-hidden="true">→</span><div><span class="cs-label c">Changed</span><p>Led with “Money left to spend” and moved the detailed breakdown below.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 OUTCOMES ============ -->
+  <section class="cs-section">
+    <div class="wrap">
+      <div class="cs-head reveal">
+        <span class="cs-num" style="border-color:#2e1a22">10 / Outcomes</span>
+        <div>
+          <h2 class="cs-h2">Where it landed</h2>
+          <div class="cs-body-text"><p>What started as a spreadsheet for planning my own trips evolved into a complete, tested mobile experience.</p></div>
+        </div>
+      </div>
+      <div class="outcome2 reveal">
+        <div><span class="cs-label" style="letter-spacing:1.12px">The result</span><p>A focused end-to-end travel planning concept that brings itinerary, bookings, and budget into one connected experience.</p></div>
+        <div><span class="cs-label" style="letter-spacing:1.12px">What I learned</span><p>Starting with a problem I knew firsthand gave the project focus. Testing with others challenged my assumptions and made the experience stronger.</p></div>
+      </div>
+      <div class="takeaway reveal">
+        <span class="cs-label" style="letter-spacing:1.12px">The takeaway</span>
+        <p>Start with a real need. Protect the core experience. Let every feature earn its place.</p>
+      </div>
+      <nav class="cs-nav" aria-label="Case studies">
+        <a href="/#work">Back to portfolio</a>
+        <a class="next" href="/work/bara">Next case study <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="reveal">
+        <span class="label">Let's talk</span>
+        <h2 class="h2">Have a role<br>in mind?</h2>
+        <a class="btn btn-rose" href="mailto:mweinish@gmail.com">mweinish@gmail.com
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.83" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M10.5 5 16 10l-5.5 5"/></svg>
+        </a>
+      </div>
+      <div class="elsewhere reveal" data-delay="1">
+        <span class="label">Elsewhere</span>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/moran-weinish" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="/assets/Moran-Weinish-CV.pdf" download>Resume (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
+      <small>© 2026 · Designed &amp; built by me</small>
+    </div>
+  </div>
+</footer>
+
+<a class="to-top" href="#" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
+<script src="/js/site.js" defer></script>
+</body>
+</html>

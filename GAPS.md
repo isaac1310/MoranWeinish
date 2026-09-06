@@ -13,6 +13,8 @@ Each item blocks or degrades a part of the site until answered.
 
 | 12 | **CV "Portfolio" link points to the old Wix site** | The PDF's link goes to mweinish.wixsite.com/moranweinish. Update it to https://moran-weinish.vercel.app in the source document and re-export, then replace `assets/Moran-Weinish-CV.pdf`. |
 
+| 13 | **TravelHub: 7 screen exports** | Section "07 / The interface" shows seven phone screens that are Figma-drawn components, not images. Please export each at 2× as PNG (632×1292) into `assets/img/travelhub/` with these exact names: `screen-01-trips-home.png`, `screen-02-trip-detail.png`, `screen-03-itinerary-day.png`, `screen-04-itinerary-map.png`, `screen-05-budget.png`, `screen-06-bookings.png`, `screen-07-group.png`. Figma: select the phone "Background" frame inside each Container component → Export → PNG 2x. Until then the site shows labelled placeholders. |
+
 ## Quality / decide together
 
 | # | Gap | Detail |

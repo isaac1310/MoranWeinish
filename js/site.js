@@ -71,3 +71,17 @@
   box.addEventListener('click', close);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
+
+/* 5. screen placeholders: if an exported screen PNG is missing, show a labelled frame instead of a broken image */
+(function () {
+  'use strict';
+  document.querySelectorAll('.screen .ph img').forEach(function (im) {
+    function fallback() {
+      var d = document.createElement('div');
+      d.className = 'missing';
+      d.textContent = 'Export from Figma → ' + im.getAttribute('src').split('/').pop();
+      im.replaceWith(d);
+    }
+    if (im.complete && im.naturalWidth === 0) fallback(); else im.addEventListener('error', fallback);
+  });
+})();
