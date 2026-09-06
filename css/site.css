@@ -186,10 +186,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ---------- about ---------- */
 .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0 80px; }
-.about-grid { display: grid; gap: 40px; margin-top: 60px; align-items: stretch; }
+.about-grid { display: grid; gap: 40px; margin-top: 60px; align-items: start; }
 .about-photo { position: relative; width: min(340px, 100%); margin-inline: auto; }
 .about-photo::before { content: ""; position: absolute; inset: 12px -12px -12px 12px; border-radius: var(--r-photo); background: var(--bg); border: 1px solid var(--border); }
-.about-photo img { position: relative; width: 100%; height: auto; aspect-ratio: 340 / 420; object-fit: cover; object-position: center top; border-radius: var(--r-photo); }
+.about-photo img { position: relative; width: 100%; height: auto; aspect-ratio: 340 / 420; object-fit: cover; border-radius: var(--r-photo); }
 .about-text .h2 { font-size: clamp(32px, 2.6vw, 50px); line-height: 1.12; max-width: 835px; }
 .about-text p { margin-top: 32px; font-size: clamp(18px, 1.15vw, 22px); line-height: 1.6; color: var(--body); max-width: 1200px; }
 .about-text .strong { font-weight: 600; }
@@ -201,10 +201,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); gap: 0 40px; } }
 @media (min-width: 1024px) {
   .about { padding: 96px 0 115px; }
-  .about-grid { grid-template-columns: 340px 1fr; gap: 64px; align-items: stretch; }
-  /* photo takes exactly the text block's height: absolutely positioned so it never drives the row */
-  .about-photo { height: 100%; min-height: 300px; }
-  .about-photo img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+  .about-grid { grid-template-columns: 340px 1fr; gap: 64px; align-items: start; }
+  /* Figma: photo is exactly 340×420, top-aligned with the heading */
+  .about-photo img { width: 340px; height: 420px; }
   .skills { grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 86px; }
   .skill { padding: 36px 40px 0; }
   .skill:first-child { padding-left: 0; }
