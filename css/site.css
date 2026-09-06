@@ -216,7 +216,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .footer-top { display: grid; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid var(--plum-border); }
 .footer .label { border: 0; padding: 0; font-size: 20px; color: var(--rose); }
 .footer .h2 { color: var(--on-plum); font-weight: 800; font-size: clamp(44px, 3.85vw, 74px); line-height: 1; letter-spacing: -0.03em; margin: 22px 0 30px; }
-.footer .btn-rose svg { width: 20px; height: 20px; animation: nudge 2.2s ease-in-out infinite; transition: transform .3s var(--ease); }
+.footer .btn-rose svg { width: 20px; height: 20px; animation: nudge 3.6s ease-in-out infinite; transition: transform .3s var(--ease); }
 @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 @media (hover: hover) { .footer .btn-rose:hover svg { animation: none; transform: translateX(8px); } }
 .elsewhere .label { color: var(--rose-muted); letter-spacing: 1.04px; }
@@ -237,9 +237,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .to-top {
   position: fixed; left: 28px; bottom: 28px; z-index: 40;
   width: 59px; height: 59px; border-radius: 50%;
-  background: rgba(255,255,255,.28); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
-  border: 3px solid var(--accent); color: var(--accent);
-  display: grid; place-items: center; box-shadow: 0 8px 12px -6px rgba(46,26,34,.3), inset 0 1px 0 rgba(255,255,255,.6);
+  /* Figma: fill #FFFFFF 45% · stroke #8A2C46 3px inside · drop shadow 4/7 blur 12.1 #000 12% · glass (frost 100) */
+  background: rgba(255,255,255,.45);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: inset 0 0 0 3px var(--accent), 4px 7px 12.1px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.7);
+  color: var(--accent);
+  display: grid; place-items: center;
   opacity: 0; transform: translateY(12px); pointer-events: none;
   transition: opacity .3s, transform .3s var(--ease);
 }
