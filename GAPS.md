@@ -7,8 +7,8 @@ Each item blocks or degrades a part of the site until answered.
 
 | # | Gap | Where it shows | What I need |
 |---|-----|----------------|-------------|
-| 1 | **LinkedIn URL** | Footer "Elsewhere → LinkedIn" (currently points at linkedin.com) | The profile URL |
-| 2 | **Resume PDF** | Footer "Resume (PDF)" — the file is not in Figma | The PDF, saved as `assets/Moran-Weinish-CV.pdf`. Consider removing phone/address from the web copy: anyone with the link can download it and search engines index PDFs. |
+| 1 | ~~LinkedIn URL~~ | Done 2026-09-06 → linkedin.com/in/moran-weinish | — |
+| 2 | ~~Resume PDF~~ | Done 2026-09-06, `assets/Moran-Weinish-CV.pdf` (1 page, 683 KB). **It contains the phone number 050-7510663**; anyone with the link can download it. Moran accepted this; swap in a phone-less copy any time. |
 | 3 | **Hero accent colour** | "feel *simple.*" | The colour comes from a shared Figma style I can't read from the file. I used `#8a2c46` (same as the "Selected work" label). Confirm or give the hex. |
 
 ## Quality / decide together
