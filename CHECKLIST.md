@@ -1,11 +1,11 @@
 # Launch checklist — moran-weinish.vercel.app
 
 ## A. Moran supplies (Figma exports → drop into the folder, tell Itzik)
-- [ ] TravelHub screens, PNG 2× (632×1292), into `assets/img/travelhub/`:
+- [x] ~~TravelHub screens~~ — not needed; rebuilt from the `.fig` as inline SVG. Was:
       `screen-01-trips-home.png` · `screen-02-trip-detail.png` · `screen-03-itinerary-day.png` ·
       `screen-04-itinerary-map.png` · `screen-05-budget.png` · `screen-06-bookings.png` · `screen-07-group.png`
       (Figma: select the phone "Background" frame inside each Container component → Export → PNG 2x)
-- [ ] Suzuki icon row, PNG 2× → `assets/img/suzuki/icons.png` (frame "Frame 1739340856", 716×41)
+- [x] ~~Suzuki icon row~~ — not needed; rendered from the `.fig` to `assets/img/suzuki/icons.png`
 - [ ] Hero accent colour: select "simple." in Figma, read the Fill hex. `8A2C46` = OK, otherwise send the hex
 - [ ] Suzuki gallery captions, slides 2–8: read and correct wording (`work/suzuki.html`, the `data-cap` texts)
 - [ ] Bara logo at 2x -> `assets/img/bara/logo.webp` 438x140 (currently 219x70, soft on retina)
