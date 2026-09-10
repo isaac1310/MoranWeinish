@@ -67,27 +67,27 @@
   },
   ".stats": {
     "fig": [
-      239,
-      1443,
+      353,
+      1214,
       null
     ],
-    "node": "46:671"
+    "node": "46:671, aligned to the text column"
   },
   ".stats li": {
     "fig": [
-      239,
-      346,
+      353,
+      288,
       null
     ],
-    "node": "46:672"
+    "node": "(1214 - 3*20) / 4, gap scales with --k"
   },
   ".reflect": {
     "fig": [
-      239,
-      1444,
+      353,
+      1214,
       null
     ],
-    "node": "177:3802"
+    "node": "177:3802, aligned to the text column"
   },
   ".swatches span": {
     "fig": [

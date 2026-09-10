@@ -153,6 +153,13 @@ a.currentTime = 200;                 // force a point in the timeline
 getComputedStyle(el).opacity;
 ```
 
+### Parent opacity multiplies
+
+A child cannot animate out of a fading ancestor. Section 04's chips looked
+static because `.cs-content.reveal` faded the whole block while the chips
+staggered inside it — opting the `<ul>` out of its own fade does not escape a
+wrapping one. Put `.reveal` on the individual children instead of the wrapper.
+
 ---
 
 ## 9. Deploying

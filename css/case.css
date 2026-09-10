@@ -88,7 +88,12 @@ br.xwide { display: none; }
      the gutter, the heading column begins where that 310 rule ends, and the
      heading drops below the number rather than sharing its baseline. */
   .cs-head { grid-template-columns: calc(225 * var(--k)) minmax(0, 1fr); gap: calc(5 * var(--k)); align-items: start; }
-  .cs-num { justify-self: stretch; min-width: 0; }
+  .cs-h2 { max-width: calc(1030 * var(--k)); }
+  .cs-body-text { max-width: calc(1030 * var(--k)); margin-top: calc(24 * var(--k)); }
+  /* the label scales with the frame too, or at 1440 a 16px 'AI-ASSISTED'
+     no longer fits the 225-wide column and breaks at the hyphen */
+  .cs-num { justify-self: stretch; min-width: 0;
+            font-size: max(11px, calc(16 * var(--k))); letter-spacing: calc(1.5 * var(--k)); }
   .cs-head > div { padding-top: calc(80 * var(--k)); }
 }
 
@@ -208,10 +213,13 @@ br.xwide { display: none; }
 /* ---------- chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; justify-content: flex-start; list-style: none; padding: 0; }
 /* Each chip rises in after the one before it. The list itself opts out of the
-   normal .reveal fade — when the container faded in at the same time it washed
-   the stagger out and read as no animation at all. It still carries .reveal so
-   the observer (and the failsafe) have something to switch on. */
-.reveal-ready .chips.reveal { opacity: 1; transform: none; transition: none; }
+   normal .reveal fade, and so does any .reveal wrapper that contains it —
+   parent opacity multiplies through the children, so a wrapping fade (the
+   .cs-content.reveal around section 04) washed the stagger out and read as
+   no animation at all. The list still carries .reveal so the observer (and
+   the failsafe) have something to switch on. */
+.reveal-ready .chips.reveal,
+.reveal-ready .reveal:has(.chips.reveal) { opacity: 1; transform: none; transition: none; }
 .reveal-ready .chips.reveal li { opacity: 0; }
 .reveal-ready .chips.reveal.in li { animation: chip-in .45s var(--ease) both; }
 .reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: 0s; }
@@ -229,11 +237,11 @@ br.xwide { display: none; }
    instead of spilling onto a third line as the viewport narrows */
 /* Figma 133:7427 — the chip block starts at the text column and breaks 5 + 3 */
 @media (min-width: 1024px) {
-  /* 790 is the frame's cap, which produces the 5 + 3 break. Below the design
-     width the type is floored, so the row stops narrowing with it — the floor
-     of 560 keeps the cap near half the row's natural width and holds two lines
-     all the way down instead of collapsing to one or spilling to three. */
-  .chips.indent { margin-left: calc(230 * var(--k)); max-width: max(560px, calc(790 * var(--k))); gap: calc(18 * var(--k)) calc(9 * var(--k)); }
+  /* The frame breaks this row 5 + 3. Our chips render a few px wider than the
+     .fig's, so the cap is 830 rather than its 790, and it floors at 700 because
+     the type floors at 13px and the row stops narrowing with the frame. Checked
+     at 1920 / 1600 / 1440 / 1280 / 1100 — 5 + 3 at every one. */
+  .chips.indent { margin-left: calc(230 * var(--k)); max-width: max(700px, calc(830 * var(--k))); gap: calc(18 * var(--k)) calc(9 * var(--k)); }
 }
 .dark .chips li { background: transparent; border-color: var(--cs-dark-line, #2e6448); color: var(--cs-dark-chip, #d9e6dc); font-weight: 400; font-size: 15px; }
 @media (min-width: 1024px) {

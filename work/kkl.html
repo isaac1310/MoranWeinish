@@ -38,7 +38,7 @@
     /* sections 08 + 09 sit in the Figma 1443-wide block, not the full wrap */
     @media (min-width: 1024px) {
       .stats { margin-top: 60px; }
-      .stats, .summary, .reflect { margin-inline: 6.93%; }
+      .stats, .summary, .reflect { margin-inline: calc(230 * var(--k)); }
     }
   </style>
 </head>
@@ -197,12 +197,12 @@
           <div class="cs-body-text"><p>Before designing the platform, I needed to understand how KKL’s calls actually work. The rules, users, documents, budgets and decisions that shape the process.</p></div>
         </div>
       </div>
-      <div class="cs-content reveal">
+      <div class="cs-content">
         <ul class="chips reveal">
           <li>Stakeholder interviews</li><li>Requirements &amp; documents</li><li>Existing process review</li><li>User flow mapping</li><li>Entity &amp; document mapping</li><li>Ongoing working sessions</li>
         </ul>
-        <p class="cs-label" style="margin-top:46px">Key insights</p>
-        <ol class="ncards insights" style="margin-top:20px">
+        <p class="cs-label reveal" style="margin-top:46px">Key insights</p>
+        <ol class="ncards insights reveal" style="margin-top:20px">
           <li><span class="n">01</span><h3>The rules change. The process stays consistent.</h3><p>Each call can have different fields, documents, budgets and scoring criteria, but they all follow the same overall lifecycle.</p></li>
           <li><span class="n">02</span><h3>Who is applying changes what they need to provide.</h3><p>The applicant’s entity type affects the documents and requirements they see throughout the submission.</p></li>
           <li><span class="n">03</span><h3>Complex processes need clear guidance.</h3><p>With multiple stages, requirements and deadlines, the experience needed to make it clear what is required, what has been completed and what comes next.</p></li>
@@ -215,7 +215,7 @@
   <section class="cs-section dark" data-pad="80 80">
     <div class="wrap">
       <div class="cs-head reveal">
-        <span class="cs-num">05 / AI-assisted process</span>
+        <span class="cs-num">05 / AI‑assisted process</span>
         <div>
           <h2 class="cs-h2" style="font-size:clamp(28px,2.5vw,48px)">Using AI to support the design process</h2>
           <div class="cs-body-text" style="font-size:clamp(17px,1.1vw,21px)"><p>The project involved a large amount of documentation, requirements and complex business logic. I used AI throughout the process to organize information, explore directions and speed up repetitive work, while keeping the UX decisions, priorities and final design choices in my hands.</p></div>
@@ -449,7 +449,7 @@
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.6</span></small>
+      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.7</span></small>
     </div>
   </div>
 </footer>
