@@ -32,7 +32,8 @@ grep -rn 'class="ver"' index.html work/*.html
 ```
 
 It exists so anyone looking at the live site can say which build they are seeing
-without digging through git.
+without digging through git. Every push to `main` bumps it — no exceptions, and
+no commit lands without one.
 
 ## Checks before pushing
 
