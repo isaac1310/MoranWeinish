@@ -8,6 +8,19 @@ Static site, no build step. Live: https://moran-weinish.vercel.app
 - `js/site.js` — mobile nav, back-to-top, scroll reveal (only JS on the site)
 - `assets/` — WebP images, video, `og.png`, CV PDF
 
+## Working on this
+
+Read `CLAUDE.md` first — it covers decoding `Portfolio.fig` for exact values,
+the checks to run before pushing, and the traps that have bitten this repo.
+
+`tools/figdecode/` decodes the Figma file into a queryable node tree, so
+colours, sizes and spacings come from the source rather than a screenshot:
+
+```bash
+brew install zstd
+python3 tools/figdecode/decode.py Portfolio.fig /tmp/figx
+```
+
 ## Editing
 - **Nav/footer are copy-pasted in every `.html`** (no build step). Change them everywhere.
 - Swap the CV: replace `assets/Moran-Weinish-CV.pdf`, keep the name.

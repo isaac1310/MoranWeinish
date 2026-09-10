@@ -207,18 +207,23 @@ br.xwide { display: none; }
 
 /* ---------- chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; justify-content: flex-start; list-style: none; padding: 0; }
-/* each chip rises in after the one before it, once the list is revealed */
-.reveal-ready .chips.reveal li { opacity: 0; transform: translateY(10px); }
-.reveal-ready .chips.reveal.in li { animation: chip-in .5s var(--ease) both; }
-.reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: .04s; }
-.reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .10s; }
-.reveal-ready .chips.reveal.in li:nth-child(3) { animation-delay: .16s; }
-.reveal-ready .chips.reveal.in li:nth-child(4) { animation-delay: .22s; }
+/* Each chip rises in after the one before it. The list itself opts out of the
+   normal .reveal fade — when the container faded in at the same time it washed
+   the stagger out and read as no animation at all. It still carries .reveal so
+   the observer (and the failsafe) have something to switch on. */
+.reveal-ready .chips.reveal { opacity: 1; transform: none; transition: none; }
+.reveal-ready .chips.reveal li { opacity: 0; }
+.reveal-ready .chips.reveal.in li { animation: chip-in .45s var(--ease) both; }
+.reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: 0s; }
+.reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .07s; }
+.reveal-ready .chips.reveal.in li:nth-child(3) { animation-delay: .14s; }
+.reveal-ready .chips.reveal.in li:nth-child(4) { animation-delay: .21s; }
 .reveal-ready .chips.reveal.in li:nth-child(5) { animation-delay: .28s; }
-.reveal-ready .chips.reveal.in li:nth-child(6) { animation-delay: .34s; }
-.reveal-ready .chips.reveal.in li:nth-child(7) { animation-delay: .40s; }
-.reveal-ready .chips.reveal.in li:nth-child(n+8) { animation-delay: .46s; }
-@keyframes chip-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.reveal-ready .chips.reveal.in li:nth-child(6) { animation-delay: .35s; }
+.reveal-ready .chips.reveal.in li:nth-child(7) { animation-delay: .42s; }
+.reveal-ready .chips.reveal.in li:nth-child(8) { animation-delay: .49s; }
+.reveal-ready .chips.reveal.in li:nth-child(n+9) { animation-delay: .56s; }
+@keyframes chip-in { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: none; } }
 .chips li { border: 1px solid var(--cs-line); background: var(--surface); border-radius: 100px; padding: 9px 17px; font-weight: 600; font-size: 14.5px; color: var(--cs-ink, var(--ink)); }
 /* chips scale with the frame so the row keeps breaking in the same place
    instead of spilling onto a third line as the viewport narrows */
