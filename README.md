@@ -32,8 +32,9 @@ grep -rn 'class="ver"' index.html work/*.html
 ```
 
 It exists so anyone looking at the live site can say which build they are seeing
-without digging through git. Every push to `main` bumps it — no exceptions, and
-no commit lands without one.
+without digging through git. **Every push that changes what ships — HTML, CSS,
+JS or assets — bumps it.** Docs-only commits do not, because nothing about the
+live site changed.
 
 ## Checks before pushing
 
