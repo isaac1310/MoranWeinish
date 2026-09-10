@@ -8,6 +8,7 @@ EXPECTED="tools/expected-$(basename "$PAGE").json"
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT
 
+lsof -ti:8799 | xargs kill 2>/dev/null || true   # a stale run holding the port
 rsync -a --exclude Portfolio.fig --exclude .git ./ "$WORK/"
 python3 - "$WORK/$PAGE.html" "$EXPECTED" <<'PY'
 import json, sys

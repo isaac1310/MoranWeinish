@@ -62,6 +62,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .dark .cs-num { color: #fff; border-color: #fff; }
 br.wide { display: none; }
 @media (min-width: 1024px) { br.wide { display: inline; } }
+br.xwide { display: none; }
+@media (min-width: 1600px) { br.xwide { display: inline; } }
 .cs-h2 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.07; font-size: clamp(30px, 2.9vw, 56px); color: var(--cs-ink, var(--ink)); max-width: 1030px; }
 .dark .cs-h2 { color: var(--cs-bg); }
 .cs-body-text { margin-top: 24px; font-size: clamp(17px, 1.2vw, 23px); line-height: 1.6; color: var(--cs-body, var(--body)); max-width: 1030px; }
@@ -188,12 +190,13 @@ br.wide { display: none; }
 
 /* ---------- design system panels ---------- */
 .ds { display: grid; gap: 40px; margin-top: 34px; }
-@media (min-width: 1024px) { .ds { grid-template-columns: 829px 1fr; gap: 0 clamp(40px, 8vw, 153px); } }
+@media (min-width: 1024px) and (max-width: 1199px) { .ds { grid-template-columns: 1fr; gap: 40px; } }
+@media (min-width: 1024px) { .ds { grid-template-columns: 49.5% 1fr; gap: 0 9.14%; } }
 .ds h3 { font-family: var(--mono); font-weight: 400; font-size: 16px; letter-spacing: 1.04px; text-transform: uppercase; color: var(--cs-label-2, #7d8a80); margin: 36px 0 12px; }
 .ds h3:first-child { margin-top: 0; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
 @media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, 1fr); max-width: 722px; } }
-.swatches span { height: 88px; border-radius: 10px; padding: 12px; display: flex; align-items: flex-end; font-weight: 600; font-size: 16px; line-height: 21px; white-space: nowrap; overflow: hidden; color: #fff; }
+.swatches span { height: 88px; border-radius: 10px; padding: 12px 10px; display: flex; align-items: flex-end; font-weight: 600; font-size: clamp(13px, 1.05vw, 16px); line-height: 21px; white-space: nowrap; color: #fff; }
 .panel { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 10px; padding: 24px 26px; }
 .type-sample .face { font-weight: 700; font-size: 40px; letter-spacing: -0.01em; line-height: 1.05; color: var(--cs-ink); }
 .type-sample .sub { margin-top: 8px; font-size: 15px; color: #8a9584; }
