@@ -21,11 +21,18 @@
     });
   }
 
-  // 2. back to top
+  // 2. back to top.
+  //    It takes the case study's own accent, except while it is sitting over
+  //    the footer, where it takes the footer's — otherwise the green ring on
+  //    KKL lands on the plum block and reads as a mistake.
   var toTop = document.querySelector('.to-top');
   if (toTop) {
+    var footer = document.querySelector('.footer');
     var onScroll = function () {
       toTop.classList.toggle('show', window.scrollY > 600);
+      if (!footer) return;
+      var b = toTop.getBoundingClientRect();
+      toTop.classList.toggle('on-footer', footer.getBoundingClientRect().top < b.bottom);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

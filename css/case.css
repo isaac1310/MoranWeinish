@@ -34,6 +34,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 }
 .cs-hero .lede { margin-top: 25px; max-width: 1011px; font-size: clamp(18px, 1.3vw, 25px); line-height: 1.56; color: var(--cs-body, var(--body)); }
 .cs-meta { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--cs-line); margin-top: 32px; }
+/* the rule above the meta row ends with the last column, not at the gutter */
+@media (min-width: 1024px) { .cs-meta { width: max-content; max-width: 100%; } }
 .cs-meta > div { padding: 22px 0 0; }
 .cs-meta dt { font-family: var(--mono); font-size: 16px; letter-spacing: .78px; text-transform: uppercase; color: var(--muted); }
 .cs-meta dd { margin: 7px 0 0; font-weight: 600; font-size: 20px; line-height: 26px; color: var(--ink); }
@@ -44,7 +46,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   .cs-hero { padding: calc(28 * var(--k)) 0 0; }
   .cs-meta { display: flex; flex-wrap: wrap; margin-top: calc(40 * var(--k)); }
   .cs-meta > div { padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; border-left: 1px solid var(--cs-line); }
-  .cs-meta dd { max-width: calc(139 * var(--k)); }
+  /* only Role wraps, after the dash — the other columns stay on one line */
+  .cs-meta > div:first-child dd { max-width: calc(170 * var(--k)); }
   .cs-meta > div:first-child { padding-left: 0; border-left: 0; }
   .cs-hero-shot { margin-top: calc(90 * var(--k)); transform: translateY(calc(60 * var(--k))); margin-bottom: calc(60 * var(--k)); }
   .cs-hero-shot img { border-radius: calc(16 * var(--k)); }
@@ -84,15 +87,17 @@ br.xwide { display: none; }
   /* Section head, revised layout (2026-09-11): the rule and its number sit at
      the gutter, the heading column begins where that 310 rule ends, and the
      heading drops below the number rather than sharing its baseline. */
-  .cs-head { grid-template-columns: calc(310 * var(--k)) minmax(0, 1fr); gap: 0; align-items: start; }
-  .cs-num { justify-self: start; min-width: calc(200 * var(--k)); }
-  .cs-head > div { padding-top: calc(110 * var(--k)); }
+  .cs-head { grid-template-columns: calc(225 * var(--k)) minmax(0, 1fr); gap: calc(5 * var(--k)); align-items: start; }
+  .cs-num { justify-self: stretch; min-width: 0; }
+  .cs-head > div { padding-top: calc(80 * var(--k)); }
 }
 
 /* content block that sits under a head, indented to the content column on desktop */
 .cs-content { margin-top: 48px; }
-/* the content under a head lines up with the heading text above it */
-@media (min-width: 1024px) { .cs-content { margin-left: calc(310 * var(--k)); margin-right: 0; } .cs-content.full { margin-inline: 0; } }
+/* The content under a head lines up with the heading above it, and the block is
+   inset the same on both sides — 230 / 1214 / 230 of the 1674 column. Running it
+   flush to the right gutter is what made the borders look uneven. */
+@media (min-width: 1024px) { .cs-content { margin-inline: calc(230 * var(--k)); } .cs-content.full { margin-inline: 0; } }
 
 /* small mono caption label */
 .cs-label { font-family: var(--mono); font-size: 16px; letter-spacing: .7px; text-transform: uppercase; color: var(--muted); }
@@ -202,12 +207,38 @@ br.xwide { display: none; }
 
 /* ---------- chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; justify-content: flex-start; list-style: none; padding: 0; }
+/* each chip rises in after the one before it, once the list is revealed */
+.reveal-ready .chips.reveal li { opacity: 0; transform: translateY(10px); }
+.reveal-ready .chips.reveal.in li { animation: chip-in .5s var(--ease) both; }
+.reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: .04s; }
+.reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .10s; }
+.reveal-ready .chips.reveal.in li:nth-child(3) { animation-delay: .16s; }
+.reveal-ready .chips.reveal.in li:nth-child(4) { animation-delay: .22s; }
+.reveal-ready .chips.reveal.in li:nth-child(5) { animation-delay: .28s; }
+.reveal-ready .chips.reveal.in li:nth-child(6) { animation-delay: .34s; }
+.reveal-ready .chips.reveal.in li:nth-child(7) { animation-delay: .40s; }
+.reveal-ready .chips.reveal.in li:nth-child(n+8) { animation-delay: .46s; }
+@keyframes chip-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .chips li { border: 1px solid var(--cs-line); background: var(--surface); border-radius: 100px; padding: 9px 17px; font-weight: 600; font-size: 14.5px; color: var(--cs-ink, var(--ink)); }
+/* chips scale with the frame so the row keeps breaking in the same place
+   instead of spilling onto a third line as the viewport narrows */
 /* Figma 133:7427 — the chip block starts at the text column and breaks 5 + 3 */
 @media (min-width: 1024px) {
-  .chips.indent { margin-left: calc(310 * var(--k)); max-width: calc(790 * var(--k)); gap: calc(18 * var(--k)) calc(9 * var(--k)); }
+  /* 790 is the frame's cap, which produces the 5 + 3 break. Below the design
+     width the type is floored, so the row stops narrowing with it — the floor
+     of 560 keeps the cap near half the row's natural width and holds two lines
+     all the way down instead of collapsing to one or spilling to three. */
+  .chips.indent { margin-left: calc(230 * var(--k)); max-width: max(560px, calc(790 * var(--k))); gap: calc(18 * var(--k)) calc(9 * var(--k)); }
 }
 .dark .chips li { background: transparent; border-color: var(--cs-dark-line, #2e6448); color: var(--cs-dark-chip, #d9e6dc); font-weight: 400; font-size: 15px; }
+@media (min-width: 1024px) {
+  /* Chips scale with the frame but the type is floored — scaling it all the way
+     down keeps the row at two lines but lands at 8px, which is unreadable. Below
+     the design width the block is allowed its full width instead, so the row
+     still breaks in two with the text legible. */
+  .chips li { padding: calc(9 * var(--k)) calc(17 * var(--k)); font-size: max(12.5px, calc(14.5 * var(--k))); }
+  .dark .chips li { font-size: max(13px, calc(15 * var(--k))); }
+}
 
 /* ---------- design system panels ---------- */
 .ds { display: grid; gap: 40px; margin-top: 34px; }

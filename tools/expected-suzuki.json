@@ -12,15 +12,15 @@
   },
   ".cs-section .cs-content": {
     "fig": [
-      433,
-      1364,
+      353,
+      1214,
       null
     ],
     "node": "indented content block"
   },
   ".cs-h2": {
     "fig": [
-      433,
+      353,
       null,
       null
     ],
@@ -34,5 +34,5 @@
     ],
     "node": "Back / Next, 76x22 at y=117"
   },
-  "_revised": "Section-head layout revised 2026-09-11: the heading column starts at gutter + 310 (where the cs-num rule ends) and .cs-content aligns with it. Taken from the designer's screenshot \u2014 Portfolio.fig in this repo is the Sep 6 export and still has the old 130/547/360 layout, so these rows are not yet verifiable against the file."
+  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head."
 }
