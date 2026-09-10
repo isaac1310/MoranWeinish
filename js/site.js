@@ -55,9 +55,18 @@
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
     root.classList.add('reveal-ready');
     items.forEach(function (el) { io.observe(el); });
-    // Failsafe: if nothing has been revealed shortly after load, show everything.
+    // Failsafe. The observer can miss an element when the layout settles after
+    // load (images and inline SVG changing heights), and it only ever fires
+    // once per element — so shortly after load, reveal anything that is on
+    // screen but still hidden. Checking per element rather than "did anything
+    // reveal at all" matters: one revealed element used to switch this off for
+    // every other one.
     window.setTimeout(function () {
-      if (!document.querySelector('.reveal.in')) { showAll(); }
+      items.forEach(function (el) {
+        if (el.classList.contains('in')) return;
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < (window.innerHeight || 0)) { el.classList.add('in'); }
+      });
     }, 2500);
   } catch (e) {
     root.classList.remove('reveal-ready');
