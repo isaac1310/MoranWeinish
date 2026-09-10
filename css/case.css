@@ -101,7 +101,7 @@ br.wide { display: none; }
 .banner { position: relative; overflow: hidden; margin-top: 24px; border-radius: 14px; padding: 44px 52px; background: var(--cs-accent); color: #fff; }
 .banner .cs-label { color: #fff; letter-spacing: 1.56px; font-size: 13px; }
 .banner p { margin-top: 16px; font-weight: 600; font-size: clamp(22px, 1.9vw, 36px); line-height: 1.45; color: var(--cs-bg); max-width: 1050px; position: relative; }
-.banner img { position: absolute; right: -10px; bottom: -8px; width: 476px; max-width: 45%; pointer-events: none; }
+.banner img { position: absolute; right: -10px; bottom: -8px; width: 476px; max-width: 45%; height: auto; pointer-events: none; }
 
 /* ---------- two-column comparison (backstage / onstage) ----------
    Figma 46:266 — block 1214 wide, two 579 columns with a 56px separator

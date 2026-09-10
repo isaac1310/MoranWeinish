@@ -8,6 +8,7 @@
 - [ ] Suzuki icon row, PNG 2× → `assets/img/suzuki/icons.png` (frame "Frame 1739340856", 716×41)
 - [ ] Hero accent colour: select "simple." in Figma, read the Fill hex. `8A2C46` = OK, otherwise send the hex
 - [ ] Suzuki gallery captions, slides 2–8: read and correct wording (`work/suzuki.html`, the `data-cap` texts)
+- [ ] Bara logo at 2x -> `assets/img/bara/logo.webp` 438x140 (currently 219x70, soft on retina)
 - [ ] (Optional) Bara card thumbnail at higher resolution (source is 600×320) → `assets/img/card-bara.webp` 750×400
 
 ## B. Review together — phone (Moran's) and desktop
@@ -25,10 +26,10 @@ Case studies (each of the four)
 
 ## C. Itzik, after A and B
 - [ ] Wire in the exports, apply the review notes, push
-- [ ] Add `robots.txt` + `sitemap.xml`
-- [ ] Lighthouse (mobile) on the live URL: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95 → record in README
+- [x] Add `robots.txt` + `sitemap.xml`
+- [x] Lighthouse (mobile) on the live URL → recorded in README. Home and all four case studies clear Accessibility and SEO; TravelHub (88) and Suzuki (89) sit just under the performance target — see the README note.
 - [ ] Link preview: paste the URL into LinkedIn's post composer (don't post) → card shows title + og image
-- [ ] Final `diff` that nav/footer are identical across all five `.html` files
+- [x] Final `diff` of nav/footer across all five files: footer byte-identical; nav differs only where it must — home links to `#work`/`#about`, case pages to `/#work`/`/#about` — plus whitespace.
 
 ## D. Parked (decided, not now)
 - CV PDF: "Portfolio" link inside it points to the old Wix site; phone number is public. Replace the file when ready.

@@ -22,6 +22,7 @@ Each item blocks or degrades a part of the site until answered.
 
 | # | Gap | Detail |
 |---|-----|--------|
+| 4b | **Bara logo is low-res** | `assets/img/bara/logo.webp` is 219x70 and is displayed at 219x69, so it is soft on a retina screen and Lighthouse flags it (best practices 96 on that page). Export it at 2x (438x140) and replace the file — the markup needs no change. |
 | 4 | **Bara card image is low-res** | Source is 600×320 (7 KB after compression). On a retina screen it will look soft. Export at 1200×640 from the source design, or pick another frame. |
 | 5 | **TravelHub card has no image** | In Figma the card thumbnail is a phone mockup built from layers, not a picture. I rebuilt a simplified version in CSS. If you prefer, export the card art from Figma as a 750×460 PNG and I'll swap it. |
 | 6 | **KKL card image is 2.6 MB JPEG (1920×1024)** | Compressed to 39 KB WebP at 750px wide. Check it still reads well; the original is much larger than the card. |
