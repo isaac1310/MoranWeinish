@@ -17,8 +17,10 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Fonts load without blocking the first paint; display=swap already handles the swap. -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&display=swap" media="print" onload="this.media='all'">
+  <!-- Fonts must not block the first paint. media="print" makes the fetch non-blocking;
+       js/site.js flips it to "all". The flip lives there, not in an inline onload,
+       because the CSP in vercel.json is script-src 'self' and blocks inline handlers. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&display=swap" media="print" data-font>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&display=swap"></noscript>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/site.css">

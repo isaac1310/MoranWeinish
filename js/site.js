@@ -1,6 +1,15 @@
 /* Moran Weinish portfolio — the only JavaScript on the site.
-   1. mobile nav drawer   2. back-to-top button   3. scroll reveal
+   0. non-blocking web fonts   1. mobile nav drawer   2. back-to-top button   3. scroll reveal
    Everything degrades: with JS off the page is fully readable. */
+
+/* 0. The font stylesheet ships as media="print" so it never blocks the first
+      paint; switch it on as soon as this file runs. It cannot be an inline
+      onload handler: the CSP in vercel.json is script-src 'self'.
+      With JS off the <noscript> copy in each page loads the fonts instead. */
+(function () {
+  'use strict';
+  document.querySelectorAll('link[data-font]').forEach(function (l) { l.media = 'all'; });
+})();
 (function () {
   'use strict';
 
