@@ -217,10 +217,14 @@ br.xwide { display: none; }
    parent opacity multiplies through the children, so a wrapping fade (the
    .cs-content.reveal around section 04) washed the stagger out and read as
    no animation at all. The list still carries .reveal so the observer (and
-   the failsafe) have something to switch on. */
+   the failsafe) have something to switch on.
+
+   The chips are NOT pre-hidden. animation-fill-mode: both holds the from-state
+   through each delay once .in applies the animation, which gives the stagger —
+   and if .in never arrives the chips are simply visible rather than invisible
+   for good. Content must not depend on the observer firing. */
 .reveal-ready .chips.reveal,
 .reveal-ready .reveal:has(.chips.reveal) { opacity: 1; transform: none; transition: none; }
-.reveal-ready .chips.reveal li { opacity: 0; }
 .reveal-ready .chips.reveal.in li { animation: chip-in .45s var(--ease) both; }
 .reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: 0s; }
 .reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .07s; }
