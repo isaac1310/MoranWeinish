@@ -248,17 +248,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
 .to-top svg { width: 22px; height: 22px; }
 
-/* ---------- scroll reveal ---------- */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-.reveal[data-delay="1"] { transition-delay: .1s; }
-.reveal[data-delay="2"] { transition-delay: .2s; }
-.reveal[data-delay="3"] { transition-delay: .3s; }
+/* ---------- scroll reveal ----------
+   Content is visible by default. The animation only exists once site.js has
+   set .reveal-ready on <html>, so with JS off — or if the script throws before
+   it gets there — the page is fully readable instead of blank. */
+.reveal { opacity: 1; transform: none; }
+.reveal-ready .reveal { opacity: 0; transform: translateY(24px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.reveal-ready .reveal.in { opacity: 1; transform: none; }
+.reveal-ready .reveal[data-delay="1"] { transition-delay: .1s; }
+.reveal-ready .reveal[data-delay="2"] { transition-delay: .2s; }
+.reveal-ready .reveal[data-delay="3"] { transition-delay: .3s; }
 
 /* ---------- reduced motion: everything static ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .reveal-ready .reveal { opacity: 1; transform: none; }
   .hero-art .card { opacity: 1; }
 }

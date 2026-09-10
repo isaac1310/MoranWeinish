@@ -2,6 +2,69 @@
    1. mobile nav drawer   2. back-to-top button   3. scroll reveal
    Everything degrades: with JS off the page is fully readable. */
 
+(function () {
+  'use strict';
+
+  // 1. mobile nav
+  var nav = document.querySelector('.nav');
+  var toggle = document.querySelector('.nav-toggle');
+  if (nav && toggle) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.querySelectorAll('.nav-drawer a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // 2. back to top
+  var toTop = document.querySelector('.to-top');
+  if (toTop) {
+    var onScroll = function () {
+      toTop.classList.toggle('show', window.scrollY > 600);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // 3. scroll reveal.
+  //    The CSS only hides .reveal once <html> has .reveal-ready, so the class
+  //    goes on at the last possible moment and comes straight back off if
+  //    anything here fails. A blank page is never an acceptable failure mode.
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  var root = document.documentElement;
+  if (reduce || !('IntersectionObserver' in window) || !items.length) return;
+
+  function showAll() {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+  try {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    root.classList.add('reveal-ready');
+    items.forEach(function (el) { io.observe(el); });
+    // Failsafe: if nothing has been revealed shortly after load, show everything.
+    window.setTimeout(function () {
+      if (!document.querySelector('.reveal.in')) { showAll(); }
+    }, 2500);
+  } catch (e) {
+    root.classList.remove('reveal-ready');
+    showAll();
+  }
+})();
+
 /* 4. lightbox for case-study screenshots (.shot img)
       Click the image once to zoom to full resolution, then drag to pan.
       Click again (or Esc / the X / the backdrop) to zoom out and close. */
