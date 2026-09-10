@@ -1,11 +1,14 @@
 /* Case-study pages — shared layout. Each page sets its own accent via
    --cs-* tokens on <body>. Desktop values from the Figma frames (1920 wide). */
 
-body.case { background: var(--cs-bg, var(--bg)); }
+/* The case-study section frames in Portfolio.fig are 1934 wide at x=-7, so the
+   real gutter on these pages is 123 and the content column 1674 — not the
+   130/1660 of the home-page frame that tokens.css was derived from. */
+body.case { --content: 1674px; --gutter: clamp(20px, 6.41vw, 123px); background: var(--cs-bg, var(--bg)); }
 body.case .nav-links a:not(.btn) { color: var(--nav); }
 
 /* ---------- case top nav (Figma 115:2957 / 184:3916 — 29px from the page edge) ---------- */
-.cs-topnav { display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 1.6vw, 29px) 0; }
+.cs-topnav { display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(16px, 1.6vw, 29px) 22px; }
 .cs-topnav a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; line-height: 22px; color: #000; transition: transform .25s var(--ease), color .25s; }
 .cs-topnav svg { width: 18px; height: 18px; flex: none; }
 @media (hover: hover) {
@@ -17,8 +20,9 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 /* ---------- header ---------- */
 .cs-hero {
   background: linear-gradient(180deg, var(--cs-hero-from, var(--cs-bg)) 0%, var(--cs-bg) 70%);
-  padding: 56px 0 0;
+  padding: 28px 0 0;
 }
+.cs-hero .wrap > .cs-brand { margin-top: 24px; }
 .cs-brand { display: inline-flex; align-items: center; gap: 15px; font-weight: 700; font-size: 24px; letter-spacing: -0.01em; color: var(--ink); }
 .cs-brand img { height: 53px; width: auto; }
 .cs-brand .cs-mark { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: var(--cs-accent); color: #fff; }
@@ -37,7 +41,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .cs-hero-shot img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 40px 79px -30px rgba(28, 42, 34, .35); }
 @media (min-width: 768px) { .cs-meta { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) {
-  .cs-hero { padding: 80px 0 0; }
+  .cs-hero { padding: 28px 0 0; }
   .cs-meta { display: flex; flex-wrap: wrap; margin-top: 40px; }
   .cs-meta > div { padding: 22px 34px 0; border-left: 1px solid var(--cs-line); }
   .cs-meta > div:first-child { padding-left: 0; border-left: 0; }
@@ -52,7 +56,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .cs-head { display: grid; gap: 24px; }
 .cs-num {
   font-family: var(--mono); font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--cs-accent); border-top: 1px solid var(--cs-accent); padding-top: 10px; align-self: start;
+  color: var(--cs-accent); border-top: 1px solid var(--cs-accent); padding-top: 10px; align-self: start; margin-top: -8px;
   display: inline-block;
 }
 .dark .cs-num { color: #fff; border-color: #fff; }
@@ -71,7 +75,7 @@ br.wide { display: none; }
 
 /* content block that sits under a head, indented to the content column on desktop */
 .cs-content { margin-top: 48px; }
-@media (min-width: 1024px) { .cs-content { margin-inline: 13.43%; } .cs-content.full { margin-inline: 0; } }
+@media (min-width: 1024px) { .cs-content { margin-inline: 13.74%; } .cs-content.full { margin-inline: 0; } }
 
 /* small mono caption label */
 .cs-label { font-family: var(--mono); font-size: 16px; letter-spacing: .7px; text-transform: uppercase; color: var(--muted); }
@@ -91,11 +95,12 @@ br.wide { display: none; }
 
 /* ---------- numbered cards ---------- */
 .ncards { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 32px; list-style: none; padding: 0; }
-.ncards li { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 12px; padding: 31px 33px; }
+.ncards li { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 12px; padding: 30px; }
 .ncards .n { font-family: var(--mono); font-size: 34px; color: var(--cs-accent); }
 .ncards h3 { margin-top: 12px; font-weight: 600; font-size: 22px; line-height: 1.25; color: var(--cs-ink, var(--ink)); }
 .ncards p { margin-top: 12px; font-size: 18px; line-height: 28px; color: var(--cs-body-2); }
 @media (min-width: 768px) { .ncards { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .ncards.insights li { min-height: 300px; } }
 
 /* ---------- challenge banner ---------- */
 .banner { position: relative; overflow: hidden; margin-top: 24px; border-radius: 14px; padding: 44px 52px; background: var(--cs-accent); color: #fff; }
@@ -104,8 +109,8 @@ br.wide { display: none; }
 .banner img { position: absolute; right: -10px; bottom: -8px; width: 476px; max-width: 45%; height: auto; pointer-events: none; }
 
 /* ---------- two-column comparison (backstage / onstage) ----------
-   Figma 46:266 — block 1214 wide, two 579 columns with a 56px separator
-   column; each row 137 tall (card 125 + 12), 11px between rows.        */
+   Figma 46:266 — two 580 columns with a 56px separator column between
+   them; each card 125 tall with 22/27 padding, 23px between rows.      */
 .compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 11px; margin-top: 8px; }
 .compare .step { grid-column: 1 / -1; }
 .compare .pill { border-radius: 100px; padding: 8px 14px; font-weight: 700; font-size: 15px; display: block; text-align: center; margin: 0 0 3px; }
@@ -113,7 +118,7 @@ br.wide { display: none; }
 .pill.b { background: var(--cs-tint-b); color: var(--cs-accent-b); }
 .compare .step {
   min-height: 125px; align-self: stretch;
-  border-radius: 12px; padding: 23px 27px;
+  border-radius: 12px; padding: 22px 27px;
   background: var(--cs-step-a-bg); border: 1px solid var(--cs-step-a-line);
   transition: background .25s var(--ease), color .25s var(--ease);
 }
@@ -131,7 +136,9 @@ br.wide { display: none; }
 }
 .compare-sep { display: none; }
 @media (min-width: 1024px) {
-  .compare { grid-template-columns: 1fr 56px 1fr; column-gap: 0; row-gap: 12px; }
+  /* three columns: card / separator / card. Placement lives here so the
+     layout is correct all the way from 1024 up. */
+  .compare { grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); column-gap: 0; row-gap: 23px; }
   .compare .pill { width: max-content; margin-inline: auto; padding: 8px 20px; font-size: 16px; }
   .compare .pill.a { grid-column: 1; }
   .compare .pill.b { grid-column: 3; }
@@ -140,6 +147,10 @@ br.wide { display: none; }
   .compare .step.b { grid-column: 3; }
   .compare-sep { display: grid; place-items: center; font-style: normal; font-size: 21px; line-height: 1; color: #7d8a80; }
   .compare-sep::before { content: "\21C4"; }
+}
+@media (min-width: 1600px) {
+  /* at the design width the cards are exactly 580 x 125 (Figma 46:266) */
+  .compare { grid-template-columns: 580px 56px 580px; justify-content: center; }
 }
 
 /* ---------- screenshots ---------- */
@@ -169,6 +180,10 @@ br.wide { display: none; }
 /* ---------- chips ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; justify-content: flex-start; list-style: none; padding: 0; }
 .chips li { border: 1px solid var(--cs-line); background: var(--surface); border-radius: 100px; padding: 9px 17px; font-weight: 600; font-size: 14.5px; color: var(--cs-ink, var(--ink)); }
+/* Figma 133:7427 — the chip block starts at the text column and breaks 5 + 3 */
+@media (min-width: 1024px) {
+  .chips.indent { margin-left: 420px; max-width: 790px; gap: 18px 9px; }
+}
 .dark .chips li { background: transparent; border-color: var(--cs-dark-line, #2e6448); color: var(--cs-dark-chip, #d9e6dc); font-weight: 400; font-size: 15px; }
 
 /* ---------- design system panels ---------- */
@@ -177,7 +192,7 @@ br.wide { display: none; }
 .ds h3 { font-family: var(--mono); font-weight: 400; font-size: 16px; letter-spacing: 1.04px; text-transform: uppercase; color: var(--cs-label-2, #7d8a80); margin: 36px 0 12px; }
 .ds h3:first-child { margin-top: 0; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
-@media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, 1fr); max-width: 722px; } }
 .swatches span { height: 88px; border-radius: 10px; padding: 12px; display: flex; align-items: flex-end; font-weight: 600; font-size: 16px; line-height: 21px; white-space: nowrap; overflow: hidden; color: #fff; }
 .panel { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 10px; padding: 24px 26px; }
 .type-sample .face { font-weight: 700; font-size: 40px; letter-spacing: -0.01em; line-height: 1.05; color: var(--cs-ink); }
@@ -241,16 +256,16 @@ body.case .footer { padding-top: 64px; }
 
 /* ---------- lightbox ---------- */
 .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(28, 42, 34, .9); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
-.lightbox .stage { position: relative; display: flex; max-width: 100%; max-height: 100%; }
+.lightbox .stage { position: relative; display: flex; padding-top: 50px; max-width: 100%; max-height: 100%; }
 .lightbox.open { display: flex; }
-.lightbox img { max-width: 100%; max-height: calc(100vh - 48px); border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,.5); background: #fff; cursor: zoom-in; transition: transform .25s var(--ease); transform-origin: center center; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 98px); border-radius: 10px; box-shadow: 0 40px 80px rgba(0,0,0,.5); background: #fff; cursor: zoom-in; transition: transform .25s var(--ease); transform-origin: center center; }
 .lightbox.zoomed { cursor: grab; align-items: flex-start; justify-content: flex-start; overflow: auto; padding: 0; }
 .lightbox.zoomed .stage { max-width: none; max-height: none; }
 .lightbox.zoomed button { position: fixed; top: 16px; right: 16px; }
 .lightbox.zoomed img { max-width: none; max-height: none; width: auto; cursor: grab; border-radius: 0; }
 .lightbox.zoomed.dragging, .lightbox.zoomed.dragging img { cursor: grabbing; }
 .lightbox .zoom-hint { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); background: rgba(255,255,255,.9); color: #1c2a22; border-radius: 100px; padding: 7px 16px; font-size: 14px; font-weight: 600; pointer-events: none; }
-.lightbox button { position: absolute; top: -14px; right: -14px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #000; font-size: 20px; line-height: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, .3); }
+.lightbox button { position: absolute; top: 0; right: 0; z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #000; font-size: 20px; line-height: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, .3); }
 
 /* ===================== TravelHub-specific blocks ===================== */
 /* hero phone (login screen drawn in CSS over the real background photo) */

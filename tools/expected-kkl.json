@@ -1,0 +1,17 @@
+{
+  "_source": "Portfolio.fig, frame 'kkl' (46:121), decoded directly. [x, width, height]; null = don't check.",
+  "_viewport": 1920,
+  ".cs-section .wrap":      { "fig": [123, 1674, null], "node": "section frames are 1934 wide at x=-7" },
+  ".cs-section .cs-content":{ "fig": [353, 1214, null], "node": "46:186 / 46:229 / 46:266" },
+  ".cs-h2":                 { "fig": [540, null, null], "node": "46:224 heading column" },
+  ".pipe span":             { "fig": [null, 161, 51],   "node": "46:190" },
+  ".ncards li":             { "fig": [353, 391, null],  "node": "46:230" },
+  ".banner":                { "fig": [353, 1214, null], "node": "46:251" },
+  ".compare .step":         { "fig": [null, 580, 125],  "node": "177:3161, padding 22/27" },
+  ".compare-sep":           { "fig": [null, 56, null],  "node": "46:279 'Margin'" },
+  ".stats":                 { "fig": [239, 1443, null], "node": "46:671" },
+  ".stats li":              { "fig": [239, 346, null],  "node": "46:672" },
+  ".reflect":               { "fig": [239, 1444, null], "node": "177:3802" },
+  ".swatches span":         { "fig": [null, 134, 88],   "node": "46:544" },
+  ".icons.solid":           { "fig": [123, 1674, null], "node": "46:638" }
+}

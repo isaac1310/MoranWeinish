@@ -1,62 +1,6 @@
 /* Moran Weinish portfolio — the only JavaScript on the site.
-   0. non-blocking web fonts   1. mobile nav drawer   2. back-to-top button   3. scroll reveal
+   1. mobile nav drawer   2. back-to-top button   3. scroll reveal
    Everything degrades: with JS off the page is fully readable. */
-
-/* 0. The font stylesheet ships as media="print" so it never blocks the first
-      paint; switch it on as soon as this file runs. It cannot be an inline
-      onload handler: the CSP in vercel.json is script-src 'self'.
-      With JS off the <noscript> copy in each page loads the fonts instead. */
-(function () {
-  'use strict';
-  document.querySelectorAll('link[data-font]').forEach(function (l) { l.media = 'all'; });
-})();
-(function () {
-  'use strict';
-
-  // 1. mobile nav
-  var nav = document.querySelector('.nav');
-  var toggle = document.querySelector('.nav-toggle');
-  if (nav && toggle) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    nav.querySelectorAll('.nav-drawer a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  // 2. back to top
-  var toTop = document.querySelector('.to-top');
-  if (toTop) {
-    var onScroll = function () {
-      toTop.classList.toggle('show', window.scrollY > 600);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    toTop.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // 3. scroll reveal (skipped under reduced motion; CSS shows everything)
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
-  if (reduce || !('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-  items.forEach(function (el) { io.observe(el); });
-})();
 
 /* 4. lightbox for case-study screenshots (.shot img)
       Click the image once to zoom to full resolution, then drag to pan.
