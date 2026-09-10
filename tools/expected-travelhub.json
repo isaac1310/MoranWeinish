@@ -1,0 +1,45 @@
+{
+  "_source": "Portfolio.fig, frame 'travelhub'. [x, width, height] at the 1920 design frame; null = don't check.",
+  "_note": "Case-study frames are 1934 wide at x=-7, so the gutter is 123 and the column 1674.",
+  "_viewport": 1920,
+  ".cs-section .wrap": {
+    "fig": [
+      123,
+      1674,
+      null
+    ],
+    "node": "section container"
+  },
+  ".cs-section .cs-content": {
+    "fig": [
+      353,
+      1214,
+      null
+    ],
+    "node": "indented content block"
+  },
+  ".cs-h2": {
+    "fig": [
+      540,
+      null,
+      null
+    ],
+    "node": "heading column, 130 + 310 + 110"
+  },
+  ".cs-topnav": {
+    "fig": [
+      null,
+      null,
+      null
+    ],
+    "node": "Back / Next, 76x22 at y=117"
+  },
+  ".screen .ph": {
+    "fig": [
+      null,
+      316,
+      646
+    ],
+    "node": "18:1334 phone instances"
+  }
+}

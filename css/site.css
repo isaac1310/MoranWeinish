@@ -39,7 +39,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex; align-items: center; gap: 12px;
   border-radius: var(--r-pill);
   font-weight: 600; font-size: 19px; line-height: 1;
-  padding: 17px 34px;
+  padding: 16px 34px;
   transition: transform .25s var(--ease), background-color .25s, color .25s, border-color .25s;
 }
 .btn-dark { background: var(--ink); color: #fff; }
@@ -104,7 +104,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .hero .lede {
-  margin-top: 29px; max-width: 614px;
+  margin-top: 29px; max-width: 640px;
   font-size: clamp(18px, 1.25vw, 24px); line-height: 1.55; color: var(--body);
 }
 .hero .actions { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
@@ -114,19 +114,20 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(280px, 40%); }
 }
 @media (min-width: 1024px) {
-  .hero { padding: 80px 0 90px; }
-  .hero .wrap { grid-template-columns: minmax(0, 1.75fr) minmax(320px, 1fr); gap: 60px; }
-  .hero-art { margin-inline: auto 0; }
+  /* Figma: text column 960, gap 160, art 547 — of the 1660 content column.
+     The art overhangs the gutter by 7 and sits 4 above the text. */
+  .hero { padding: calc(80 * var(--k)) 0 calc(90 * var(--k)); }
+  .hero .wrap { grid-template-columns: 57.83% 32.95%; gap: 9.64%; align-items: start; }
+  .hero .lede { max-width: calc(640 * var(--k)); margin-top: calc(29 * var(--k)); }
+  .hero .actions { margin-top: calc(42 * var(--k)); gap: calc(14 * var(--k)); }
+  .hero-art { margin-inline: auto 0; margin-top: calc(-4 * var(--k)); margin-right: calc(-7 * var(--k)); }
 }
 
-/* hero cards — float, rotate, fade in */
-.hero-art .card { transform-box: fill-box; transform-origin: center; opacity: 0; animation: card-in 1.5s var(--ease) forwards; }
-.hero-art .c1 { animation-delay: .1s; }
-.hero-art .c2 { animation-delay: .35s; }
-.hero-art .c3 { animation-delay: .6s; }
-.hero-art .float { animation: float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-.hero-art .f2 { animation-duration: 7s; animation-delay: -2s; }
-.hero-art .f3 { animation-duration: 8s; animation-delay: -4s; }
+/* The hero illustration ships as one flat PNG, so the per-card entrance and the
+   three float speeds that the Figma file has are not on the site — only the whole
+   image fades in and bobs. The .c1/.c2/.c3 and .float/.f2/.f3 rules that used to
+   sit here matched nothing and have been removed; restoring the staggered version
+   means inlining the three vector cards, which is a layout decision for Moran. */
 @keyframes card-in { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-9px) rotate(-1deg); } }
 
@@ -135,27 +136,35 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 44px; }
 .strip .label { color: var(--rose); border: 0; padding: 0; font-size: 18px; }
 .strip ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; font-size: 18px; }
-@media (min-width: 1024px) { .strip li + li::before { content: "/"; color: #fff; margin-right: 26px; } }
-@media (min-width: 1024px) { .strip { padding: 26px 0; } .strip .wrap { flex-wrap: nowrap; } .strip ul { flex: 1; justify-content: center; } }
+@media (min-width: 1024px) { .strip li + li::before { content: "/"; color: #fff; margin-right: calc(26 * var(--k)); } }
+@media (min-width: 1024px) {
+  .strip { padding: calc(26 * var(--k)) 0; }
+  /* Figma: the strip insets 146, not the 130 the rest of the page uses */
+  .strip .wrap { width: min(calc(1628 * var(--k)), 100% - 2 * calc(146 * var(--k))); flex-wrap: nowrap; gap: calc(44 * var(--k)); }
+  .strip ul { flex: 1; justify-content: center; gap: 8px calc(26 * var(--k)); }
+}
 
 /* ---------- sections ---------- */
 .section { padding: 64px 0; }
 .section-head { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 44px; }
 .about .wrap > .label, .footer .label { align-self: flex-start; }
 .h2 { font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; font-size: clamp(36px, 2.9vw, 56px); color: var(--ink); }
-@media (min-width: 1024px) { .section { padding: 96px 0; } }
+@media (min-width: 1024px) { .section { padding: calc(96 * var(--k)) 0; }
+  .section-head { gap: calc(14 * var(--k)); margin-bottom: calc(44 * var(--k)); } }
 
 /* ---------- case-study cards ---------- */
 .cards { display: grid; gap: 28px; grid-template-columns: 1fr; list-style: none; margin: 0; padding: 0; }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1200px) { .cards { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1200px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(28 * var(--k)); } }
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-card);
-  overflow: hidden; display: flex; flex-direction: column; min-height: 472px;
+  overflow: hidden; display: flex; flex-direction: column;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
 }
 .card > a { display: flex; flex-direction: column; flex: 1; }
-.card-media { height: 230px; overflow: hidden; position: relative; background: var(--bg); }
+/* Figma card is 394 x 472 with a 230-tall media band. A fixed 230px in a fluid
+   card tightens the crop as the card narrows, so it is a ratio instead. */
+.card-media { aspect-ratio: 394 / 230; overflow: hidden; position: relative; background: var(--bg); }
 .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
 .card-body { padding: 26px 28px; display: flex; flex-direction: column; flex: 1; }
 .card-meta { font-family: var(--mono); font-size: 14px; letter-spacing: .84px; text-transform: uppercase; color: var(--muted-2); margin-bottom: 12px; }
@@ -169,23 +178,18 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .card:hover .card-cta svg { transform: translateX(4px); }
 }
 
-/* TravelHub card: phone mockup drawn in CSS (the Figma card has no raster) */
-/* TravelHub card art — the Figma thumbnail (66:520) is 372.7 x 230: a phone
-   showing the trips-home screen on a coral-to-white wash. Every value below is
-   from Portfolio.fig; the card-media box is already 230 tall, so they map 1:1. */
-.mock-th { background: linear-gradient(to top, rgba(255, 188, 164, .5) 0%, #ffffff 78.2%); display: flex; justify-content: center; align-items: flex-start; overflow: hidden; }
-.phone { width: 316px; margin-top: 22px; flex: none; background: #fff; border-radius: 46px 46px 0 0; padding: 11px 11px 0; box-shadow: 0 18px 40px -22px rgba(46, 26, 34, .3); }
-.phone-in { background: #fbf7f3; border-radius: 36px 36px 0 0; padding: 0 0 0; min-height: 197px; }
-.phone-status { display: flex; justify-content: space-between; align-items: center; height: 38px; padding: 0 22px; font-size: 12px; font-weight: 600; color: #33302e; }
-.phone-status i { display: inline-block; width: 40px; height: 8px; border-radius: 3px; background: #33302e; opacity: .8; }
-.phone-hi { display: flex; justify-content: space-between; align-items: center; height: 47px; margin: 6px 18px 0; }
-.phone-hi small { display: block; font-size: 13px; line-height: 17px; color: #9a9089; }
-.phone-hi b { display: block; font-size: 23px; line-height: 30px; color: #17150f; }
-.phone-hi .av { width: 42px; height: 42px; border-radius: 50%; background: #d98f6a; border: 2px solid #fff; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 16px; box-shadow: 0 6px 12px -6px rgba(0, 0, 0, .3); }
-.phone-trip { margin: 18px 18px 0; background: linear-gradient(150deg, #ef8e7f, #e87a6a); border-radius: 22px; padding: 18px; color: #fff; box-shadow: 0 12px 24px -8px rgba(232, 122, 106, .55); }
-.phone-trip small { display: block; font-size: 11px; letter-spacing: 1.1px; text-transform: uppercase; font-weight: 600; }
-.phone-trip b { display: block; font-size: 26px; line-height: 34px; margin: 5px 0 0; }
-.phone-trip span { display: block; font-size: 13px; line-height: 17px; margin-top: 5px; }
+/* TravelHub card art — Figma 66:520 is 372.7 x 230: the trips-home phone on a
+   coral-to-white wash, clipped to the top 208px of the device. The phone itself
+   is generated from the .fig, so this only has to place and crop it. */
+.mock-th { background: linear-gradient(to top, rgba(255, 188, 164, .5) 0%, #ffffff 78.2%); position: relative; overflow: hidden; }
+.mock-th .th-phone {
+  position: absolute;
+  left: 7.6%;            /* 28.33 / 372.7 */
+  top: 9.57%;            /* 22 / 230     */
+  width: 84.79%;         /* 316 / 372.7  */
+  height: auto;
+  filter: drop-shadow(0 10px 22px rgba(46, 26, 34, .22));
+}
 
 /* ---------- about ---------- */
 .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0 80px; }
@@ -203,14 +207,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .skill dd span { white-space: nowrap; }
 @media (min-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); gap: 0 40px; } }
 @media (min-width: 1024px) {
-  .about { padding: 96px 0 115px; }
-  .about-grid { grid-template-columns: 340px 1fr; gap: 64px; align-items: start; }
+  .about { padding: calc(96 * var(--k)) 0 calc(115 * var(--k)); }
+  .about-grid { grid-template-columns: calc(340 * var(--k)) minmax(0, 1fr); gap: calc(64 * var(--k)); align-items: start; }
   /* Figma: photo is exactly 340×420, top-aligned with the heading */
-  .about-photo img { width: 340px; height: 420px; }
-  .skills { grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 86px; }
-  .skill { padding: 36px 40px 0; }
-  .skill:first-child { padding-left: 0; }
-  .skill + .skill { border-left: 1px solid var(--border); }
+  .about-photo img { width: calc(340 * var(--k)); height: calc(420 * var(--k)); }
+  .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: calc(86 * var(--k)); }
+  /* Figma: each column is flush left and padded right, with the rule on the right */
+  .skill { padding: calc(36 * var(--k)) calc(40 * var(--k)) 0 0; }
+  .skill:not(:last-child) { border-right: 1px solid var(--border); }
 }
 
 /* ---------- footer / contact ---------- */
@@ -229,9 +233,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .footer-bottom .brand { color: var(--on-plum); font-size: 22px; }
 .footer-bottom .brand-mark { background: var(--rose); color: var(--plum); width: 37px; height: 37px; }
 .footer-bottom small { font-size: 18px; color: var(--rose-muted); }
+/* build marker — bumped one patch per commit, so what is live is identifiable */
+.footer-bottom .ver { margin-left: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .5px; opacity: .55; }
 @media (min-width: 1024px) {
-  .footer { padding: 155px 0 44px; }
-  .footer-top { grid-template-columns: 1fr auto; gap: 196px; padding-bottom: 70px; }
+  /* Figma: 103 below the bottom row, of which 30 is already .footer-bottom's padding-top */
+  .footer { padding: calc(155 * var(--k)) 0 calc(73 * var(--k)); }
+  .footer-top { grid-template-columns: minmax(0, 1fr) auto; gap: calc(196 * var(--k)); padding-bottom: calc(70 * var(--k)); }
   .footer-bottom small { font-size: 22px; }
 }
 

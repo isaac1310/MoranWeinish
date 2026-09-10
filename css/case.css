@@ -41,12 +41,13 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .cs-hero-shot img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 40px 79px -30px rgba(28, 42, 34, .35); }
 @media (min-width: 768px) { .cs-meta { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) {
-  .cs-hero { padding: 28px 0 0; }
-  .cs-meta { display: flex; flex-wrap: wrap; margin-top: 40px; }
-  .cs-meta > div { padding: 22px 34px 0; border-left: 1px solid var(--cs-line); }
+  .cs-hero { padding: calc(28 * var(--k)) 0 0; }
+  .cs-meta { display: flex; flex-wrap: wrap; margin-top: calc(40 * var(--k)); }
+  .cs-meta > div { padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; border-left: 1px solid var(--cs-line); }
+  .cs-meta dd { max-width: calc(139 * var(--k)); }
   .cs-meta > div:first-child { padding-left: 0; border-left: 0; }
-  .cs-hero-shot { margin-top: 90px; transform: translateY(60px); margin-bottom: 60px; }
-  .cs-hero-shot img { border-radius: 16px; }
+  .cs-hero-shot { margin-top: calc(90 * var(--k)); transform: translateY(calc(60 * var(--k))); margin-bottom: calc(60 * var(--k)); }
+  .cs-hero-shot img { border-radius: calc(16 * var(--k)); }
 }
 
 /* ---------- numbered sections ---------- */
@@ -69,10 +70,19 @@ br.xwide { display: none; }
 .cs-body-text { margin-top: 24px; font-size: clamp(17px, 1.2vw, 23px); line-height: 1.6; color: var(--cs-body, var(--body)); max-width: 1030px; }
 .cs-body-text p + p { margin-top: 1em; }
 .dark .cs-body-text { color: var(--cs-dark-text, #bcd9c6); }
+/* Vertical section padding is 90/90 in most of the .fig, but not all of it.
+   The exceptions carry data-pad="<top> <bottom>" so the markup can be audited
+   against the frame. Verified directly from Portfolio.fig; bara and suzuki
+   nest their sections differently and have not been measured, so they use the
+   default. */
 @media (min-width: 1024px) {
-  .cs-section { padding: 90px 0; }
-  .cs-head { grid-template-columns: 310px 1fr; gap: 110px; align-items: start; }
-  .cs-num { justify-self: start; min-width: 200px; }
+  .cs-section { padding: calc(90 * var(--k)) 0; }
+  .cs-section[data-pad="90 60"]   { padding: calc(90 * var(--k)) 0 calc(60 * var(--k)); }
+  .cs-section[data-pad="80 80"]   { padding: calc(80 * var(--k)) 0; }
+  .cs-section[data-pad="100 110"] { padding: calc(100 * var(--k)) 0 calc(110 * var(--k)); }
+  .cs-section[data-pad="96 119"]  { padding: calc(96 * var(--k)) 0 calc(119 * var(--k)); }
+  .cs-head { grid-template-columns: calc(310 * var(--k)) minmax(0, 1fr); gap: calc(110 * var(--k)); align-items: start; }
+  .cs-num { justify-self: start; min-width: calc(200 * var(--k)); }
 }
 
 /* content block that sits under a head, indented to the content column on desktop */
@@ -89,7 +99,7 @@ br.xwide { display: none; }
 .pipe i { color: var(--cs-line-2); font-style: normal; font-size: 28px; line-height: 1; }
 @media (min-width: 1024px) {
   .pipe { flex-wrap: nowrap; justify-content: space-between; gap: 0; }
-  .pipe span { flex: 0 0 161px; min-width: 0; height: 51px; display: grid; place-items: center; padding: 0 8px; }
+  .pipe span { flex: 0 0 calc(161 * var(--k)); min-width: 0; height: calc(51 * var(--k)); display: grid; place-items: center; padding: 0 calc(8 * var(--k)); border-radius: calc(10 * var(--k)); font-size: calc(16 * var(--k)); }
 }
 .legend { display: flex; flex-wrap: wrap; gap: 12px 23px; margin-top: 28px; font-size: 15px; color: var(--cs-body-2); }
 .legend span::before { content: ""; display: inline-block; width: 11px; height: 11px; border-radius: 3.8px; margin-right: 8px; vertical-align: -1px; background: var(--cs-tint-a); border: 1px solid var(--cs-accent-a); }
@@ -102,10 +112,14 @@ br.xwide { display: none; }
 .ncards h3 { margin-top: 12px; font-weight: 600; font-size: 22px; line-height: 1.25; color: var(--cs-ink, var(--ink)); }
 .ncards p { margin-top: 12px; font-size: 18px; line-height: 28px; color: var(--cs-body-2); }
 @media (min-width: 768px) { .ncards { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1024px) { .ncards.insights li { min-height: 300px; } }
+@media (min-width: 1024px) { .ncards li { padding: calc(30 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .ncards { gap: calc(20 * var(--k)); }
+  .ncards.insights li { min-height: calc(300 * var(--k)); } }
 
 /* ---------- challenge banner ---------- */
 .banner { position: relative; overflow: hidden; margin-top: 24px; border-radius: 14px; padding: 44px 52px; background: var(--cs-accent); color: #fff; }
+@media (min-width: 1024px) { .banner { margin-top: calc(24 * var(--k)); border-radius: calc(14 * var(--k)); padding: calc(44 * var(--k)) calc(52 * var(--k)); }
+  .banner img { width: calc(476 * var(--k)); } }
 .banner .cs-label { color: #fff; letter-spacing: 1.56px; font-size: 13px; }
 .banner p { margin-top: 16px; font-weight: 600; font-size: clamp(22px, 1.9vw, 36px); line-height: 1.45; color: var(--cs-bg); max-width: 1050px; position: relative; }
 .banner img { position: absolute; right: -10px; bottom: -8px; width: 476px; max-width: 45%; height: auto; pointer-events: none; }
@@ -138,9 +152,13 @@ br.xwide { display: none; }
 }
 .compare-sep { display: none; }
 @media (min-width: 1024px) {
-  /* three columns: card / separator / card. Placement lives here so the
-     layout is correct all the way from 1024 up. */
-  .compare { grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); column-gap: 0; row-gap: 23px; }
+  /* three columns: card / separator / card, at the Figma 580/56/580 scaled to
+     the viewport. Placement lives here so the layout is right from 1024 up. */
+  .compare { grid-template-columns: calc(580 * var(--k)) calc(56 * var(--k)) calc(580 * var(--k));
+             justify-content: center; column-gap: 0; row-gap: calc(23 * var(--k)); }
+  .compare .step { min-height: calc(125 * var(--k)); padding: calc(22 * var(--k)) calc(27 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .compare .step h3 { font-size: calc(19 * var(--k)); line-height: calc(25 * var(--k)); }
+  .compare .step p { font-size: calc(16 * var(--k)); line-height: calc(24 * var(--k)); margin-top: calc(6 * var(--k)); }
   .compare .pill { width: max-content; margin-inline: auto; padding: 8px 20px; font-size: 16px; }
   .compare .pill.a { grid-column: 1; }
   .compare .pill.b { grid-column: 3; }
@@ -150,17 +168,14 @@ br.xwide { display: none; }
   .compare-sep { display: grid; place-items: center; font-style: normal; font-size: 21px; line-height: 1; color: #7d8a80; }
   .compare-sep::before { content: "\21C4"; }
 }
-@media (min-width: 1600px) {
-  /* at the design width the cards are exactly 580 x 125 (Figma 46:266) */
-  .compare { grid-template-columns: 580px 56px 580px; justify-content: center; }
-}
+
 
 /* ---------- screenshots ---------- */
 .shots { display: grid; gap: 14px; margin-top: 14px; }
 .shots.two { grid-template-columns: 1fr; }
 .shots.three { grid-template-columns: 1fr; }
 @media (min-width: 640px) { .shots.two, .shots.three { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .shots.two { gap: 57px; } }
+@media (min-width: 1024px) { .shots.two { gap: calc(57 * var(--k)); } .shots { gap: calc(14 * var(--k)); } }
 @media (min-width: 1024px) { .shots.three { grid-template-columns: repeat(3, 1fr); } }
 .shot figure { margin: 0; }
 .shot .frame { border: 1px solid var(--cs-line); border-radius: 10px; overflow: hidden; background: var(--surface); }
@@ -184,19 +199,22 @@ br.xwide { display: none; }
 .chips li { border: 1px solid var(--cs-line); background: var(--surface); border-radius: 100px; padding: 9px 17px; font-weight: 600; font-size: 14.5px; color: var(--cs-ink, var(--ink)); }
 /* Figma 133:7427 — the chip block starts at the text column and breaks 5 + 3 */
 @media (min-width: 1024px) {
-  .chips.indent { margin-left: 420px; max-width: 790px; gap: 18px 9px; }
+  .chips.indent { margin-left: calc(420 * var(--k)); max-width: calc(790 * var(--k)); gap: calc(18 * var(--k)) calc(9 * var(--k)); }
 }
 .dark .chips li { background: transparent; border-color: var(--cs-dark-line, #2e6448); color: var(--cs-dark-chip, #d9e6dc); font-weight: 400; font-size: 15px; }
 
 /* ---------- design system panels ---------- */
 .ds { display: grid; gap: 40px; margin-top: 34px; }
 @media (min-width: 1024px) and (max-width: 1199px) { .ds { grid-template-columns: 1fr; gap: 40px; } }
-@media (min-width: 1024px) { .ds { grid-template-columns: 49.5% 1fr; gap: 0 9.14%; } }
+@media (min-width: 1024px) { .ds { grid-template-columns: 49.5% minmax(0, 1fr); gap: 0 9.14%; margin-top: calc(34 * var(--k)); }
+  .ds h3 { margin: calc(36 * var(--k)) 0 calc(12 * var(--k)); }
+  .panel { padding: calc(24 * var(--k)) calc(26 * var(--k)); } }
 .ds h3 { font-family: var(--mono); font-weight: 400; font-size: 16px; letter-spacing: 1.04px; text-transform: uppercase; color: var(--cs-label-2, #7d8a80); margin: 36px 0 12px; }
 .ds h3:first-child { margin-top: 0; }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
-@media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, 1fr); max-width: 722px; } }
 .swatches span { height: 88px; border-radius: 10px; padding: 12px 10px; display: flex; align-items: flex-end; font-weight: 600; font-size: clamp(13px, 1.05vw, 16px); line-height: 21px; white-space: nowrap; color: #fff; }
+@media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: calc(722 * var(--k)); gap: calc(12 * var(--k)); }
+  .swatches span { height: calc(88 * var(--k)); border-radius: calc(10 * var(--k)); padding: calc(12 * var(--k)) calc(10 * var(--k)); } }
 .panel { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 10px; padding: 24px 26px; }
 .type-sample .face { font-weight: 700; font-size: 40px; letter-spacing: -0.01em; line-height: 1.05; color: var(--cs-ink); }
 .type-sample .sub { margin-top: 8px; font-size: 15px; color: #8a9584; }
@@ -225,7 +243,11 @@ br.xwide { display: none; }
 
 /* ---------- impact stats ---------- */
 .stats { display: grid; gap: 20px; grid-template-columns: repeat(2, 1fr); margin-top: 32px; list-style: none; padding: 0; }
-@media (min-width: 1024px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(20 * var(--k)); }
+  .stats li { padding: calc(29 * var(--k)) calc(31 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .reflect { gap: calc(20 * var(--k)); }
+  .reflect div { padding: calc(33 * var(--k)) calc(37 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .summary { padding: calc(34 * var(--k)) calc(40 * var(--k)); border-radius: calc(12 * var(--k)); } }
 .stats li { border: 1px solid var(--cs-line); border-radius: 12px; padding: 29px 31px; }
 .stats b { display: block; font-weight: 600; font-size: 46px; line-height: 1; color: var(--cs-accent); }
 .stats p { margin-top: 12px; font-size: 17px; line-height: 26px; color: var(--cs-body-2); }
@@ -255,7 +277,7 @@ br.xwide { display: none; }
 
 /* case-study footer variant: shorter bottom padding */
 body.case .footer { padding-top: 64px; }
-@media (min-width: 1024px) { body.case .footer { padding: 44px 0 80px; } }
+@media (min-width: 1024px) { body.case .footer { padding: calc(44 * var(--k)) 0 calc(80 * var(--k)); } }
 
 /* ---------- lightbox ---------- */
 .lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(28, 42, 34, .9); display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
@@ -273,7 +295,7 @@ body.case .footer { padding-top: 64px; }
 /* ===================== TravelHub-specific blocks ===================== */
 /* hero phone (login screen drawn in CSS over the real background photo) */
 .th-hero-grid { display: grid; gap: 40px; align-items: center; }
-@media (min-width: 1024px) { .th-hero-grid { grid-template-columns: 1fr 330px; gap: 70px; } }
+@media (min-width: 1024px) { .th-hero-grid { grid-template-columns: minmax(0, 1fr) calc(330 * var(--k)); gap: calc(70 * var(--k)); } }
 .th-phone { width: 330px; max-width: 100%; margin: 0 auto; background: #fff; border-radius: 50px; padding: 12px; box-shadow: 0 40px 80px -30px rgba(46,26,34,.45); }
 .th-phone .scr { position: relative; border-radius: 38px; overflow: hidden; aspect-ratio: 306 / 654; background: #2e1a22 url('/assets/img/travelhub/hero-bg.webp') center / cover; color: #fff; }
 .th-phone .scr::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)); }
@@ -297,7 +319,7 @@ body.case .footer { padding-top: 64px; }
 
 /* research: stats + findings */
 .research { display: grid; gap: 40px; margin-top: 40px; }
-@media (min-width: 1024px) { .research { grid-template-columns: 629px 1fr; gap: 56px; align-items: start; } }
+@media (min-width: 1024px) { .research { grid-template-columns: calc(629 * var(--k)) minmax(0, 1fr); gap: calc(56 * var(--k)); align-items: start; } }
 .statbar { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--surface); border: 1px solid var(--cs-line); border-radius: 32px; }
 .statbar div { padding: 26px 18px; text-align: center; }
 .statbar div + div { border-left: 1px solid var(--cs-line); }
@@ -340,7 +362,7 @@ body.case .footer { padding-top: 64px; }
 
 /* wireframes */
 .wires { display: grid; gap: 40px; margin-top: 56px; align-items: center; }
-@media (min-width: 1024px) { .wires { grid-template-columns: 732px 1fr; gap: 60px; } }
+@media (min-width: 1024px) { .wires { grid-template-columns: calc(732 * var(--k)) minmax(0, 1fr); gap: calc(60 * var(--k)); } }
 .wire-row { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
 .wire { width: 224px; text-align: center; }
 .wire .fr { height: 452px; background: #faf9f6; border: 1px solid #ded9cd; border-radius: 30px; padding: 16px 14px; display: flex; flex-direction: column; gap: 11px; }
@@ -359,20 +381,26 @@ body.case .footer { padding-top: 64px; }
 
 /* design system (TravelHub palette panel is 1060 + 565) */
 .ds.th { grid-template-columns: 1fr; }
-@media (min-width: 1024px) { .ds.th { grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr); gap: 0 49px; } }
+@media (min-width: 1024px) { .ds.th { grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 0 calc(49 * var(--k)); } }
 .swatches.th span { border: 1px solid #14120c; }
 
 /* screens grid (dark section) */
-.screens { display: grid; gap: 40px 24px; grid-template-columns: repeat(2, 1fr); margin-top: 52px; justify-items: center; }
-@media (min-width: 768px) { .screens { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1200px) { .screens { grid-template-columns: repeat(4, 1fr); } .screens .row1 { grid-column: span 1; } }
-.screen { width: 100%; max-width: 316px; text-align: center; }
+.screens { display: grid; gap: 40px 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 52px; justify-items: center; }
+@media (min-width: 768px) { .screens { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Figma 18:1334 / 18:1609 — three phones then four, not four then three.
+   A 12-column track lets the first three span 4 each and the last four span 3. */
+@media (min-width: 1200px) {
+  .screens { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: calc(40 * var(--k)) calc(40 * var(--k)); margin-top: calc(52 * var(--k)); }
+  .screen { grid-column: span 3; }
+  .screen:nth-child(-n+3) { grid-column: span 4; }
+}
+.screen { width: 100%; max-width: calc(316 * var(--k)); text-align: center; }
 .screen .ph { aspect-ratio: 316 / 646; filter: drop-shadow(0 24px 44px rgba(0, 0, 0, .55)); }
 .screen .ph svg { width: 100%; height: auto; display: block; }
 /* the phone shell is part of the drawing, so no frame/padding is added here */
 .screen .ph > img { width: 100%; height: 100%; border-radius: 36px; object-fit: cover; object-position: top; display: block; background: #fbf7f3; }
 .screen .ph .missing { display: grid; place-items: center; text-align: center; padding: 24px; font-family: var(--mono); font-size: 12px; line-height: 1.6; color: #9a9089; border: 1px dashed #ddd9d0; }
-.screen span { display: block; margin-top: 16px; font-family: var(--mono); font-size: 16px; letter-spacing: .52px; text-transform: uppercase; color: #fff; }
+.screen span { display: block; margin-top: calc(16 * var(--k)); font-family: var(--mono); font-size: 16px; letter-spacing: .52px; text-transform: uppercase; color: #fff; }
 .dark.th { background: #2e1a22; }
 .dark.th .cs-h2, .dark.th .cs-body-text { color: #fff; }
 .dark.th .cs-h2 { font-weight: 700; }
@@ -384,11 +412,11 @@ body.case .footer { padding-top: 64px; }
 .inter .ic svg { width: 30px; height: 30px; fill: none; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
 .inter h3 { font-weight: 700; font-size: 26px; color: var(--ink); }
 .inter p { margin-top: 10px; font-size: 20px; line-height: 31px; color: var(--muted-3); }
-@media (min-width: 1024px) { .inter { grid-template-columns: 1fr 1fr; gap: 0 70px; } }
+@media (min-width: 1024px) { .inter { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 calc(70 * var(--k)); } }
 
 /* testing */
 .testing { display: grid; gap: 40px; margin-top: 50px; }
-@media (min-width: 1024px) { .testing { grid-template-columns: 300px 1fr; gap: 115px; } }
+@media (min-width: 1024px) { .testing { grid-template-columns: calc(300 * var(--k)) minmax(0, 1fr); gap: calc(115 * var(--k)); } }
 .tstats > div { padding: 22px 0; border-bottom: 1px solid var(--cs-line); }
 .tstats > div:first-child { border-top: 1px solid var(--cs-line); }
 .tstats b { display: block; font-weight: 700; font-size: 52px; line-height: 1; color: var(--ink); }
@@ -407,10 +435,10 @@ body.case .footer { padding-top: 64px; }
 .outcome2 { display: grid; margin-top: 50px; border-top: 1px solid var(--cs-line); border-bottom: 1px solid var(--cs-line); }
 .outcome2 > div { padding: 34px 0 30px; }
 .outcome2 p { margin-top: 12px; font-size: 22px; line-height: 33px; color: var(--body-2); }
-@media (min-width: 1024px) { .outcome2 { grid-template-columns: 1fr 1fr; } .outcome2 > div { padding: 34px 60px 30px; } .outcome2 > div:first-child { padding-left: 0; } .outcome2 > div + div { border-left: 1px solid var(--cs-line); } }
+@media (min-width: 1024px) { .outcome2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .outcome2 > div { padding: calc(34 * var(--k)) calc(60 * var(--k)) calc(30 * var(--k)); } .outcome2 > div:first-child { padding-left: 0; } .outcome2 > div + div { border-left: 1px solid var(--cs-line); } }
 .takeaway { display: grid; gap: 16px; padding: 54px 0 10px; }
 .takeaway p { font-weight: 700; font-size: clamp(26px, 2.2vw, 42px); line-height: 1.3; color: var(--ink); max-width: 900px; }
-@media (min-width: 1024px) { .takeaway { grid-template-columns: 300px 1fr; gap: 40px; padding-left: 120px; } }
+@media (min-width: 1024px) { .takeaway { grid-template-columns: calc(300 * var(--k)) minmax(0, 1fr); gap: calc(40 * var(--k)); padding-left: calc(120 * var(--k)); } }
 
 /* ===================== Bara-specific blocks ===================== */
 .bara-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin-top: 28px; }

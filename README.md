@@ -20,6 +20,20 @@ python3 -m http.server 8787
 ```
 Open http://127.0.0.1:8787/. Note: `/work/kkl` clean URLs only work on Vercel; locally use `/work/kkl.html`.
 
+## Version marker
+
+The footer carries a build number next to the copyright (`v1.0.0`). **Bump the
+patch on every commit that reaches `main`** — these are fixes, not features, so
+the patch is the right digit. It is hard-coded in the five `.html` footers,
+which are copy-pasted, so change it in all five:
+
+```bash
+grep -rn 'class="ver"' index.html work/*.html
+```
+
+It exists so anyone looking at the live site can say which build they are seeing
+without digging through git.
+
 ## Checks before pushing
 
 ```bash

@@ -6,7 +6,7 @@
   --surface: #ffffff;
   --border: #ecdedd;
   --plum: #4a1a2e;
-  --plum-border: rgba(244, 239, 230, 0.18); /* #f4efe6 hairline on plum */
+  --plum-border: rgba(244, 239, 230, 0.15); /* #f4efe6 hairline on plum */
 
   /* text */
   --ink: #2e1a22;
@@ -33,6 +33,17 @@
   /* type */
   --sans: "Assistant", "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Design-frame scale. Every px below that came out of Portfolio.fig is a
+     measurement of the 1920-wide frame, so at any narrower viewport it has to
+     be multiplied by this. Without it the gutters and type scale with the
+     viewport while spacing, padding and fixed grid tracks stay at their 1920
+     size — which is what threw the alignment off at 1440.
+     --k is the rendered size of one design pixel: 1px at 1920, 0.75px at 1440,
+     floored at 0.5333px (the 1024 scale). Use it as calc(<figma number> * var(--k)) —
+     note the number is unitless, because --k already carries the unit.
+       1 at 1920 · 0.75 at 1440 · 0.533 at 1024 */
+  --k: clamp(0.5333px, 100vw / 1920, 1px);
 
   /* layout — 1920 design width, 130px gutters, 1660px content */
   --content: 1660px;
