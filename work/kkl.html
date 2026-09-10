@@ -37,13 +37,18 @@
     #final .cs-body-text p + p { margin-top: 0; }
     /* "call for proposals." is the Fun Green style in Figma */
     .cs-hero h1 .accent { color: var(--cs-accent); }
+    /* sections 08 + 09 sit in the Figma 1443-wide block, not the full wrap */
+    @media (min-width: 1024px) {
+      .stats { margin-top: 60px; }
+      .stats, .summary, .reflect { margin-inline: 6.57%; }
+    }
   </style>
 </head>
 <body class="case">
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Moran Weinish — home"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
     <ul class="nav-links">
       <li><a href="/#work">Work</a></li>
       <li><a href="/#about">About</a></li>
@@ -101,12 +106,12 @@
       </div>
       <div class="cs-content reveal">
         <span class="cs-label">One lifecycle</span>
-        <div class="pipe" role="list">
-          <span class="a">Build the call</span><i>→</i>
-          <span class="a">Publish</span><i>→</i>
-          <span class="b">Submit</span><i>→</i>
-          <span class="a">Review &amp; score</span><i>→</i>
-          <span class="a">Committee &amp; legal</span><i>→</i>
+        <div class="pipe">
+          <span class="a">Build the call</span><i aria-hidden="true">→</i>
+          <span class="a">Publish</span><i aria-hidden="true">→</i>
+          <span class="b">Submit</span><i aria-hidden="true">→</i>
+          <span class="a">Review &amp; score</span><i aria-hidden="true">→</i>
+          <span class="a">Committee &amp; legal</span><i aria-hidden="true">→</i>
           <span class="a">Contract</span>
         </div>
         <div class="legend"><span class="a">KKL team (Backstage)</span><span class="b">Applicants (Onstage)</span></div>
@@ -133,7 +138,7 @@
         <div class="banner">
           <span class="cs-label">The challenge</span>
           <p>Create one connected process where the rules defined by KKL guide everything that follows. From what applicants see and submit to how each proposal is reviewed and evaluated.</p>
-          <img src="/assets/img/kkl/challenge-art.webp" alt="" width="476" height="164" aria-hidden="true">
+          <img src="/assets/img/kkl/challenge-art.webp" alt="" width="355" height="136" aria-hidden="true">
         </div>
       </div>
     </div>
@@ -154,21 +159,21 @@
         <div class="compare">
           <span class="pill a">KKL team (Backstage)</span>
           <span class="pill b">Applicants (Onstage)</span>
-          <div class="step a"><h4>Form structure &amp; fields</h4><p>Build the submission flow in stages, define the fields applicants need to complete, and decide what is required for each call.</p></div>
+          <div class="step a"><h3>Form structure &amp; fields</h3><p>Build the submission flow in stages, define the fields applicants need to complete, and decide what is required for each call.</p></div>
           <i class="compare-sep" aria-hidden="true"></i>
-          <div class="step b"><h4>A submission that adapts to the call</h4><p>Applicants move through a guided form based on the structure and requirements defined specifically for that call.</p></div>
-          <div class="step a"><h4>Eligibility &amp; entity types</h4><p>Define who can apply, from municipalities and NGOs to companies, and the requirements they need to meet.</p></div>
+          <div class="step b"><h3>A submission that adapts to the call</h3><p>Applicants move through a guided form based on the structure and requirements defined specifically for that call.</p></div>
+          <div class="step a"><h3>Eligibility &amp; entity types</h3><p>Define who can apply, from municipalities and NGOs to companies, and the requirements they need to meet.</p></div>
           <i class="compare-sep" aria-hidden="true"></i>
-          <div class="step b"><h4>Clear eligibility from the start</h4><p>Applicants see the relevant threshold conditions and requirements before moving through the submission process.</p></div>
-          <div class="step a"><h4>Budget &amp; funding rules</h4><p>Set the funding model, limits and participation percentage, including different rules for different types of calls and applicants.</p></div>
+          <div class="step b"><h3>Clear eligibility from the start</h3><p>Applicants see the relevant threshold conditions and requirements before moving through the submission process.</p></div>
+          <div class="step a"><h3>Budget &amp; funding rules</h3><p>Set the funding model, limits and participation percentage, including different rules for different types of calls and applicants.</p></div>
           <i class="compare-sep" aria-hidden="true"></i>
-          <div class="step b"><h4>Budget checks while filling the form</h4><p>Funding amounts are validated against the call’s limits and funding percentage, helping identify issues before submission.</p></div>
-          <div class="step a"><h4>Documents by entity type</h4><p>Define the documents each type of organization needs to provide, so requirements can change according to who is applying.</p></div>
+          <div class="step b"><h3>Budget checks while filling the form</h3><p>Funding amounts are validated against the call’s limits and funding percentage, helping identify issues before submission.</p></div>
+          <div class="step a"><h3>Documents by entity type</h3><p>Define the documents each type of organization needs to provide, so requirements can change according to who is applying.</p></div>
           <i class="compare-sep" aria-hidden="true"></i>
-          <div class="step b"><h4>Only the documents that apply</h4><p>The required-document list adapts to the applicant’s legal entity type and other choices made during the submission.</p></div>
-          <div class="step a"><h4>Quality &amp; scoring criteria</h4><p>Build the evaluation model in advance, including criteria, sub-criteria, weights and the data used for scoring.</p></div>
+          <div class="step b"><h3>Only the documents that apply</h3><p>The required-document list adapts to the applicant’s legal entity type and other choices made during the submission.</p></div>
+          <div class="step a"><h3>Quality &amp; scoring criteria</h3><p>Build the evaluation model in advance, including criteria, sub-criteria, weights and the data used for scoring.</p></div>
           <i class="compare-sep" aria-hidden="true"></i>
-          <div class="step b"><h4>Ready for the next stage</h4><p>The information submitted by applicants is structured around the same rules and criteria KKL uses later in the process.</p></div>
+          <div class="step b"><h3>Ready for the next stage</h3><p>The information submitted by applicants is structured around the same rules and criteria KKL uses later in the process.</p></div>
         </div>
       </div>
 
@@ -325,7 +330,7 @@
 
       <div class="ds reveal">
         <div>
-          <h4>Palette</h4>
+          <h3>Palette</h3>
           <div class="swatches">
             <span style="background:#006837">Green · primary</span>
             <span style="background:#37c56b;color:#053d22">Green · bright</span>
@@ -336,7 +341,7 @@
             <span style="background:#c0392b">Error</span>
             <span style="background:#f0a13a">Action</span>
           </div>
-          <h4>Typography &amp; scale</h4>
+          <h3>Typography &amp; scale</h3>
           <div class="panel type-sample">
             <div class="face">Open Sans, Assistant</div>
             <div class="sub">Hebrew &amp; Latin · headings, body and data</div>
@@ -344,7 +349,7 @@
           </div>
         </div>
         <div>
-          <h4>Components</h4>
+          <h3>Components</h3>
           <div class="panel">
             <div class="ds-row">
               <span class="ds-btn" style="background:#006837;color:#fff">Primary</span>
@@ -365,7 +370,7 @@
               <i style="border:2px solid #d7e0d5;color:#a8b0a2">4</i>
             </div>
           </div>
-          <h4>Field states</h4>
+          <h3>Field states</h3>
           <div class="panel fields">
             <div><label>Default</label><span>580123456</span></div>
             <div><label style="color:#01838d">Focus</label><span style="border:2px solid #01838d">580123456</span></div>
@@ -375,8 +380,8 @@
         </div>
       </div>
 
-      <h4 class="cs-label reveal" style="margin-top:30px">Iconography</h4>
-      <div class="panel icons reveal" style="margin-top:14px">
+      <h3 class="cs-label reveal" style="margin-top:30px">Iconography</h3>
+      <div class="panel icons solid reveal" style="margin-top:14px">
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M17.5 3.75L18.25 3.0C18.05 2.8 17.78 2.69 17.5 2.69L17.5 3.75ZM7.5 3.75L7.5 2.69L7.5 3.75ZM5.0 6.25L3.94 6.25L5.0 6.25ZM5.0 23.75L3.94 23.75L5.0 23.75ZM25.0 11.25L26.06 11.25C26.06 10.97 25.95 10.7 25.75 10.5L25.0 11.25ZM17.5 3.75L17.5 2.69L7.5 2.69L7.5 3.75L7.5 4.81L17.5 4.81L17.5 3.75ZM7.5 3.75L7.5 2.69C6.56 2.69 5.65 3.06 4.98 3.73L5.73 4.48L6.48 5.23C6.75 4.96 7.12 4.81 7.5 4.81L7.5 3.75ZM5.73 4.48L4.98 3.73C4.31 4.4 3.94 5.31 3.94 6.25L5.0 6.25L6.06 6.25C6.06 5.87 6.21 5.5 6.48 5.23L5.73 4.48ZM5.0 6.25L3.94 6.25L3.94 23.75L5.0 23.75L6.06 23.75L6.06 6.25L5.0 6.25ZM5.0 23.75L3.94 23.75C3.94 24.69 4.31 25.6 4.98 26.27L5.73 25.52L6.48 24.77C6.21 24.5 6.06 24.13 6.06 23.75L5.0 23.75ZM5.73 25.52L4.98 26.27C5.65 26.94 6.56 27.31 7.5 27.31L7.5 26.25L7.5 25.19C7.12 25.19 6.75 25.04 6.48 24.77L5.73 25.52ZM7.5 26.25L7.5 27.31L22.5 27.31L22.5 26.25L22.5 25.19L7.5 25.19L7.5 26.25ZM22.5 26.25L22.5 27.31C23.44 27.31 24.35 26.94 25.02 26.27L24.27 25.52L23.52 24.77C23.25 25.04 22.88 25.19 22.5 25.19L22.5 26.25ZM24.27 25.52L25.02 26.27C25.69 25.6 26.06 24.69 26.06 23.75L25.0 23.75L23.94 23.75C23.94 24.13 23.79 24.5 23.52 24.77L24.27 25.52ZM25.0 23.75L26.06 23.75L26.06 11.25L25.0 11.25L23.94 11.25L23.94 23.75L25.0 23.75ZM25.0 11.25L25.75 10.5L18.25 3.0L17.5 3.75L16.75 4.5L24.25 12.0L25.0 11.25Z"/><path d="M18.56 3.75C18.56 3.16 18.09 2.69 17.5 2.69C16.91 2.69 16.44 3.16 16.44 3.75L17.5 3.75L18.56 3.75ZM17.5 11.25L16.44 11.25C16.44 11.84 16.91 12.31 17.5 12.31L17.5 11.25ZM25.0 12.31C25.59 12.31 26.06 11.84 26.06 11.25C26.06 10.66 25.59 10.19 25.0 10.19L25.0 11.25L25.0 12.31ZM17.5 3.75L16.44 3.75L16.44 11.25L17.5 11.25L18.56 11.25L18.56 3.75L17.5 3.75ZM17.5 11.25L17.5 12.31L25.0 12.31L25.0 11.25L25.0 10.19L17.5 10.19L17.5 11.25Z"/></svg>
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M6.88 5.62L6.88 6.69L23.12 6.69L23.12 5.62L23.12 4.56L6.88 4.56L6.88 5.62ZM23.12 5.62L23.12 6.69C24.26 6.69 25.19 7.61 25.19 8.75L26.25 8.75L27.31 8.75C27.31 6.44 25.44 4.56 23.12 4.56L23.12 5.62ZM26.25 8.75L25.19 8.75L25.19 22.5L26.25 22.5L27.31 22.5L27.31 8.75L26.25 8.75ZM26.25 22.5L25.19 22.5C25.19 23.64 24.26 24.56 23.12 24.56L23.12 25.62L23.12 26.69C25.44 26.69 27.31 24.81 27.31 22.5L26.25 22.5ZM23.12 25.62L23.12 24.56L6.88 24.56L6.88 25.62L6.88 26.69L23.12 26.69L23.12 25.62ZM6.88 25.62L6.88 24.56C5.74 24.56 4.81 23.64 4.81 22.5L3.75 22.5L2.69 22.5C2.69 24.81 4.56 26.69 6.88 26.69L6.88 25.62ZM3.75 22.5L4.81 22.5L4.81 8.75L3.75 8.75L2.69 8.75L2.69 22.5L3.75 22.5ZM3.75 8.75L4.81 8.75C4.81 7.61 5.74 6.69 6.88 6.69L6.88 5.62L6.88 4.56C4.56 4.56 2.69 6.44 2.69 8.75L3.75 8.75Z"/><path d="M3.75 10.19C3.16 10.19 2.69 10.66 2.69 11.25C2.69 11.84 3.16 12.31 3.75 12.31L3.75 11.25L3.75 10.19ZM26.25 12.31C26.84 12.31 27.31 11.84 27.31 11.25C27.31 10.66 26.84 10.19 26.25 10.19L26.25 11.25L26.25 12.31ZM11.06 3.12C11.06 2.54 10.59 2.06 10.0 2.06C9.41 2.06 8.94 2.54 8.94 3.12L10.0 3.12L11.06 3.12ZM8.94 8.12C8.94 8.71 9.41 9.19 10.0 9.19C10.59 9.19 11.06 8.71 11.06 8.12L10.0 8.12L8.94 8.12ZM21.06 3.12C21.06 2.54 20.59 2.06 20.0 2.06C19.41 2.06 18.94 2.54 18.94 3.12L20.0 3.12L21.06 3.12ZM18.94 8.12C18.94 8.71 19.41 9.19 20.0 9.19C20.59 9.19 21.06 8.71 21.06 8.12L20.0 8.12L18.94 8.12ZM3.75 11.25L3.75 12.31L26.25 12.31L26.25 11.25L26.25 10.19L3.75 10.19L3.75 11.25ZM10.0 3.12L8.94 3.12L8.94 8.12L10.0 8.12L11.06 8.12L11.06 3.12L10.0 3.12ZM20.0 3.12L18.94 3.12L18.94 8.12L20.0 8.12L21.06 8.12L21.06 3.12L20.0 3.12Z"/></svg>
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3.94 26.25C3.94 26.84 4.41 27.31 5.0 27.31C5.59 27.31 6.06 26.84 6.06 26.25L5.0 26.25L3.94 26.25ZM6.06 17.5C6.06 16.91 5.59 16.44 5.0 16.44C4.41 16.44 3.94 16.91 3.94 17.5L5.0 17.5L6.06 17.5ZM3.94 12.5C3.94 13.09 4.41 13.56 5.0 13.56C5.59 13.56 6.06 13.09 6.06 12.5L5.0 12.5L3.94 12.5ZM6.06 3.75C6.06 3.16 5.59 2.69 5.0 2.69C4.41 2.69 3.94 3.16 3.94 3.75L5.0 3.75L6.06 3.75ZM13.94 26.25C13.94 26.84 14.41 27.31 15.0 27.31C15.59 27.31 16.06 26.84 16.06 26.25L15.0 26.25L13.94 26.25ZM16.06 15.0C16.06 14.41 15.59 13.94 15.0 13.94C14.41 13.94 13.94 14.41 13.94 15.0L15.0 15.0L16.06 15.0ZM13.94 10.0C13.94 10.59 14.41 11.06 15.0 11.06C15.59 11.06 16.06 10.59 16.06 10.0L15.0 10.0L13.94 10.0ZM16.06 3.75C16.06 3.16 15.59 2.69 15.0 2.69C14.41 2.69 13.94 3.16 13.94 3.75L15.0 3.75L16.06 3.75ZM23.94 26.25C23.94 26.84 24.41 27.31 25.0 27.31C25.59 27.31 26.06 26.84 26.06 26.25L25.0 26.25L23.94 26.25ZM26.06 20.0C26.06 19.41 25.59 18.94 25.0 18.94C24.41 18.94 23.94 19.41 23.94 20.0L25.0 20.0L26.06 20.0ZM23.94 15.0C23.94 15.59 24.41 16.06 25.0 16.06C25.59 16.06 26.06 15.59 26.06 15.0L25.0 15.0L23.94 15.0ZM26.06 3.75C26.06 3.16 25.59 2.69 25.0 2.69C24.41 2.69 23.94 3.16 23.94 3.75L25.0 3.75L26.06 3.75ZM1.25 16.44C0.66 16.44 0.19 16.91 0.19 17.5C0.19 18.09 0.66 18.56 1.25 18.56L1.25 17.5L1.25 16.44ZM8.75 18.56C9.34 18.56 9.81 18.09 9.81 17.5C9.81 16.91 9.34 16.44 8.75 16.44L8.75 17.5L8.75 18.56ZM11.25 8.94C10.66 8.94 10.19 9.41 10.19 10.0C10.19 10.59 10.66 11.06 11.25 11.06L11.25 10.0L11.25 8.94ZM18.75 11.06C19.34 11.06 19.81 10.59 19.81 10.0C19.81 9.41 19.34 8.94 18.75 8.94L18.75 10.0L18.75 11.06ZM21.25 18.94C20.66 18.94 20.19 19.41 20.19 20.0C20.19 20.59 20.66 21.06 21.25 21.06L21.25 20.0L21.25 18.94ZM28.75 21.06C29.34 21.06 29.81 20.59 29.81 20.0C29.81 19.41 29.34 18.94 28.75 18.94L28.75 20.0L28.75 21.06ZM5.0 26.25L6.06 26.25L6.06 17.5L5.0 17.5L3.94 17.5L3.94 26.25L5.0 26.25ZM5.0 12.5L6.06 12.5L6.06 3.75L5.0 3.75L3.94 3.75L3.94 12.5L5.0 12.5ZM15.0 26.25L16.06 26.25L16.06 15.0L15.0 15.0L13.94 15.0L13.94 26.25L15.0 26.25ZM15.0 10.0L16.06 10.0L16.06 3.75L15.0 3.75L13.94 3.75L13.94 10.0L15.0 10.0ZM25.0 26.25L26.06 26.25L26.06 20.0L25.0 20.0L23.94 20.0L23.94 26.25L25.0 26.25ZM25.0 15.0L26.06 15.0L26.06 3.75L25.0 3.75L23.94 3.75L23.94 15.0L25.0 15.0ZM1.25 17.5L1.25 18.56L8.75 18.56L8.75 17.5L8.75 16.44L1.25 16.44L1.25 17.5ZM11.25 10.0L11.25 11.06L18.75 11.06L18.75 10.0L18.75 8.94L11.25 8.94L11.25 10.0ZM21.25 20.0L21.25 21.06L28.75 21.06L28.75 20.0L28.75 18.94L21.25 18.94L21.25 20.0Z"/></svg>
@@ -415,8 +420,8 @@
         <div><h2 class="cs-h2">What this project taught me</h2></div>
       </div>
       <div class="reflect reveal">
-        <div><h4>What worked well</h4><p>Understanding the process in depth before designing. The different entity types, documents, budget rules and dependencies helped me make better UX decisions and build flows that could support different types of calls without redesigning them each time.</p></div>
-        <div><h4 class="next">What I would explore next</h4><p>I would expand user testing with real applicants across different entity types, using their feedback to further refine the language, guidance and more complex submission scenarios.</p></div>
+        <div><h3>What worked well</h3><p>Understanding the process in depth before designing. The different entity types, documents, budget rules and dependencies helped me make better UX decisions and build flows that could support different types of calls without redesigning them each time.</p></div>
+        <div><h3 class="next">What I would explore next</h3><p>I would expand user testing with real applicants across different entity types, using their feedback to further refine the language, guidance and more complex submission scenarios.</p></div>
       </div>
       <nav class="cs-nav" aria-label="Case studies">
         <a href="/#work">Back to portfolio</a>
