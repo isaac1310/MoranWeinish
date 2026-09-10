@@ -30,7 +30,13 @@
       --cs-accent: #006837; --cs-dark: #05341f; --cs-dark-text: #bcd9c6; --cs-dark-line: #2e6448; --cs-dark-chip: #d9e6dc;
       --cs-accent-a: #01838d; --cs-tint-a: #e3f7f8;   /* KKL team · Backstage */
       --cs-accent-b: #006837; --cs-tint-b: #e2fadf;   /* Applicants · Onstage */
+      --cs-step-a-bg: #f2fcfd; --cs-step-a-line: #bfeaee;   /* Backstage cards */
+      --cs-step-b-bg: #f4fdf2; --cs-step-b-line: #bfe9ba;   /* Onstage cards */
     }
+    /* Figma runs the two paragraphs of section 06 as one text block */
+    #final .cs-body-text p + p { margin-top: 0; }
+    /* "call for proposals." is the Fun Green style in Figma */
+    .cs-hero h1 .accent { color: var(--cs-accent); }
   </style>
 </head>
 <body class="case">
@@ -56,11 +62,16 @@
 
 <main>
 
+  <nav class="cs-topnav" aria-label="Case study">
+    <a class="back" href="/#work"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9H4M8.5 4.5 4 9l4.5 4.5"/></svg>Back</a>
+    <a class="fwd" href="/work/travelhub">Next<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+  </nav>
+
   <!-- ============ HEADER ============ -->
   <header class="cs-hero">
     <div class="wrap">
       <p class="cs-brand"><img src="/assets/img/kkl/logo.webp" alt="" width="41" height="53">KKL</p>
-      <h1>The system behind every<br>KKL call for proposals.</h1>
+      <h1>The system behind every<br>KKL <span class="accent">call for proposals.</span></h1>
       <p class="lede">KKL’s teams define each call - its requirements, documents, budget rules and evaluation process. Applicants use the same system to understand what’s required and submit their proposal.<br>I designed both experiences as one connected process, making a complex workflow easier to manage and easier to follow.</p>
       <dl class="cs-meta">
         <div><dt>Role</dt><dd>Product Designer - UX/UI</dd></div>
@@ -141,27 +152,23 @@
 
       <div class="cs-content reveal">
         <div class="compare">
-          <div class="compare-col a">
-            <span class="pill a">KKL team (Backstage)</span>
-            <ol class="steps">
-              <li><h4>Form structure &amp; fields</h4><p>Build the submission flow in stages, define the fields applicants need to complete, and decide what is required for each call.</p></li>
-              <li><h4>Eligibility &amp; entity types</h4><p>Define who can apply, from municipalities and NGOs to companies, and the requirements they need to meet.</p></li>
-              <li><h4>Budget &amp; funding rules</h4><p>Set the funding model, limits and participation percentage, including different rules for different types of calls and applicants.</p></li>
-              <li><h4>Documents by entity type</h4><p>Define the documents each type of organization needs to provide, so requirements can change according to who is applying.</p></li>
-              <li><h4>Quality &amp; scoring criteria</h4><p>Build the evaluation model in advance, including criteria, sub-criteria, weights and the data used for scoring.</p></li>
-            </ol>
-          </div>
-          <div class="compare-sep" aria-hidden="true"></div>
-          <div class="compare-col b">
-            <span class="pill b">Applicants (Onstage)</span>
-            <ol class="steps">
-              <li><h4>A submission that adapts to the call</h4><p>Applicants move through a guided form based on the structure and requirements defined specifically for that call.</p></li>
-              <li><h4>Clear eligibility from the start</h4><p>Applicants see the relevant threshold conditions and requirements before moving through the submission process.</p></li>
-              <li><h4>Budget checks while filling the form</h4><p>Funding amounts are validated against the call’s limits and funding percentage, helping identify issues before submission.</p></li>
-              <li><h4>Only the documents that apply</h4><p>The required-document list adapts to the applicant’s legal entity type and other choices made during the submission.</p></li>
-              <li><h4>Ready for the next stage</h4><p>The information submitted by applicants is structured around the same rules and criteria KKL uses later in the process.</p></li>
-            </ol>
-          </div>
+          <span class="pill a">KKL team (Backstage)</span>
+          <span class="pill b">Applicants (Onstage)</span>
+          <div class="step a"><h4>Form structure &amp; fields</h4><p>Build the submission flow in stages, define the fields applicants need to complete, and decide what is required for each call.</p></div>
+          <i class="compare-sep" aria-hidden="true"></i>
+          <div class="step b"><h4>A submission that adapts to the call</h4><p>Applicants move through a guided form based on the structure and requirements defined specifically for that call.</p></div>
+          <div class="step a"><h4>Eligibility &amp; entity types</h4><p>Define who can apply, from municipalities and NGOs to companies, and the requirements they need to meet.</p></div>
+          <i class="compare-sep" aria-hidden="true"></i>
+          <div class="step b"><h4>Clear eligibility from the start</h4><p>Applicants see the relevant threshold conditions and requirements before moving through the submission process.</p></div>
+          <div class="step a"><h4>Budget &amp; funding rules</h4><p>Set the funding model, limits and participation percentage, including different rules for different types of calls and applicants.</p></div>
+          <i class="compare-sep" aria-hidden="true"></i>
+          <div class="step b"><h4>Budget checks while filling the form</h4><p>Funding amounts are validated against the call’s limits and funding percentage, helping identify issues before submission.</p></div>
+          <div class="step a"><h4>Documents by entity type</h4><p>Define the documents each type of organization needs to provide, so requirements can change according to who is applying.</p></div>
+          <i class="compare-sep" aria-hidden="true"></i>
+          <div class="step b"><h4>Only the documents that apply</h4><p>The required-document list adapts to the applicant’s legal entity type and other choices made during the submission.</p></div>
+          <div class="step a"><h4>Quality &amp; scoring criteria</h4><p>Build the evaluation model in advance, including criteria, sub-criteria, weights and the data used for scoring.</p></div>
+          <i class="compare-sep" aria-hidden="true"></i>
+          <div class="step b"><h4>Ready for the next stage</h4><p>The information submitted by applicants is structured around the same rules and criteria KKL uses later in the process.</p></div>
         </div>
       </div>
 
@@ -184,7 +191,7 @@
       <div class="cs-head reveal">
         <span class="cs-num">04 / Research</span>
         <div>
-          <h2 class="cs-h2">Understanding the process before designing it</h2>
+          <h2 class="cs-h2">Understanding the process before<br class="wide">designing it</h2>
           <div class="cs-body-text"><p>Before designing the platform, I needed to understand how KKL’s calls actually work. The rules, users, documents, budgets and decisions that shape the process.</p></div>
         </div>
       </div>
@@ -219,7 +226,7 @@
   </section>
 
   <!-- ============ 06 FINAL DESIGN ============ -->
-  <section class="cs-section alt">
+  <section class="cs-section alt" id="final">
     <div class="wrap">
       <div class="cs-head reveal">
         <span class="cs-num">06 / Final design</span>
