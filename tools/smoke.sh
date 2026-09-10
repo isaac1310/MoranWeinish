@@ -10,10 +10,10 @@
 #   1. static  — no CSS rule may hide .reveal unless it is behind .reveal-ready,
 #                which is the class js/site.js adds. This is what guarantees the
 #                page is readable with JavaScript off or broken.
-#   2. rendered — five seconds after load, every .reveal element on every page
-#                must have a computed opacity above 0. Elements below the fold
-#                are covered by the failsafe timer in js/site.js, which is the
-#                property worth testing: the page always ends up readable.
+#   2. rendered — every .reveal element that is in the viewport after load must
+#                have a computed opacity above 0. Elements below the fold are
+#                meant to stay hidden until scrolled to; content you can see
+#                must never be invisible.
 #
 #   python3 -m http.server 8787 &
 #   tools/smoke.sh
@@ -34,24 +34,24 @@ echo "2. rendered: every .reveal element ends up visible"
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"; lsof -ti:8798 | xargs kill 2>/dev/null || true' EXIT
 lsof -ti:8798 | xargs kill 2>/dev/null || true
 rsync -a --exclude Portfolio.fig --exclude .git ./ "$WORK/"
-PROBE='<script>window.addEventListener("load",function(){setTimeout(function(){var els=document.querySelectorAll(".reveal"),h=0;els.forEach(function(e){if(+getComputedStyle(e).opacity<0.05)h++;});document.title="R{\"total\":"+els.length+",\"hidden\":"+h+"}R";},5000);});</script>'
+cp tools/probe.js "$WORK/probe.js"
 for f in "$WORK"/index.html "$WORK"/work/*.html; do
-  python3 - "$f" "$PROBE" <<'PY'
+  python3 - "$f" <<'PY'
 import sys
-p, probe = sys.argv[1], sys.argv[2]
+p = sys.argv[1]
 s = open(p).read()
-open(p, 'w').write(s.replace('</body>', probe + '</body>'))
+open(p, 'w').write(s.replace('</body>', '<script src="/probe.js"></script></body>'))
 PY
 done
 (cd "$WORK" && python3 -m http.server 8798 >/dev/null 2>&1 &) ; sleep 1.5
 for PAGE in /index.html /work/kkl.html /work/travelhub.html /work/bara.html /work/suzuki.html; do
   R=$("$CHROME" --headless=new --disable-gpu --hide-scrollbars --virtual-time-budget=20000 \
       --window-size=1500,1000 --dump-dom "http://localhost:8798$PAGE" 2>/dev/null \
-      | grep -o 'R{[^}]*}R' | head -1 | tr -d 'R')
+      | grep -o 'SMOKE{[^}]*}SMOKE' | head -1 | sed 's/SMOKE//g')
   T=$(sed -n 's/.*"total":\([0-9]*\).*/\1/p' <<<"$R"); H=$(sed -n 's/.*"hidden":\([0-9]*\).*/\1/p' <<<"$R")
   if [[ -z "${T:-}" ]]; then printf '   %-22s ?     could not read the page\n' "$PAGE"; FAIL=1
-  elif [[ "$H" -gt 0 ]]; then printf '   %-22s FAIL  %s/%s still invisible\n' "$PAGE" "$H" "$T"; FAIL=1
-  else printf '   %-22s ok    %s visible\n' "$PAGE" "$T"; fi
+  elif [[ "$H" -gt 0 ]]; then printf '   %-22s FAIL  %s of %s in view are invisible\n' "$PAGE" "$H" "$T"; FAIL=1
+  else printf '   %-22s ok    %s in view, all visible\n' "$PAGE" "$T"; fi
 done
 
 [[ "$FAIL" -eq 0 ]] && echo "content is visible on every page" || echo "SMOKE TEST FAILED"

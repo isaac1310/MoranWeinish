@@ -20,6 +20,18 @@ python3 -m http.server 8787
 ```
 Open http://127.0.0.1:8787/. Note: `/work/kkl` clean URLs only work on Vercel; locally use `/work/kkl.html`.
 
+## Checks before pushing
+
+```bash
+python3 -m http.server 8787 &
+tools/smoke.sh          # content is visible on every page (see tools/README.md)
+tools/measure.sh work/kkl   # geometry matches Portfolio.fig
+```
+
+`smoke.sh` exists because a bad edit to `js/site.js` once shipped four of the
+five pages completely blank, and neither the markup, the CSS, nor a Lighthouse
+run caught it — Lighthouse scored the blank pages 100 for accessibility.
+
 ## Lighthouse
 
 Mobile, run against the live URL on 2026-09-10 (`npx lighthouse@12 <url>`, default
