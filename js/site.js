@@ -60,7 +60,7 @@
   box.className = 'lightbox';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-label', 'Enlarged screenshot');
-  box.innerHTML = '<img alt=""><button type="button" aria-label="Close">\u00d7</button><span class="zoom-hint"></span>';
+  box.innerHTML = '<div class="stage"><img alt=""><button type="button" aria-label="Close">\u00d7</button></div><span class="zoom-hint"></span>';
   document.body.appendChild(box);
   var big = box.querySelector('img');
   var hint = box.querySelector('.zoom-hint');
