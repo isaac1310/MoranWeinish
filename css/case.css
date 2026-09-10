@@ -159,8 +159,9 @@ br.xwide { display: none; }
 @media (min-width: 1024px) {
   /* three columns: card / separator / card, at the Figma 580/56/580 scaled to
      the viewport. Placement lives here so the layout is right from 1024 up. */
+  /* left-aligned to the text column above it, not centred in the block */
   .compare { grid-template-columns: calc(580 * var(--k)) calc(56 * var(--k)) calc(580 * var(--k));
-             justify-content: center; column-gap: 0; row-gap: calc(23 * var(--k)); }
+             justify-content: start; column-gap: 0; row-gap: calc(23 * var(--k)); }
   .compare .step { min-height: calc(125 * var(--k)); padding: calc(22 * var(--k)) calc(27 * var(--k)); border-radius: calc(12 * var(--k)); }
   .compare .step h3 { font-size: calc(19 * var(--k)); line-height: calc(25 * var(--k)); }
   .compare .step p { font-size: calc(16 * var(--k)); line-height: calc(24 * var(--k)); margin-top: calc(6 * var(--k)); }
