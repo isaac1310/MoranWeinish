@@ -219,24 +219,36 @@ br.xwide { display: none; }
    no animation at all. The list still carries .reveal so the observer (and
    the failsafe) have something to switch on.
 
-   The chips are NOT pre-hidden. animation-fill-mode: both holds the from-state
-   through each delay once .in applies the animation, which gives the stagger —
-   and if .in never arrives the chips are simply visible rather than invisible
-   for good. Content must not depend on the observer firing. */
+   The chip observer (not the generic one) waits until the row is in the middle
+   of the screen, so the stagger plays where it can actually be seen. */
 .reveal-ready .chips.reveal,
 .reveal-ready .reveal:has(.chips.reveal) { opacity: 1; transform: none; transition: none; }
-.reveal-ready .chips.reveal.in li { animation: chip-in .45s var(--ease) both; }
+/* Deliberately NOT pre-hidden. animation-fill-mode: both already holds the
+   from-state through each delay once .in applies the animation, which is what
+   makes the stagger — and it overrides any opacity declared here, so pre-hiding
+   means that if the animation never runs (observer missed, animations off, a
+   rendering edge) the chips are stuck invisible with no way back. Without the
+   pre-hide the worst case is chips that are simply visible and unanimated. */
+.reveal-ready .chips.reveal.in li { animation: chip-in .5s var(--ease) both; }
 .reveal-ready .chips.reveal.in li:nth-child(1) { animation-delay: 0s; }
-.reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .07s; }
-.reveal-ready .chips.reveal.in li:nth-child(3) { animation-delay: .14s; }
-.reveal-ready .chips.reveal.in li:nth-child(4) { animation-delay: .21s; }
-.reveal-ready .chips.reveal.in li:nth-child(5) { animation-delay: .28s; }
-.reveal-ready .chips.reveal.in li:nth-child(6) { animation-delay: .35s; }
-.reveal-ready .chips.reveal.in li:nth-child(7) { animation-delay: .42s; }
-.reveal-ready .chips.reveal.in li:nth-child(8) { animation-delay: .49s; }
-.reveal-ready .chips.reveal.in li:nth-child(n+9) { animation-delay: .56s; }
-@keyframes chip-in { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: none; } }
+.reveal-ready .chips.reveal.in li:nth-child(2) { animation-delay: .08s; }
+.reveal-ready .chips.reveal.in li:nth-child(3) { animation-delay: .16s; }
+.reveal-ready .chips.reveal.in li:nth-child(4) { animation-delay: .24s; }
+.reveal-ready .chips.reveal.in li:nth-child(5) { animation-delay: .32s; }
+.reveal-ready .chips.reveal.in li:nth-child(6) { animation-delay: .4s; }
+.reveal-ready .chips.reveal.in li:nth-child(7) { animation-delay: .48s; }
+.reveal-ready .chips.reveal.in li:nth-child(8) { animation-delay: .56s; }
+.reveal-ready .chips.reveal.in li:nth-child(n+9) { animation-delay: .64s; }
+@keyframes chip-in {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 .chips li { border: 1px solid var(--cs-line); background: var(--surface); border-radius: 100px; padding: 9px 17px; font-weight: 600; font-size: 14.5px; color: var(--cs-ink, var(--ink)); }
+@media (hover: hover) {
+  .chips li { transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease); }
+  .chips li:hover { background: var(--cs-accent); color: #fff; border-color: var(--cs-accent); }
+  .dark .chips li:hover { background: #fff; color: var(--cs-dark, #05341f); border-color: #fff; }
+}
 /* chips scale with the frame so the row keeps breaking in the same place
    instead of spilling onto a third line as the viewport narrows */
 /* Figma 133:7427 — the chip block starts at the text column and breaks 5 + 3 */

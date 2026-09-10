@@ -47,9 +47,49 @@
   //    goes on at the last possible moment and comes straight back off if
   //    anything here fails. A blank page is never an acceptable failure mode.
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
+  var items = document.querySelectorAll('.reveal:not(.chips)');
+  var chipRows = document.querySelectorAll('.chips.reveal');
   var root = document.documentElement;
-  if (reduce || !('IntersectionObserver' in window) || !items.length) return;
+  if (reduce || !('IntersectionObserver' in window)) return;
+
+  function playChips(el) {
+    el.classList.remove('in');
+    void el.offsetWidth;
+    el.classList.add('in');
+  }
+
+  root.classList.add('reveal-ready');
+
+  if (chipRows.length) {
+    // Chip rows are ~40px tall. threshold: 0.6 plus a shrunk root meant they
+    // could scroll through the viewport without ever intersecting "enough",
+    // so .in never landed and the stagger never ran. Fire once the row sits
+    // in the middle band, and restart the animation each time it does.
+    var chipIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        playChips(en.target);
+        chipIO.unobserve(en.target);
+      });
+    }, { rootMargin: '-8% 0px -22% 0px', threshold: 0 });
+    chipRows.forEach(function (ul) { chipIO.observe(ul); });
+
+    // The CSS hides the chips until .in lands, so if this observer ever fails
+    // to fire the row is invisible rather than merely unanimated — the same
+    // failure mode that once shipped four blank pages. Play any row that is on
+    // screen and has not played yet, on scroll and shortly after load.
+    var chipFailsafe = function () {
+      chipRows.forEach(function (ul) {
+        if (ul.classList.contains('in')) return;
+        var r = ul.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) { playChips(ul); }
+      });
+    };
+    window.addEventListener('scroll', chipFailsafe, { passive: true });
+    window.setTimeout(chipFailsafe, 2000);
+  }
+
+  if (!items.length) return;
 
   function showAll() {
     items.forEach(function (el) { el.classList.add('in'); });
@@ -60,7 +100,6 @@
         if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
       });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-    root.classList.add('reveal-ready');
     items.forEach(function (el) { io.observe(el); });
     // Failsafe. The observer can miss an element when the layout settles after
     // load (images and inline SVG changing heights), and it only ever fires

@@ -17,8 +17,17 @@ window.addEventListener('load', function () {
       var shown = e.classList.contains('in') || +getComputedStyle(e).opacity > 0.05;
       if (!shown) { unrevealed++; offenders.push(e.className); }
     });
+    // chip list items are hidden by CSS until their row plays — check them too,
+    // they are children of a .reveal and would otherwise slip past this test
+    var chipsHidden = 0;
+    document.querySelectorAll('.chips li').forEach(function (li) {
+      var r = li.getBoundingClientRect();
+      var vis = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      if (r.height <= 0 || vis / r.height < 0.15) return;
+      if (+getComputedStyle(li).opacity < 0.05) { chipsHidden++; offenders.push('chip: ' + li.textContent.slice(0, 20)); }
+    });
     document.title = 'SMOKE' + JSON.stringify({
-      total: inView, hidden: unrevealed,
+      total: inView, hidden: unrevealed + chipsHidden,
       all: document.querySelectorAll('.reveal').length,
       cls: document.documentElement.className, offenders: offenders
     }) + 'SMOKE';

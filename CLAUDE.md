@@ -140,6 +140,14 @@ and one revealed element switched the net off for every other one.
 
 ---
 
+### animation-fill-mode: both overrides declared values
+
+`animation: x .5s both` holds the from-state through the delay, which is what
+makes a stagger — and it beats any `opacity`/`transform` declared on the same
+element. So never *also* pre-hide the element: if the animation does not run,
+the declared visible state cannot win and the content is stuck invisible.
+Let the animation own the hidden phase; the un-animated fallback must be visible.
+
 ## 8. Verifying animation
 
 Headless Chrome with `--virtual-time-budget` does **not** advance CSS
@@ -152,6 +160,14 @@ const a = el.getAnimations()[0];
 a.currentTime = 200;                 // force a point in the timeline
 getComputedStyle(el).opacity;
 ```
+
+**What cannot be verified here at all: scroll-triggered IntersectionObserver.**
+Headless with `--virtual-time-budget` does not deliver IO callbacks reliably
+above `threshold: 0`, and the browser pane reports `document.hidden === true`
+even when fronted, which defers them. A control observer with identical options
+returns nothing in both. Test the mechanism by forcing the class and reading the
+animation, then say plainly that the *timing* needs a human with a real browser
+— do not claim a scroll-triggered fix is verified.
 
 ### Parent opacity multiplies
 
