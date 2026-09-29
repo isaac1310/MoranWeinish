@@ -28,8 +28,22 @@
   var toTop = document.querySelector('.to-top');
   if (toTop) {
     var footer = document.querySelector('.footer');
+    // On a phone the button floats over the text you are reading, so there it
+    // only appears while you scroll back up (or at the very end of the page)
+    // and gets out of the way again as soon as you scroll down.
+    var phone = window.matchMedia('(max-width: 767px)');
+    var lastY = window.scrollY;
     var onScroll = function () {
-      toTop.classList.toggle('show', window.scrollY > 600);
+      var y = window.scrollY, up = y < lastY - 2, down = y > lastY + 2;
+      if (up || down) lastY = y;
+      if (!phone.matches) {
+        toTop.classList.toggle('show', y > 600);
+      } else {
+        var atEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 40;
+        if (y <= 600) toTop.classList.remove('show');
+        else if (up || atEnd) toTop.classList.add('show');
+        else if (down) toTop.classList.remove('show');
+      }
       if (!footer) return;
       var b = toTop.getBoundingClientRect();
       toTop.classList.toggle('on-footer', footer.getBoundingClientRect().top < b.bottom);
@@ -125,7 +139,8 @@
       Click again (or Esc / the X / the backdrop) to zoom out and close. */
 (function () {
   'use strict';
-  var imgs = document.querySelectorAll('.shot img');
+  // Suzuki's carousel and before/after images are photos too (Itzik: tapping one did nothing)
+  var imgs = document.querySelectorAll('.shot img, .cs-hero-shot img, .gallery .slide img, .ba img');
   if (!imgs.length) return;
   var box = document.createElement('div');
   box.className = 'lightbox';
@@ -164,6 +179,9 @@
 
   imgs.forEach(function (im) {
     im.addEventListener('click', function () {
+      // a swipe on the carousel ends in a click too — that one changes slide, it doesn't open
+      var st = im.closest('.stage');
+      if (st && Date.now() - (+st.getAttribute('data-swiped') || 0) < 500) return;
       big.src = im.currentSrc || im.src; big.alt = im.alt;
       box.classList.add('open'); unzoom();
       document.body.style.overflow = 'hidden';
@@ -264,7 +282,10 @@
         if (e.pointerId !== id) return;
         id = null;
         var dx = e.clientX - sx, dy = e.clientY - sy;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) show(dx < 0 ? i + 1 : i - 1);
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          stage.setAttribute('data-swiped', Date.now());
+          show(dx < 0 ? i + 1 : i - 1);
+        }
       });
       stage.addEventListener('pointercancel', function () { id = null; });
     }

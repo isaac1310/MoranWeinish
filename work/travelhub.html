@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.22">
+  <meta name="build" content="v1.0.23">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -158,7 +158,11 @@
       .ds.th .icons svg { width: max(24px, calc(32 * var(--k))); height: max(24px, calc(32 * var(--k))); }
 
       /* §09: observations 1186, fig 18:1175 */
-      .testing { grid-template-columns: calc(300 * var(--k)) minmax(0, calc(1186 * var(--k))); }
+      .testing { grid-template-columns: calc(300 * var(--k)) minmax(0, calc(1186 * var(--k))); align-items: stretch; }
+      /* Itzik 2026-09-29: the dividers of both columns sit at the same heights — three equal rows each,
+         both columns stretched to the taller one */
+      .tstats, .obs { display: grid; grid-template-rows: repeat(3, 1fr); }
+      .tstats > div { display: flex; flex-direction: column; justify-content: center; }
 
       /* §10 takeaway: 303 tall, 50 below the outcomes; label 230 at x 375, quote at 645,
          label text 65 and quote 108 below the rule (fig 226:2942–2946) */
@@ -219,8 +223,14 @@
       .inter h3 { font-size: 19px; }
       .inter p { font-size: 16px; line-height: 25px; }
       .tstats b { font-size: 38px; }
-      .obs .cs-label { font-size: 14px; }
-      .obs p { font-size: 17px; line-height: 25px; }
+      /* phones keep the Observed → Changed pairing side by side, arrow and all (Itzik), and the obs block
+         doesn't draw a second rule right under the stats' last one */
+      .obs > div { grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr); gap: 10px; align-items: start; padding: 20px 0; }
+      .obs > div:first-child { border-top: 0; padding-top: 0; }
+      .obs .arrow { display: block; padding-top: 22px; text-align: center; }
+      .testing { gap: 24px; }
+      .obs .cs-label { font-size: 13px; }
+      .obs p { font-size: 15px; line-height: 22px; }
       .outcome2 p { font-size: 17px; line-height: 27px; }
       .takeaway p { font-size: 23px; }
     }

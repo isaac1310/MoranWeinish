@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.22">
+  <meta name="build" content="v1.0.23">
   <title>Suzuki Israel — refreshing the digital experience · Moran Weinish</title>
   <meta name="description" content="Case study: a visual refresh of Suzuki Israel's website. Clearer hierarchy, one consistent design system and a mobile-first experience, live on suzuki.co.il. UX/UI by Moran Weinish at Comrax.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/suzuki">
@@ -235,6 +235,19 @@
       .sw-big span { height: calc(116.3 * var(--k)); padding: calc(14.5 * var(--k)); border-radius: calc(12.1 * var(--k)); font-size: max(12px, calc(15.7 * var(--k))); }
       .sw-small { grid-template-columns: repeat(4, calc(155 * var(--k))); gap: calc(13.9 * var(--k)); margin-top: calc(12 * var(--k)); }
       .sw-small span { height: calc(85.6 * var(--k)); padding: calc(12.7 * var(--k)); border-radius: calc(11.6 * var(--k)); font-size: max(12px, calc(15.7 * var(--k))); }
+    }
+      /* phones (Itzik 2026-09-29): four tidy rows instead of pieces wrapping one per line —
+       buttons + scroll pill · dropdown · tags + badge · slider */
+    @media (max-width: 767px) {
+      .ds-comp { --u: .8px; padding: 20px 18px; }
+      .ds-comp .ds-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+      .ds-comp .ds-row + .ds-row { margin-top: 16px; }
+      .ds-comp .ds-btn { padding: 10px 16px; font-size: 14px; }
+      .ds-comp .ds-tag { font-size: 13px; }
+      .ds-comp .ds-select, .ds-comp .ds-range { flex: 1 1 100%; width: auto; }
+      .ds-comp .ds-range b, .ds-comp .ds-range u + u { width: auto; }
+      .ds-comp .ds-range b { right: calc(8 * var(--u)); }
+      .ds-comp .ds-range u + u { left: auto; right: 0; width: calc(15.2 * var(--u)); }
     }
   </style>
 </head>
