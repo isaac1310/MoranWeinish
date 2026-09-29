@@ -54,6 +54,8 @@ for sel, spec in exp.items():
     if sel.startswith('_'): continue
     r = m.get(sel)
     f = [None if v is None else round(v * k) for v in spec['fig']]
+    # text inside has a legibility floor below this width, so the box may grow
+    if spec.get('height_floored_below') and int(os.environ.get('WIDTH', 1920)) < spec['height_floored_below']: f[2] = None
     if r is None:
         print(f"{sel:<26}{'NOT FOUND':<24}{str(f):<20}<-- MISSING"); bad += 1; continue
     ok = all(abs(r[i] - v) <= tol for i, v in enumerate(f) if v is not None)

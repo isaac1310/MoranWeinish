@@ -6,7 +6,7 @@
 # by default, four of the five pages shipped completely blank. Nothing in the
 # HTML, the CSS, or a Lighthouse run caught it.
 #
-# Two checks:
+# Three checks:
 #   1. static  — no CSS rule may hide .reveal unless it is behind .reveal-ready,
 #                which is the class js/site.js adds. This is what guarantees the
 #                page is readable with JavaScript off or broken.
@@ -14,6 +14,7 @@
 #                have a computed opacity above 0. Elements below the fold are
 #                meant to stay hidden until scrolled to; content you can see
 #                must never be invisible.
+#   3. overflow — no page scrolls sideways at 375, 390 or 1024.
 #
 #   python3 -m http.server 8787 &
 #   tools/smoke.sh
@@ -52,6 +53,37 @@ for PAGE in /index.html /work/kkl.html /work/travelhub.html /work/bara.html /wor
   if [[ -z "${T:-}" ]]; then printf '   %-22s ?     could not read the page\n' "$PAGE"; FAIL=1
   elif [[ "$H" -gt 0 ]]; then printf '   %-22s FAIL  %s of %s in view are invisible\n' "$PAGE" "$H" "$T"; FAIL=1
   else printf '   %-22s ok    %s in view, all visible\n' "$PAGE" "$T"; fi
+done
+
+echo "3. no sideways scroll at 375, 390 and 1024"
+# Headless Chrome will not open a window narrower than 500, so each page is
+# loaded in a same-origin iframe of the target width and measured from outside.
+# This is what caught KKL (411) and Bara (601) scrolling sideways on a phone.
+cat > "$WORK/_overflow.html" <<'HTML'
+<!doctype html><body style="margin:0"><script>
+var pages = ['/index.html','/work/kkl.html','/work/travelhub.html','/work/bara.html','/work/suzuki.html'];
+var widths = [375, 390, 1024], out = [], left = pages.length * widths.length;
+pages.forEach(function (p) { widths.forEach(function (w) {
+  var f = document.createElement('iframe');
+  f.style.cssText = 'width:' + w + 'px;height:800px;border:0;display:block';
+  // measure after the web fonts land: the fallback font is narrower and hides it
+  f.onload = function () { f.contentDocument.fonts.ready.then(function () { setTimeout(function () {
+    var d = f.contentDocument.documentElement;
+    out.push(p + '@' + w + '=' + d.scrollWidth);
+    if (--left === 0) document.title = 'OVF' + out.join(',') + 'OVF';
+  }, 1500); }); };
+  f.src = p; document.body.appendChild(f);
+}); });
+</script></body>
+HTML
+R=$("$CHROME" --headless=new --disable-gpu --hide-scrollbars --virtual-time-budget=30000 \
+    --window-size=1100,1000 --dump-dom "http://localhost:8798/_overflow.html" 2>/dev/null \
+    | grep -o 'OVF[^<]*OVF' | head -1 | sed 's/OVF//g')
+if [[ -z "$R" ]]; then echo "   ?     could not measure"; FAIL=1; fi
+for item in ${R//,/ }; do
+  pg=${item%@*}; rest=${item#*@}; w=${rest%=*}; sw=${rest#*=}
+  if [[ "$sw" -gt "$w" ]]; then printf '   %-22s FAIL  %s wide at %s\n' "$pg" "$sw" "$w"; FAIL=1
+  else printf '   %-22s ok    %s\n' "$pg" "$w"; fi
 done
 
 [[ "$FAIL" -eq 0 ]] && echo "content is visible on every page" || echo "SMOKE TEST FAILED"

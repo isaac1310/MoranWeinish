@@ -37,7 +37,13 @@
     .ncards .n, .insight-wide .n { color: #185a6b; }
     .chips li { background: #e4f2ef; border-color: #e4f2ef; color: #3f6b74; }
     .dark .chips li { background: transparent; border-color: #fff; color: #d9e4e2; }
-    .reflect h4 { color: #006837; }
+    .reflect h3:not(.next) { color: #006837; }
+    /* logo: icon then wordmark, the wordmark set 5 lower (153:1603 / 153:1605) */
+    .bara-logo { gap: 0; align-items: flex-start; }
+    .bara-logo img { height: 69px; }
+    .bara-logo img + img { margin-top: 5px; }
+    /* the system picker is a 1364 block, inset 155 each side of the 1674 column (168:973) */
+    @media (min-width: 1024px) { .shots.picker { margin-inline: calc(155 * var(--k)); } }
   </style>
 </head>
 <body class="case">
@@ -80,8 +86,8 @@
   </nav>
 
     <div class="wrap">
-      <p class="cs-brand"><img src="/assets/img/bara/logo.webp" alt="Bara Professional" width="219" height="70" style="height:69px"></p>
-      <h1>A Guided Experience for<br>Clinical Product Selection</h1>
+      <p class="cs-brand bara-logo" role="img" aria-label="Bara Professional"><img src="/assets/img/bara/logo-icon.webp" alt="" width="62" height="70"><img src="/assets/img/bara/logo-word.webp" alt="" width="155" height="70"></p>
+      <h1>A Guided Experience for <br class="wide">Clinical Product Selection</h1>
       <p class="lede">Clini-Kal is a tool designed for certified therapists using the Bara Professional platform.<br>It guides therapists through a simple step-by-step process, from choosing a treatment approach, system, symptom, and diagnosis to finding the most relevant herbal product and a complementary product for their patient.</p>
       <dl class="cs-meta">
         <div><dt>Role</dt><dd>Product Designer&nbsp;- UX/UI</dd></div>
@@ -159,9 +165,9 @@
         <div><h3>How a therapist thinks</h3><p>“I work with Chinese medicine. The patient has an issue related to this body system, with these symptoms and this diagnosis.”<br>The therapist builds a clinical picture step by step, using information they already know about the patient.</p></div>
         <div><h3>How Clini-Kal Responds</h3><p>The same decisions become linked selections in Clini-Kal. Each choice narrows the available options and leads to the next, ending with a matched product and a complementary product, while keeping the experience simple and focused for the therapist.</p></div>
       </div>
-      <div class="shots reveal" style="margin-top:28px">
+      <div class="shots reveal picker" style="margin-top:28px">
         <div class="shot"><figure>
-          <div class="frame raised" style="border:0"><img src="/assets/img/bara/system-picker.webp" alt="Choosing a body system from an icon grid" loading="lazy" style="height:auto"></div>
+          <div class="frame raised" style="border:0;aspect-ratio:1364/675"><img src="/assets/img/bara/system-picker.webp" alt="Choosing a body system from an icon grid" loading="lazy" style="object-position:50% 74.7%"></div>
           <figcaption>Choosing a body system: options are displayed in a clear icon grid, making them easier to scan and select.</figcaption>
         </figure></div>
       </div>
@@ -255,7 +261,7 @@
       <div class="shots reveal" style="margin-top:48px">
         <div class="shot"><figure>
           <div class="frame annot" style="aspect-ratio:1660/552">
-            <img src="/assets/img/bara/shot-results.webp" alt="Results: best match first with a complementary product" loading="lazy">
+            <img src="/assets/img/bara/shot-results.webp" alt="Results: best match first with a complementary product" loading="lazy" style="object-position:50% 20.6%">
             <span class="badge" style="background:#c56a1e;left:96.4%;top:35.7%">1</span>
             <span class="badge" style="background:#c56a1e;left:84.2%;top:50.9%">2</span>
             <span class="badge" style="background:#c56a1e;left:5.1%;top:35.5%">3</span>
@@ -396,7 +402,7 @@
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.10</span></small>
+      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.11</span></small>
     </div>
     <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>

@@ -55,7 +55,9 @@
       580,
       125
     ],
-    "node": "177:3161, padding 22/27"
+    "node": "177:3161, padding 22/27",
+    "height_floored_below": 1440,
+    "_why": "text is max(12px, 16k) so it stays legible at 1024; the card grows instead (2026-09-29)"
   },
   ".compare-sep": {
     "fig": [

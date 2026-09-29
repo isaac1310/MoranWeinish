@@ -21,6 +21,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .wrap { width: min(var(--content), 100% - 2 * var(--gutter)); margin-inline: auto; }
 
+/* forced line breaks that only apply on wide screens — put the space before the <br> (CLAUDE.md §7) */
+br.wide { display: none; }
+@media (min-width: 1024px) { br.wide { display: inline; } }
+br.xwide { display: none; }
+@media (min-width: 1600px) { br.xwide { display: inline; } }
+
 /* ---------- labels (Space Mono, uppercase, tracked) ---------- */
 .label {
   font-family: var(--mono);
@@ -109,7 +115,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .hero .actions { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
 .hero-art { width: min(100%, 547px); margin-inline: auto; aspect-ratio: 547 / 497; }
-.hero-art img { width: 100%; height: auto; opacity: 0; animation: card-in 1.5s var(--ease) .1s forwards, float 7s ease-in-out 1.6s infinite; }
+.hero-art img { width: 100%; height: auto; animation: card-in 1.5s var(--ease) .1s both, float 7s ease-in-out 1.6s infinite; }
 @media (min-width: 768px) {
   .hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(280px, 40%); }
 }
@@ -357,5 +363,4 @@ html:not(.splash-seen):not(.splash-skip) .hero-art img { animation-delay: 2s, 3.
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal, .reveal-ready .reveal { opacity: 1; transform: none; }
-  .hero-art .card { opacity: 1; }
 }
