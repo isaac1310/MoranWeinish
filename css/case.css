@@ -8,7 +8,14 @@ body.case { --content: 1674px; --gutter: clamp(20px, 6.41vw, 123px); background:
 body.case .nav-links a:not(.btn) { color: var(--nav); }
 
 /* ---------- case top nav (Figma 115:2957 / 184:3916 — 29px from the page edge) ---------- */
-.cs-topnav { display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(16px, 1.6vw, 29px) 22px; }
+/* Back / Next stay pinned under the site header while you read (Itzik 2026-09-29). The bar sits
+   just before the hero, so the hero gives up the 14px of its top padding that the bar now has
+   above its links — at rest the page lays out exactly as before. */
+.cs-topnav { position: sticky; top: 64px; z-index: 45; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px clamp(16px, 1.6vw, 29px);
+  background: color-mix(in srgb, var(--cs-hero-from, var(--cs-bg, #fff)) 88%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+@media (min-width: 1024px) { .cs-topnav { top: var(--nav-h); } }
 .cs-topnav a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; line-height: 22px; color: #000; transition: transform .25s var(--ease), color .25s; }
 .cs-topnav svg { width: 18px; height: 18px; flex: none; }
 @media (hover: hover) {
@@ -20,7 +27,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 /* ---------- header ---------- */
 .cs-hero {
   background: linear-gradient(180deg, var(--cs-hero-from, var(--cs-bg)) 0%, var(--cs-bg) 70%);
-  padding: 28px 0 0;
+  padding: 22px 0 0;
 }
 .cs-hero .wrap > .cs-brand { margin-top: 24px; }
 .cs-brand { display: inline-flex; align-items: center; gap: 15px; font-weight: 700; font-size: 24px; letter-spacing: -0.01em; color: var(--ink); }
@@ -47,7 +54,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 @media (max-width: 1023px) { .cs-hero-shot { margin-bottom: 48px; } }
 @media (min-width: 768px) { .cs-meta { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) {
-  .cs-hero { padding: calc(28 * var(--k)) 0 0; }
+  .cs-hero { padding: calc(28 * var(--k) - 6px) 0 0; }
   .cs-meta { display: flex; flex-wrap: wrap; margin-top: calc(40 * var(--k)); }
   .cs-meta > div { padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; border-left: 1px solid var(--cs-line); }
   /* only Role wraps, after the dash — the other columns stay on one line */
@@ -351,14 +358,14 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .cs-nav a { border-radius: 100px; padding: 15px 30px; font-weight: 700; font-size: 17px; border: 2px solid #000; color: #000; display: inline-flex; gap: 13px; align-items: center; transition: transform .25s var(--ease), background .25s, color .25s; }
 .cs-nav a.next { background: #000; color: #fff; }
 .cs-nav a.next svg { transition: transform .25s var(--ease); }
-.cs-nav a.prev svg { transition: transform .25s var(--ease); }
+.cs-nav a.prev svg, .cs-nav a.home svg { transition: transform .25s var(--ease); }
 @media (max-width: 767px) {
   .cs-nav { flex-wrap: nowrap; gap: 8px; justify-content: space-between; padding-top: 22px; margin-top: 40px; }
   .cs-nav a { padding: 10px 15px; font-size: 14px; gap: 6px; border-width: 1.5px; white-space: nowrap; }
   .cs-nav a svg { width: 14px; height: 14px; }
   .cs-nav a.prev, .cs-nav a.home { margin-right: 0; }
   /* Itzik 2026-09-29: on a phone the row is Previous · Next only — the top Back link already goes home */
-  .cs-nav a:not(.prev):not(.next) { display: none; }
+  .cs-nav a:not(.prev):not(.next):not(.home) { display: none; }  /* KKL has no Previous: it keeps Back to portfolio */
   .cs-nav a.next { margin-left: auto; }
   .cs-nav a { padding: 11px 18px; }
   .cs-nav .l { display: none; }
@@ -368,7 +375,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   .cs-nav a:hover { background: var(--plum); border-color: var(--plum); color: var(--rose); }
   .cs-nav a.next:hover { background: var(--cs-accent); border-color: var(--cs-accent); color: #fff; }
   .cs-nav a.next:hover svg { transform: translateX(5px); }
-  .cs-nav a.prev:hover svg { transform: translateX(-5px); }
+  .cs-nav a.prev:hover svg, .cs-nav a.home:hover svg { transform: translateX(-5px); }
 }
 
 /* case-study footer variant: shorter bottom padding */
