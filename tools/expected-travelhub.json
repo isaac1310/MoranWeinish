@@ -62,11 +62,12 @@
   },
   ".findings li": {
     "fig": [
-      808,
-      577,
+      646,
+      629,
       null
     ],
-    "node": "18:733 number 27 + text 550 (TH16)"
+    "node": "18:733 number 27 + text 550 (TH16)",
+    "_why": "Itzik 2026-09-29: \u00a702 follows the phone layout on desktop \u2014 stat bar centred, findings below it in a block of the same 629 width, centred in the 1674 column"
   },
   ".th-plane": {
     "fig": [

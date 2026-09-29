@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.25">
+  <meta name="build" content="v1.0.26">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -75,7 +75,13 @@
     .research { position: relative; }
     .research > .statbar, .research > .findings { position: relative; }
     /* live Figma: the stat bar sits centred against the findings list, not at its top */
-    @media (min-width: 1024px) { .research > .statbar { align-self: center; } }
+    /* Itzik 2026-09-29: desktop follows the phone layout — the stat bar centred, the numbered findings
+       underneath in a block of the same width (was: bar left, findings right) */
+    @media (min-width: 1024px) {
+      .research { grid-template-columns: minmax(0, 1fr); justify-items: center; row-gap: calc(56 * var(--k)); }
+      .research > .statbar, .research > .findings { width: min(100%, calc(629 * var(--k))); }
+      .research > .findings li { max-width: none; }
+    }
     .th-plane { display: none; }
 
     /* ---- §03: the persona icons are Figma's own filled vectors (bulb 95:947,
