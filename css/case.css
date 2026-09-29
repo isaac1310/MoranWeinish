@@ -528,7 +528,9 @@ body.case .footer { padding-top: 64px; }
 .two-cards div { background: #fff; border-radius: 12px; padding: 30px 34px; box-shadow: 0 4px 4px rgba(0,0,0,.06); }
 .two-cards h3 { font-family: var(--mono); font-size: 16px; letter-spacing: .7px; text-transform: uppercase; color: #02a7bb; }
 .two-cards p { margin-top: 14px; font-size: 20px; line-height: 32px; color: #185a6b; }
-.cs-section.blue { background: #5889a8; border-color: transparent; }
+/* 133:8829 / 153:1706: #5889a8 at 11% paint opacity over the page (#f7f6f3), not solid —
+   the solid blue made the text fail contrast. #e6eaeb is the same blend for browsers without color-mix. */
+.cs-section.blue { background: #e6eaeb; background: color-mix(in srgb, #5889a8 11%, var(--cs-bg, #f7f6f3)); border-color: #e6e4de; }
 .blue .cs-num { color: #185a6b; border-color: #185a6b; }
 .blue .cs-h2 { color: #173f46; font-size: clamp(32px, 3.3vw, 64px); }
 .blue .cs-body-text { color: #014f40; font-size: clamp(17px, 1.25vw, 24px); }
@@ -543,12 +545,13 @@ body.case .footer { padding-top: 64px; }
 .callouts li { display: flex; gap: 9px; align-items: flex-start; }
 .callouts .badge { position: static; transform: none; width: 22px; height: 22px; font-size: 12px; flex: none; box-shadow: none;
   border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-weight: 700; color: #fff; }
-.summary.blue { background: #5889a8; border-color: #5889a8; color: #243b41; }
+.summary.blue { background: #e6eaeb; background: color-mix(in srgb, #5889a8 11%, var(--cs-bg, #f7f6f3)); border-color: #e6e4de; color: #243b41; }
 
 /* ===================== Suzuki-specific blocks ===================== */
 .approach { display: grid; gap: 16px; margin-top: 48px; list-style: none; padding: 0; }
 @media (min-width: 768px) { .approach { grid-template-columns: repeat(3, 1fr); } }
-.approach li { background: #2f3949; border: 1px solid #2b333c; border-radius: 12px; padding: 27px 29px; }
+/* 246:3797: #2f3949 at 64% paint opacity over the #1d2b45 section, not solid */
+.approach li { background: #283447; border: 1px solid #2b333c; border-radius: 12px; padding: 27px 29px; }
 .approach h3 { font-weight: 700; font-size: 20px; color: #ff5a6e; }
 .approach p { margin-top: 8px; font-size: 16px; line-height: 25px; color: #9aa4ab; }
 .dark.navy { background: #1d2b45; }
