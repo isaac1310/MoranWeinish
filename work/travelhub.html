@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.27">
+  <meta name="build" content="v1.0.28">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -73,7 +73,6 @@
     /* ---- §02 ---- */
     .findings b { display: block; }          /* the bold lead is its own line, fig 18:736 (U+2028) */
     .research { position: relative; }
-    .obs-head { display: none; }
     .research > .statbar, .research > .findings { position: relative; }
     /* live Figma: the stat bar sits centred against the findings list, not at its top */
     /* Itzik 2026-09-29: desktop follows the phone layout — the stat bar centred, the numbered findings
@@ -236,10 +235,7 @@
       .obs > div { grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr); gap: 10px; align-items: start;
                    padding: 16px; border: 1px solid var(--cs-line); border-radius: 14px; background: var(--surface); }
       .obs > div:last-child { border-bottom: 1px solid var(--cs-line); }
-      /* Itzik: on a phone it wasn't clear the stats come first and then each theme's Observed → Changed —
-         a label heads the pairs and every pair is its own card */
-      .obs-head { display: block; margin: 8px 0 -8px; font-size: 13px; letter-spacing: .78px; }
-      .obs-head span { color: #c9c4b8; padding: 0 6px; }
+      /* each theme is its own card, so the stats read first and every Observed → Changed pair as one unit */
       .obs .arrow { display: block; padding-top: 22px; text-align: center; }
       .testing { gap: 24px; }
       .obs .cs-label { font-size: 13px; }
@@ -587,7 +583,6 @@
           <div><b class="good">4/5</b><span>Planned a day successfully on their first attempt</span></div>
           <div><b>3</b><span>Design iterations</span></div>
         </div>
-        <p class="cs-label obs-head" aria-hidden="true">Observed <span>→</span> Changed</p>
         <div class="obs">
           <div><div><span class="cs-label o">Observed</span><p>Users struggled to switch between trips.</p></div><span class="arrow" aria-hidden="true">→</span><div><span class="cs-label c">Changed</span><p>Made the trip switcher persistent and visible at the top of every screen.</p></div></div>
           <div><div><span class="cs-label o">Observed</span><p>Users struggled to connect new bookings with the right day.</p></div><span class="arrow" aria-hidden="true">→</span><div><span class="cs-label c">Changed</span><p>Let users add bookings directly to a day, keeping the action within the planning flow.</p></div></div>
