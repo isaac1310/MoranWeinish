@@ -41,7 +41,7 @@
       1206,
       null
     ],
-    "node": "133:8713 — 1206 wide, 3 lines at 1920 (B10)",
+    "node": "133:8713 \u2014 1206 wide, 3 lines at 1920 (B10)",
     "_why": "was 1011 and ran to 4 lines; height not checked, the type floors at 18px"
   },
   ".cs-meta > div": {
@@ -50,8 +50,10 @@
       196,
       null
     ],
-    "node": "133:9389 — first of the fixed 196/218/245/169/168 columns, inset 5 from the 1006 rule (B11)",
-    "_why": "the other columns carry unscaled 20px values, so only the first track is stable at every width"
+    "node": "133:9389 \u2014 first of the fixed 196/218/245/169/168 columns, inset 5 from the 1006 rule (B11)",
+    "_why": "the other columns carry unscaled 20px values, so only the first track is stable at every width",
+    "layout_changes_below": 1770,
+    "_why_role": "Role column is floored at \"Product Designer -\" (158px, case.css) so it stays 2 lines; below ~1770 the column no longer scales straight down"
   },
   ".cs-hero-shot img": {
     "fig": [
@@ -59,7 +61,7 @@
       1650,
       815
     ],
-    "node": "165:961 — 1650 wide, centred (B19)",
+    "node": "165:961 \u2014 1650 wide, centred (B19)",
     "_why": "was the full 1674 column"
   },
   ".bara-flow span": {
@@ -68,7 +70,7 @@
       193,
       60
     ],
-    "node": "153:967…983 — five equal 193x60 pills (B13)",
+    "node": "153:967\u2026983 \u2014 five equal 193x60 pills (B13)",
     "height_floored_below": 1440,
     "_why": "pill type floors at 13px and wraps to two lines, so the height floors at 44 below 1440"
   },
@@ -78,7 +80,7 @@
       391,
       293
     ],
-    "node": "177:2621 — 293 tall (B21)",
+    "node": "177:2621 \u2014 293 tall (B21)",
     "height_floored_below": 1920,
     "_why": "was 305; body text is unscaled 18px, so the card only matches in height at 1920"
   },
@@ -88,7 +90,7 @@
       1214,
       319
     ],
-    "node": "153:1097 — lh 52, 63 below the cards (B14/B21)",
+    "node": "153:1097 \u2014 lh 52, 63 below the cards (B14/B21)",
     "height_floored_below": 1920,
     "_why": "label and body line-heights are fixed px, so height only matches at 1920"
   },
@@ -98,7 +100,7 @@
       662,
       221
     ],
-    "node": "133:8840 — the two cards are a 1364 block at x278, 41 apart (B1/B17)",
+    "node": "133:8840 \u2014 the two cards are a 1364 block at x278, 41 apart (B1/B17)",
     "height_floored_below": 1920,
     "_why": "was full column; card text is unscaled 20px so height only matches at 1920"
   },
@@ -116,7 +118,7 @@
       null,
       null
     ],
-    "node": "153:1168 — AI chips start under the text column (B8)"
+    "node": "153:1168 \u2014 AI chips start under the text column (B8)"
   },
   ".bara-thumbs .frame": {
     "fig": [
@@ -124,7 +126,7 @@
       830,
       302
     ],
-    "node": "133:8951 / 133:8956 — 14 apart (B16)",
+    "node": "133:8951 / 133:8956 \u2014 14 apart (B16)",
     "_why": "was 57 apart (809 wide); 830 = (1674 - 14) / 2 in our 1674 column vs the frame's 823 in 1660"
   },
   ".swatches span": {
@@ -133,9 +135,9 @@
       null,
       88
     ],
-    "node": "153:1582 — 4 per row, 134.4 x 88 (B2); x moved 123 → 202 with the KKL §07 layout",
+    "node": "153:1582 \u2014 4 per row, 134.4 x 88 (B2); x moved 123 \u2192 202 with the KKL \u00a707 layout",
     "height_floored_below": 1200,
-    "_why": "width not checked: at 1024–1199 the palette spans the stacked top row and its four swatches share 640px so the 12px labels stay on one line; 134.4 wide at ≥1200. Below ~1200 the swatch grows (min-height)"
+    "_why": "width not checked: at 1024\u20131199 the palette spans the stacked top row and its four swatches share 640px so the 12px labels stay on one line; 134.4 wide at \u22651200. Below ~1200 the swatch grows (min-height)"
   },
   ".bara-icons img": {
     "fig": [
@@ -143,17 +145,17 @@
       729,
       86
     ],
-    "node": "153:1659 — buttons strip first, then filters (B6), scaled 0.95 into the 1436 content box of the 1516 panel",
+    "node": "153:1659 \u2014 buttons strip first, then filters (B6), scaled 0.95 into the 1436 content box of the 1516 panel",
     "_why": "was 767 x 90 at x206 in the 1660 panel; the two strips keep their 767:754 ratio and 12 overlap"
   },
-  "_revised_2026-09-29": "Phase-2 Bara pass (REVIEW.md §6 B1–B21): entries above added with the node they come from. All from the decoded .fig (Sep 6 export); B12 rhythm is from the same export and should be confirmed against a fresh one.",
+  "_revised_2026-09-29": "Phase-2 Bara pass (REVIEW.md \u00a76 B1\u2013B21): entries above added with the node they come from. All from the decoded .fig (Sep 6 export); B12 rhythm is from the same export and should be confirmed against a fresh one.",
   ".ds": {
     "fig": [
       202,
       1516,
       null
     ],
-    "node": "Moran 2026-09-29: match KKL's §07 (kkl.html .sec-ds) — grid inset 79 each side, 202 → 1718",
+    "node": "Moran 2026-09-29: match KKL's \u00a707 (kkl.html .sec-ds) \u2014 grid inset 79 each side, 202 \u2192 1718",
     "_why": "was the full 1674 column in Bara's own 822 | 56 | 782 (153:1485 / 153:1524); height not checked, the panel type is unscaled"
   },
   ".ds > div:nth-child(3)": {
@@ -162,7 +164,7 @@
       722,
       null
     ],
-    "node": "Typography & scale, row 2 col 1 — 722 (153:1508 is 722 in the .fig too)"
+    "node": "Typography & scale, row 2 col 1 \u2014 722 (153:1508 is 722 in the .fig too)"
   },
   ".ds > div:nth-child(4)": {
     "fig": [
@@ -170,7 +172,7 @@
       692,
       null
     ],
-    "node": "Field states, row 2 col 2 — KKL's 692 column, rows level (was 782 at x1008, 133:9120)"
+    "node": "Field states, row 2 col 2 \u2014 KKL's 692 column, rows level (was 782 at x1008, 133:9120)"
   },
   ".bara-icons": {
     "fig": [
@@ -181,5 +183,25 @@
     "node": "153:1664 iconography panel, inset 79 like the grid (KKL .icons.ico)",
     "_why": "was 1660 at the gutter"
   },
-  "_revised_2026-09-29b": "Phase-3 Bara pass (Moran's answers): §07 moved to KKL's layout, entries .ds / .ds > div / .bara-icons / .swatches span / .bara-icons img. Source: Moran's instruction + kkl.html, checked against the live Figma prototype (frame 133:8706) for the 2 × 2 order and 4-up palette."
+  "_revised_2026-09-29b": "Phase-3 Bara pass (Moran's answers): \u00a707 moved to KKL's layout, entries .ds / .ds > div / .bara-icons / .swatches span / .bara-icons img. Source: Moran's instruction + kkl.html, checked against the live Figma prototype (frame 133:8706) for the 2 \u00d7 2 order and 4-up palette.",
+  ".bara-results .callouts li:nth-child(2)": {
+    "fig": [
+      770,
+      null,
+      null
+    ],
+    "node": "133:8974 \u2014 results callout 2 starts 647 into the image column (123 + 647)",
+    "_why": "was 1fr 1fr (x 972); callouts now 11 under the results image and 29 under the main one (133:8969 / 133:8936)"
+  },
+  ".fields > div": {
+    "fig": [
+      1053,
+      311,
+      59
+    ],
+    "node": "133:9121 \u2014 16 label + 6 + 37 box = 59; \u25be / \u2715 13 in from the right",
+    "height_floored_below": 1920,
+    "_why": "was 65.5 (18 label, 39.5\u201341.5 box); x/w follow the KKL 692 column, height is fixed px (12/13 type) so only matches at 1920"
+  },
+  "_revised_2026-09-29c": "Final polish: logo 43 higher (hero padding 0, logo 3 under the sticky bar \u2192 y 143), \u00a706 callout spacing / results column 2, \u00a707 field boxes. Decode and the live Figma prototype (frame 133:8706, canvas pixels read 2026-09-29) agree on every number used."
 }

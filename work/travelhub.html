@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.32">
+  <meta name="build" content="v1.0.33">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -90,8 +90,26 @@
        distance 95:926, person 95:906), drawn in the 52 avatar's coordinates ---- */
     .persona .av svg { width: 100%; height: 100%; fill: #fff; stroke: none; }
 
-    /* ---- §05 ---- */
-    .wire span { text-transform: uppercase; }
+    /* ---- §05: three wireframes in one row, 224 + 30 + 224 + 30 + 224 = the 732 column (fig 18:954).
+       Everything in them is in --w (the inline heights in the markup too): 1px below 1024, where the
+       phone swipe row keeps its 224 frames, and one design pixel (--k) from 1024, where the column is
+       732·k — fixed px there wrapped the row onto two or three lines at 1440 and 1024. These restate
+       case.css's .wire rules (only TravelHub uses them). The boxes are dashed in Figma (3/2, fig 18:958). ---- */
+    .wire-row { --w: 1px; }
+    .wire { width: calc(224 * var(--w)); }
+    .wire .fr { height: calc(452 * var(--w)); border-radius: calc(30 * var(--w)); padding: calc(16 * var(--w)) calc(14 * var(--w)); gap: calc(11 * var(--w)); }
+    .wire .fr > * { border-radius: calc(10 * var(--w)); }
+    .wire .fr .bar { width: calc(81 * var(--w)); height: calc(13 * var(--w)); border-radius: calc(4 * var(--w)); }
+    .wire .fr .box { border-radius: calc(12 * var(--w)); border-style: dashed; }
+    .wire .fr .row { gap: calc(8 * var(--w)); }
+    .wire .fr .row i { height: calc(52 * var(--w)); border-radius: calc(9 * var(--w)); }
+    .wire .fr .row i:first-child { width: calc(44 * var(--w)); border-style: dashed; }
+    .wire .fr .btn-w { height: calc(40 * var(--w)); border-radius: calc(11 * var(--w)); }
+    .wire span { margin-top: calc(14 * var(--w)); text-transform: uppercase; }
+    @media (min-width: 1024px) {
+      .wire-row { --w: var(--k); flex-wrap: nowrap; justify-content: flex-start; gap: calc(30 * var(--k)); }
+      .wire span { font-size: max(12px, calc(16 * var(--k))); letter-spacing: calc(1.12 * var(--k)); line-height: calc(24 * var(--k)); }
+    }
 
     /* ---- §06 ---- */
     .ds h3 { letter-spacing: 1.12px; }
@@ -107,6 +125,10 @@
     /* one row at every width — on a phone the note wrapped under the icons (before the ≥1024 rule, CLAUDE.md §5) */
     .ds.th .panel.icons { flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
 
+    /* ---- §08: rules between the interaction rows only, none under the last (fig 18:1108…: each row
+       has a top border, the block no bottom one); the ≥1024 block does the same for its bottom pair ---- */
+    .inter > div:last-child { border-bottom: 0; }
+
     /* ---- §10 takeaway: its own top rule, fig 226:2942 ---- */
     .outcome2 { border-bottom: 0; }
     /* stacked (below 1024) the result and the lesson get the rule the desktop draws between its two columns */
@@ -121,27 +143,52 @@
       .cs-hero { padding-bottom: calc(119 * var(--k)); }
       .th-hero-grid { grid-template-columns: minmax(0, 1fr) calc(330 * var(--k)) calc(110 * var(--k)); }
       .th-phone { align-self: start; margin-top: calc(-15.5 * var(--k)); }
-      .cs-hero .lede { max-width: calc(893 * var(--k)); }
-      /* meta row 793, columns 215 / 184 / 219 / 169(+6), fig 18:1268 */
+      /* lede text 28 below the h1 box and the meta rule 44 below the lede (fig 18:1264 ends 495,
+         18:1267 at 523, 78 tall, 18:1268 at 645; live prototype agrees). Was 25 / 40, which put them
+         3 and 7 high. The lede gap keeps case.css's 25 as a floor (the lede's type is floored at
+         18px, so a scaled 15 at 1024 was tight). The column is centred against the phone, so
+         whatever it grows is taken back underneath — the brand and h1 stay where they were. */
+      .cs-hero .lede { max-width: calc(893 * var(--k)); margin-top: max(25px, calc(28 * var(--k))); }
+      .cs-meta { margin-top: calc(44 * var(--k)); }
+      .th-hero-grid > div:first-child { margin-bottom: calc(25px - max(25px, calc(28 * var(--k))) - 4 * var(--k)); }
+      /* meta row 793, columns 215 / 184 / 219 / 169(+6), fig 18:1268. Role keeps a 158 floor
+         (case.css) so "Product Designer -" / "UX/UI" stays two lines at 1440 and 1024; its column
+         grows by the same amount (158 + the 34·k right padding). 1920 is unchanged: 180 / 215. */
       .cs-meta { min-width: min(100%, calc(793 * var(--k))); }
-      .cs-meta > div:nth-child(1) { min-width: calc(215 * var(--k)); }
+      .cs-meta > div:nth-child(1) { min-width: max(calc(215 * var(--k)), calc(158px + 34 * var(--k))); }
       .cs-meta > div:nth-child(2) { min-width: calc(184 * var(--k)); }
       .cs-meta > div:nth-child(3) { min-width: calc(219 * var(--k)); }
       .cs-meta > div:nth-child(4) { min-width: calc(175 * var(--k)); }
-      .cs-meta > div:first-child dd { max-width: calc(180 * var(--k)); }
+      .cs-meta > div:first-child dd { max-width: max(calc(180 * var(--k)), 158px); }
 
       /* §02: findings text 550 (fig 18:740), plane fig 95:856 */
       .findings li { max-width: calc(577 * var(--k)); }
+      /* Figma spaces the four findings 44 / 24 / 33 apart (18:733 → 18:745; the live prototype reads
+         the same), which looks like a slip rather than a rhythm — one even 34, their average (was 22) */
+      .findings { gap: calc(34 * var(--k)); }
       .th-plane { display: block; position: absolute; right: calc(20 * var(--k)); top: calc(-80 * var(--k)); width: calc(326.6 * var(--k)); height: auto; pointer-events: none; }
 
       /* §03, §08, §10: inset to the content block like .cs-content (fig 133:7595, 18:1107, 226:2931) */
       .personas, .inter, .outcome2 { margin-inline: calc(230 * var(--k)); }
+      /* §08: two per row here, so neither of the bottom pair draws a rule (see the base rule) */
+      .inter > div:nth-last-child(-n+2) { border-bottom: 0; }
+      /* §10: the columns end with their text — Figma has no bottom padding (226:2932: 34 top, 0 bottom;
+         the takeaway rule is 50 below). Was 30. Stacked below 1024 it keeps its 30. */
+      .outcome2 > div { padding-bottom: 0; }
       /* the persona columns are narrower once inset, so their padding scales too (fig 18:796: 38 top, 42 each side, none after the last) */
       .persona { padding: calc(38 * var(--k)) calc(42 * var(--k)) calc(34 * var(--k)); }
       .persona:last-child { padding-right: 0; }
 
       /* §04: 1601 wide, fig 18:870 / 18:914 */
       .tabs5, .flow4 { max-width: calc(1601 * var(--k)); }
+      /* the tab row is ruled top (ink) and bottom (line) only, with a divider after every tab but the
+         last — no outer box, no radius, and Trips starts flush at the gutter (fig 18:870: a hard-stop
+         #2e1a22 / #ecdedd stroke; cells 18:871… right border only, 28 / 24 padding). Below 1024 the
+         2-column grid keeps its boxed cells. */
+      .tabs5 { border: 0; border-radius: 0; overflow: visible; border-top: 1px solid var(--cs-ink); border-bottom: 1px solid var(--cs-line); }
+      .tabs5 div { margin: 0; border: 0; padding: calc(28 * var(--k)) calc(24 * var(--k)); }
+      .tabs5 div:not(:last-child) { border-right: 1px solid var(--cs-line); }
+      .tabs5 div:first-child { padding-left: 0; }
 
       /* §05: top-aligned, no rule, 730 wide, fig 18:994 */
       .wires { align-items: start; }
@@ -442,9 +489,9 @@
       </div>
       <div class="wires reveal">
         <div class="wire-row" aria-hidden="true">
-          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:84px">Next trip</div><i style="height:46px"></i><i style="height:46px"></i><i class="btn-w"></i></div><span>Trips</span></div>
+          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:calc(84 * var(--w))">Next trip</div><i style="height:calc(46 * var(--w))"></i><i style="height:calc(46 * var(--w))"></i><i class="btn-w"></i></div><span>Trips</span></div>
           <div class="wire"><div class="fr"><i class="bar"></i><div class="row"><i></i><i></i></div><div class="row"><i></i><i></i></div><div class="row"><i></i><i></i></div><i class="btn-w"></i></div><span>Itinerary</span></div>
-          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:70px">Left</div><i style="height:34px"></i><i style="height:34px"></i><i style="height:34px"></i><i class="btn-w"></i></div><span>Budget</span></div>
+          <div class="wire"><div class="fr"><i class="bar"></i><div class="box" style="height:calc(70 * var(--w))">Left</div><i style="height:calc(34 * var(--w))"></i><i style="height:calc(34 * var(--w))"></i><i style="height:calc(34 * var(--w))"></i><i class="btn-w"></i></div><span>Budget</span></div>
         </div>
         <div class="changes">
           <span class="cs-label" style="letter-spacing:1.12px">What changed after lo-fi</span>

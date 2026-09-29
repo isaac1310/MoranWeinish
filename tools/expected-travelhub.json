@@ -125,6 +125,15 @@
     ],
     "node": "18:998 (TH20)"
   },
+  ".wire-row": {
+    "fig": [
+      123,
+      732,
+      490
+    ],
+    "node": "18:954: three 224 x 452 wireframes 30 apart, label 14 below (490 with it)",
+    "_why": "2026-09-29: the wireframes were fixed px in a 732\u00b7k column and wrapped onto 2\u20133 rows at 1440 / 1024; now in --k, one row at every desktop width (checked against the live prototype)"
+  },
   ".swatches.th span": {
     "fig": [
       202,

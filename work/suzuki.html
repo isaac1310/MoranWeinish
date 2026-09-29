@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.32">
+  <meta name="build" content="v1.0.33">
   <title>Suzuki Israel — refreshing the digital experience · Moran Weinish</title>
   <meta name="description" content="Case study: a visual refresh of Suzuki Israel's website. Clearer hierarchy, one consistent design system and a mobile-first experience, live on suzuki.co.il. UX/UI by Moran Weinish at Comrax.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/suzuki">
@@ -149,7 +149,12 @@
       /* S14 — meta row: fixed columns 196/218/245/169/168, 1.5px rules (175:1687) */
       .cs-meta { margin-top: calc(69 * var(--k)); border-top-width: 1.5px; }
       .cs-meta > div { flex: none; min-width: max-content; border-left: 0; border-right: 1.5px solid; padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; }
-      .cs-meta > div:nth-child(1) { width: calc(196 * var(--k)); padding-left: 0; padding-right: calc(3 * var(--k)); }
+      /* Role keeps Figma's two lines ("Product Designer - / UX/UI") at every width. The value type is
+         a fixed 20px while the column scales, so at 1440 / 1024 the 170k measure split it into three.
+         "Product Designer -" is 157px at 20px: the measure never drops below 158px, and the column
+         never below that plus the 34k column padding. Both floors are under 196 / 170 at 1920. */
+      .cs-meta > div:first-child dd { max-width: max(calc(170 * var(--k)), 158px); }
+      .cs-meta > div:nth-child(1) { width: max(calc(196 * var(--k)), calc(158px + 34 * var(--k))); padding-left: 0; padding-right: calc(3 * var(--k)); }
       .cs-meta > div:nth-child(2) { width: calc(218 * var(--k)); }
       .cs-meta > div:nth-child(3) { width: calc(245 * var(--k)); }
       .cs-meta > div:nth-child(4) { width: calc(169 * var(--k)); }

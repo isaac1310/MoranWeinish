@@ -60,7 +60,9 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   .cs-meta { display: flex; flex-wrap: wrap; margin-top: calc(40 * var(--k)); }
   .cs-meta > div { padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; border-left: 1px solid var(--cs-line); }
   /* only Role wraps, after the dash — the other columns stay on one line */
-  .cs-meta > div:first-child dd { max-width: calc(170 * var(--k)); }
+  /* the cap makes Role break after the dash ("Product Designer - / UX/UI"), but the type is a fixed 20px,
+     so below ~1770 a scaled cap split it into three lines; never narrower than "Product Designer -" */
+  .cs-meta > div:first-child dd { max-width: max(calc(170 * var(--k)), 158px); }
   .cs-meta > div:first-child { padding-left: 0; border-left: 0; }
   /* no transform here: .reveal-ready .reveal.in { transform: none } outranks it once JS runs, so it only
      ever applied with JS off and the two layouts differed by 60px */

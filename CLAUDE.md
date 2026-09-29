@@ -33,7 +33,10 @@ screenshot backwards and moving a column 80px the wrong way.
 screens and the Suzuki icon row were built: they are drawn components in Figma,
 not images, so there was never a file to export.
 
-### Two traps in the geometry
+For a whole frame side by side with the page, `tools/figcompare.sh` (see tools/README.md) renders
+it with `refpage.py`; `gensvg.py` stays the small emitter for the site's own inline SVGs.
+
+### Three traps in the geometry
 
 - **Case-study frames are 1934 wide at x = −7.** So on those pages the gutter is
   **123** and the content column **1674** — not the 130 / 1660 of the home page
@@ -41,6 +44,9 @@ not images, so there was never a file to export.
 - **Image crops live in the paint transform**, not the image. `m00/m11` are the
   crop's width/height fraction, `m02/m12` its offset. Resizing the source
   without applying that produces squashed rubbish.
+- **Paint opacity is not the colour's alpha.** A fill is `color` *and* `opacity`; Bara §03 is
+  `#5889a8` at 11% (a pale grey-green) and shipped solid blue because only the colour was read.
+  Apply both, and look at the live prototype when a colour seems loud.
 
 ---
 

@@ -1,5 +1,9 @@
 """Emit a Figma frame subtree as one self-contained inline SVG.
 
+For a whole-page reference render — rotated/flipped nodes, resized instances, image
+crops, per-side borders — use refpage.py next to this file instead; this one stays the
+small emitter for the site's own inline SVGs (it positions nodes by translation only).
+
 The seven TravelHub screens are drawn in Figma, not exported images, so there
 was nothing to copy into assets/. Every node's position, size, fill, radius,
 text and vector geometry is in the decoded file, so the frame can be rebuilt
@@ -56,10 +60,17 @@ class Ctx:
         if p.get('type') == 'GRADIENT_RADIAL':
             self.defs.append('<radialGradient id="%s">%s</radialGradient>' % (gid_, ''.join(stops)))
         else:
-            dx, dy = m.get('m00', 1), m.get('m10', 0)
-            ang = math.atan2(-dy, dx)
-            x1, y1 = 0.5 - math.cos(ang) / 2, 0.5 + math.sin(ang) / 2
-            x2, y2 = 0.5 + math.cos(ang) / 2, 0.5 - math.sin(ang) / 2
+            # The paint transform maps the shape's unit box into gradient space, where the
+            # gradient runs along x from 0 to 1 at y = .5; its ends in the box are T^-1(0,.5)
+            # and T^-1(1,.5). (This used to read the column m00/m10 as the direction, which
+            # drew a vertical wash sideways — found in the 2026-09-29 review.)
+            a, b, c = m.get('m00', 1), m.get('m01', 0), m.get('m02', 0)
+            d, e, g = m.get('m10', 0), m.get('m11', 1), m.get('m12', 0)
+            det = a * e - b * d or 1e-9
+            ia, ib, ic = e / det, -b / det, (b * g - c * e) / det
+            id_, ie, ig = -d / det, a / det, (c * d - a * g) / det
+            x1, y1 = ia * 0 + ib * .5 + ic, id_ * 0 + ie * .5 + ig
+            x2, y2 = ia * 1 + ib * .5 + ic, id_ * 1 + ie * .5 + ig
             self.defs.append('<linearGradient id="%s" x1="%s" y1="%s" x2="%s" y2="%s">%s</linearGradient>'
                              % (gid_, round(x1,3), round(y1,3), round(x2,3), round(y2,3), ''.join(stops)))
         return 'url(#%s)' % gid_
