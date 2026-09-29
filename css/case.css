@@ -342,7 +342,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 /* Previous on the left, Back + Next on the right (Figma 184:4078 / 188:4131);
    on a phone all three sit in one compact row with short labels */
 .cs-nav { margin-top: 64px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; align-items: center; }
-.cs-nav a.prev { margin-right: auto; }
+/* KKL is the first case study: no Previous there, so Back to portfolio takes the left slot */
+.cs-nav a.prev, .cs-nav a.home { margin-right: auto; }
 .cs-nav .s { display: none; }
 @media (min-width: 1024px) { .cs-nav { margin-top: calc(70 * var(--k)); padding-top: calc(62 * var(--k)); } }
 .cs-nav a { border-radius: 100px; padding: 15px 30px; font-weight: 700; font-size: 17px; border: 2px solid #000; color: #000; display: inline-flex; gap: 13px; align-items: center; transition: transform .25s var(--ease), background .25s, color .25s; }
@@ -353,7 +354,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   .cs-nav { flex-wrap: nowrap; gap: 8px; justify-content: space-between; padding-top: 22px; margin-top: 40px; }
   .cs-nav a { padding: 10px 15px; font-size: 14px; gap: 6px; border-width: 1.5px; white-space: nowrap; }
   .cs-nav a svg { width: 14px; height: 14px; }
-  .cs-nav a.prev { margin-right: 0; }
+  .cs-nav a.prev, .cs-nav a.home { margin-right: 0; }
   .cs-nav .l { display: none; }
   .cs-nav .s { display: inline; }
 }
