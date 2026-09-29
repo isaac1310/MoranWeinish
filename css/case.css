@@ -17,11 +17,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 @media (min-width: 1024px) { .cs-topnav { top: var(--nav-h); } }
 .cs-topnav a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; line-height: 22px; color: #000; transition: transform .25s var(--ease), color .25s; }
-/* the bar names the neighbours instead of a bare "Back" (people read that as "back to the portfolio"):
-   a small mono "Previous" / "Next" label, then the project name; on a phone only the name */
-.cs-topnav .k { font-family: var(--mono); font-weight: 400; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted-2); }
-.cs-topnav .n { font-weight: 700; }
-@media (max-width: 767px) { .cs-topnav .k { display: none; } .cs-topnav a { font-size: 16px; } }
+/* the bar names the neighbouring projects (not a bare "Back", which reads as "back to the portfolio") */
+@media (max-width: 767px) { .cs-topnav a { font-size: 16px; } }
 .cs-topnav svg { width: 18px; height: 18px; flex: none; }
 @media (hover: hover) {
   .cs-topnav a:hover { color: var(--cs-accent); }
@@ -353,35 +350,6 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 }
 
 /* ---------- prev / next ---------- */
-/* End of a case study: one wide "Next case study" card — the what-now for someone who finished
-   reading. Getting around (previous / next / all work) lives in the sticky bar at the top, so the
-   old Previous · Back to portfolio · Next row here only repeated it (Itzik + Moran 2026-09-29). */
-.cs-next {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; align-items: center;
-  margin-top: 48px; padding: 28px 24px; border: 1px solid var(--cs-line); border-radius: 18px;
-  background: var(--surface); color: var(--cs-ink, var(--ink));
-  transition: border-color .25s, box-shadow .25s var(--ease), transform .25s var(--ease);
-}
-.cs-next .k { grid-column: 1; font-family: var(--mono); font-size: 13px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--cs-accent); }
-.cs-next .t { grid-column: 1; margin-top: 8px; font-weight: 600; font-size: clamp(28px, 2.9vw, 56px); line-height: 1.07; letter-spacing: -0.01em; }
-.cs-next .d { grid-column: 1; margin-top: 10px; max-width: 62ch; font-size: 16px; line-height: 1.55; color: var(--cs-body, var(--body)); }
-.cs-next .go { grid-column: 2; grid-row: 1 / span 3; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--cs-ink, var(--ink)); color: #fff; transition: transform .3s var(--ease), background .25s; }
-.cs-next .go svg { width: 22px; height: 22px; }
-@media (min-width: 1024px) {
-  /* in the same centred 1234 block as §08–§09 above it */
-  .cs-next { margin: calc(70 * var(--k)) calc(220 * var(--k)) 0; padding: calc(48 * var(--k)) calc(56 * var(--k)); border-radius: calc(20 * var(--k)); }
-  .cs-next .k { font-size: max(12px, calc(16 * var(--k))); }
-  .cs-next .d { font-size: max(15px, calc(19 * var(--k))); margin-top: calc(14 * var(--k)); }
-  .cs-next .go { width: max(52px, calc(72 * var(--k))); height: max(52px, calc(72 * var(--k))); }
-}
-@media (max-width: 767px) { .cs-next { column-gap: 16px; } .cs-next .go { width: 44px; height: 44px; } }
-@media (hover: hover) {
-  .cs-next:hover { border-color: var(--cs-accent); box-shadow: 0 24px 48px -28px rgba(0, 0, 0, .3); transform: translateY(-3px); }
-  .cs-next:hover .go { background: var(--cs-accent); transform: translateX(6px); }
-}
-.cs-next:focus-visible { outline: 3px solid var(--cs-accent); outline-offset: 4px; }
-
 /* case-study footer variant: shorter bottom padding */
 body.case .footer { padding-top: 64px; }
 @media (min-width: 1024px) { body.case .footer { padding: calc(44 * var(--k)) 0 calc(80 * var(--k)); } }
