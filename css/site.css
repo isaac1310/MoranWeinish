@@ -240,7 +240,8 @@ br.xwide { display: none; }
 }
 @media (hover: hover) {
   .card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgba(46, 26, 34, .35); border-color: #e2cfce; }
-  .card:hover .card-media img { transform: scale(1.04); }
+  /* the TravelHub card's picture is an inline SVG, not an <img>, so it needs its own zoom */
+  .card:hover .card-media img, .card:hover .mock-th .th-phone { transform: scale(1.04); }
   .card:hover .card-cta svg { transform: translateX(4px); }
 }
 
@@ -259,6 +260,7 @@ br.xwide { display: none; }
      so the shadow shrinks with the phone; px first as the fallback */
   filter: drop-shadow(0 0 1px rgba(20, 18, 12, .05)) drop-shadow(0 30px 60px rgba(20, 18, 12, .16));
   filter: drop-shadow(0 0 1px rgba(20, 18, 12, .05)) drop-shadow(0 8.05cqw 16.1cqw rgba(20, 18, 12, .16));
+  transform-origin: 50% 0; transition: transform .6s var(--ease);
 }
 
 /* ---------- about ---------- */
@@ -323,14 +325,12 @@ br.xwide { display: none; }
 .footer-bottom .brand { color: var(--on-plum); font-size: 22px; }
 .footer-bottom .brand-mark { background: var(--rose); color: var(--plum); width: 37px; height: 37px; }
 .footer-bottom small { font-size: 18px; color: var(--rose-muted); }
-/* build marker — bumped one patch per commit, so what is live is identifiable */
-.footer-bottom .ver { margin-left: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .5px; opacity: .55; }
 @media (min-width: 1024px) {
   /* Figma: 103 below the bottom row, of which 30 is already .footer-bottom's padding-top */
-  /* Moran 2026-09-29: the full height from 18:623 / 255:6135 — 283 from the email button to the rule,
-     153 under the brand row */
-  .footer { padding: calc(155 * var(--k)) 0 calc(153 * var(--k)); }
-  .footer-top { grid-template-columns: minmax(0, 1fr) auto; gap: calc(196 * var(--k)); padding-bottom: calc(283 * var(--k)); }
+  /* Figma 18:623 / 255:6135 has 283 from the email button to the rule and 153 under the brand row;
+     Itzik asked for it a bit shorter (2026-09-29): 190 / 110 */
+  .footer { padding: calc(155 * var(--k)) 0 calc(110 * var(--k)); }
+  .footer-top { grid-template-columns: minmax(0, 1fr) auto; gap: calc(196 * var(--k)); padding-bottom: calc(190 * var(--k)); }
   .footer-bottom small { font-size: 22px; }
   /* 18:624 / 18:633: 22 / 30 around the h2, 20 label→links, 16 between links */
   .footer .h2 { margin: calc(22 * var(--k)) 0 calc(30 * var(--k)); }

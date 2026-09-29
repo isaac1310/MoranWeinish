@@ -35,19 +35,17 @@ Open http://127.0.0.1:8787/. Note: `/work/kkl` clean URLs only work on Vercel; l
 
 ## Version marker
 
-The footer carries a build number next to the copyright (`v1.0.0`). **Bump the
-patch on every commit that reaches `main`** — these are fixes, not features, so
-the patch is the right digit. It is hard-coded in the five `.html` footers,
-which are copy-pasted, so change it in all five:
+Each page carries its build number in a `<meta name="build" content="v1.0.x">` tag in the
+`<head>`. It used to show in the footer next to the copyright; since v1.0.17 it is not
+visible on the page, but view-source or `curl -s <url> | grep 'name="build"'` still tells
+anyone which build is live. **Bump the patch on every push that changes what ships** —
+HTML, CSS, JS or assets — in all five files:
 
 ```bash
-grep -rn 'class="ver"' index.html work/*.html
+grep -rn 'name="build"' index.html work/*.html
 ```
 
-It exists so anyone looking at the live site can say which build they are seeing
-without digging through git. **Every push that changes what ships — HTML, CSS,
-JS or assets — bumps it.** Docs-only commits do not, because nothing about the
-live site changed.
+Docs-only commits do not bump, because nothing about the live site changed.
 
 ## Checks before pushing
 

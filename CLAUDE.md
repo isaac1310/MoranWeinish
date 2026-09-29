@@ -180,7 +180,7 @@ wrapping one. Put `.reveal` on the individual children instead of the wrapper.
 
 ## 9. Deploying
 
-Push to `main` → Vercel. **Bump the patch version in all five footers on every
+Push to `main` → Vercel. **Bump the patch version (`<meta name="build">` in the `<head>`) in all five files on every
 push that changes what ships** (see README). Docs-only commits do not bump.
 
 Pushes go through Itzik's personal GitHub account, not the work one.
