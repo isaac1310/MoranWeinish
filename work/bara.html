@@ -31,13 +31,18 @@
       --cs-accent: #185a6b; --cs-dark: #185a6b; --cs-dark-text: #c3d3d0; --cs-dark-line: #fff; --cs-dark-chip: #d9e4e2;
       --cs-accent-a: #1b86a2; --cs-tint-a: #e4f2ef; --cs-accent-b: #014f40; --cs-tint-b: #eef4f6;
     }
-    .cs-hero h1 { font-size: clamp(40px, 4.8vw, 92px); line-height: 1; }
+    /* from 768 up only: below that the phone scale (end of this block) applies */
+    @media (min-width: 768px) { .cs-hero h1 { font-size: clamp(40px, 4.8vw, 92px); line-height: 1; } }
     .cs-meta { border-color: #185a6b; } .cs-meta > div { border-color: #185a6b !important; }
     .stats b { color: #447a6f; }
     .ncards .n, .insight-wide .n { color: #185a6b; }
     .chips li { background: #e4f2ef; border-color: #e4f2ef; color: #3f6b74; }
     .dark .chips li { background: transparent; border-color: #fff; color: #d9e4e2; }
     .reflect h3:not(.next) { color: #006837; }
+    /* live Figma (checked 2026-09-29): "Clinical" is the teal accent, the rest of the h1 is ink */
+    .cs-hero h1 .accent { color: var(--cs-accent); }
+    /* in the 1234 block Moran chose, "2 Approaches" wrapped at 46; 40 keeps each stat on one line */
+    @media (min-width: 1024px) { .stats b { font-size: max(28px, calc(40 * var(--k))); } }
     /* logo: icon then wordmark, the wordmark set 5 lower (153:1603 / 153:1605) */
     .bara-logo { gap: 0; align-items: flex-start; }
     .bara-logo img { height: 69px; }
@@ -67,6 +72,19 @@
 
     /* ---- 01 main user flow (153:963) ---- */
     .bara-flow-wrap { text-align: center; }
+    /* phones: one column, every pill the same full width, the arrows turned to point down,
+       so the steps read top to bottom on a single centre line */
+    @media (max-width: 767px) {
+      .bara-flow { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 4px; margin-top: 20px; }
+      .bara-flow span { min-width: 0; padding: 14px 16px; font-size: 16px; line-height: 1.25; }
+      .bara-flow i { align-self: center; font-size: 26px; transform: rotate(90deg); }
+    }
+    /* tablets: one row, five equal pills that share the width (two-line labels are fine) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .bara-flow { flex-wrap: nowrap; gap: 6px; }
+      .bara-flow span { flex: 1 1 0; min-width: 0; min-height: 60px; display: grid; place-items: center; padding: 8px; font-size: 15px; line-height: 1.2; }
+      .bara-flow i { flex: none; font-size: 24px; }
+    }
     @media (min-width: 1024px) {
       /* the row is centred; its label is left-aligned, 13 in from the first pill */
       .cs-content.full.bara-flow-wrap { width: max-content; max-width: 100%; margin-inline: auto; text-align: left; }
@@ -81,7 +99,8 @@
     }
 
     /* ---- 02 problem cards (177:2753) + challenge banner (153:1097) ---- */
-    .banner p { line-height: 1.3; max-width: none; }   /* 40 / 52, the text runs to the padding */
+    .banner p { line-height: 1.3; max-width: none; color: #f7f6f3; font-size: 19px; }   /* 40 / 52, the text runs to the padding */
+    @media (min-width: 768px) { .banner p { font-size: clamp(22px, 2.1vw, 40px); } }   /* was inline, so a phone could not override it */
     .banner .cs-label { display: block; line-height: 19px; }   /* 153:1098, 319 tall in all */
     @media (min-width: 1024px) {
       .ncards.problem li { padding: calc(30 * var(--k)) calc(32 * var(--k)) calc(20.6 * var(--k)); }   /* 293 tall */
@@ -111,8 +130,17 @@
       .bara-ki { margin-top: calc(29 * var(--k)); }
     }
 
+    /* ---- 05 AI: its own heading/body sizes (were inline, which beat the phone scale) ---- */
+    @media (min-width: 768px) {
+      .cs-section.dark .cs-h2 { font-size: clamp(28px, 2.5vw, 48px); }
+      .cs-section.dark .cs-body-text { font-size: clamp(17px, 1.1vw, 21px); }
+    }
+
     /* ---- 06 final design: blocks 67 / 94 / 86 apart, thumbnails 14 apart ---- */
     .bara-main, .bara-thumbs, .bara-results { margin-top: 48px; }
+    /* both thumbnail captions in the first one's style, 16 #4c5f63 (133:8954; Moran 2026-09-29 —
+       the .fig has the second at 15 #647a7e, 133:8959) */
+    .bara-thumbs figcaption { font-size: 16px; line-height: 21px; color: #4c5f63; }
     @media (min-width: 1024px) {
       .bara-main { margin-top: calc(67 * var(--k)); }
       /* 133:8936 — column 2 starts 851 in, so callout 1 stays on one line */
@@ -134,25 +162,71 @@
       .swatches { grid-template-columns: repeat(4, calc(134.4 * var(--k))); gap: calc(12 * var(--k)); }
       /* min-height, not height: below ~1200 the floored 12px label wraps to two lines */
       .swatches span { height: auto; min-height: calc(88 * var(--k)); padding: calc(12 * var(--k)); font-size: max(12px, calc(13 * var(--k))); }
-      .type-sample { max-width: calc(722 * var(--k)); }   /* 153:1508 */
       .fields { gap: calc(13 * var(--k)) calc(16 * var(--k)); }
-      .bara-icons-label { margin-top: calc(47 * var(--k)); }
-      /* 153:1664 — buttons strip then filters, 12 overlap, one row */
-      .bara-icons { margin-top: calc(20 * var(--k)); flex-wrap: nowrap; gap: 0; padding: calc(17.5 * var(--k)) calc(76 * var(--k)); }
+      /* KKL's §07 layout (Moran 2026-09-29, kkl.html .sec-ds): the grid, the iconography
+         label and its panel are inset 79 on both sides — 202 → 1718 at 1920 — in a 2 × 2 of
+         Palette | Components over Typography | Field states, columns 722 | 692, rows level.
+         Replaces Bara's own 822 | 56 | 782 from the .fig (153:1485 / 153:1524). */
+      .ds { margin-inline: calc(79 * var(--k)); grid-template-columns: calc(722 * var(--k)) calc(692 * var(--k));
+            justify-content: space-between; gap: calc(36 * var(--k)) 0; }
+      .ds h3 { margin-bottom: calc(14 * var(--k)); }   /* 153:1487 → 153:1582 */
+      .ds > div { display: flex; flex-direction: column; }
+      .ds > div > .panel { flex: 1; }
+      .bara-icons-label { margin: calc(47 * var(--k)) calc(79 * var(--k)) 0; }
+      /* 153:1664 — buttons strip then filters, 12 overlap, one row. The panel is 1516 now,
+         not 1660, so the two strips (767 + 754 − 12 = 1509) are scaled into its 1436 content
+         box by percentage: 767/1509, 754/1509, −12/1509 */
+      .bara-icons { margin: calc(20 * var(--k)) calc(79 * var(--k)) 0; flex-wrap: nowrap; gap: 0; padding: calc(20 * var(--k)) calc(40 * var(--k)); }
       .bara-icons img { flex: none; }
-      .bara-icons img:first-child { width: calc(767 * var(--k)); }
-      .bara-icons img + img { width: calc(754 * var(--k)); margin-left: calc(-12 * var(--k)); }
+      .bara-icons img:first-child { width: 50.83%; }
+      .bara-icons img + img { width: 49.97%; margin-left: -0.8%; }
     }
-    /* Bara's own columns: 822 | 56 | 782 (153:1485 / 153:1524). case.css stacks
-       .ds between 1024 and 1199, so this starts at 1200 and leaves that alone. */
-    @media (min-width: 1200px) { .ds { grid-template-columns: minmax(0, 822fr) minmax(0, 782fr); column-gap: calc(56 * var(--k)); } }
+    /* 1024–1199 (as KKL): too narrow for the palette beside the components, so the top row
+       stacks (case.css collapses .ds here too); Typography | Field states stay side by side */
+    @media (min-width: 1024px) and (max-width: 1199px) {
+      .ds { grid-template-columns: calc(722 * var(--k)) calc(692 * var(--k)); gap: 40px 0; }
+      .ds > div:nth-child(-n+2) { grid-column: 1 / -1; }
+      .swatches { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 640px; }
+      .swatches span { min-height: 64px; }
+    }
+
+    /* ---- 08 impact: the stats sit 135 below the heading (153:1683 → 153:1686; was 31) ---- */
+    @media (min-width: 1024px) { .stats { margin-top: calc(135 * var(--k)); } }
+
+    /* ---- phones: Bara's own sizes a step down, on top of the shared phone scale in
+       case.css (h1 / h2 / body / lede). Targets at 390: h1 ≈ 36, h2 ≈ 26–30, text 16–17.
+       No phone frame in the .fig — type, colours and content stay the desktop frame's. ---- */
+    @media (max-width: 767px) {
+      .cs-hero h1 { font-size: clamp(32px, 9.3vw, 38px); line-height: 1.05; }
+      /* case.css gives .blue .cs-h2 / .blue .cs-body-text their own clamps, which outrank the shared phone scale */
+      .cs-section.blue .cs-h2 { font-size: clamp(24px, 6.8vw, 30px); line-height: 1.15; }
+      .cs-section.blue .cs-body-text { font-size: 16px; line-height: 1.6; }
+      .cs-meta dd { font-size: 17px; line-height: 23px; }
+      .banner { padding: 26px 22px 28px; }
+      .ncards li, .insight-wide { padding: 22px 22px 24px; }
+      .ncards .n, .insight-wide .n { font-size: 28px; }
+      .ncards h3 { font-size: 19px; }
+      .ncards p { font-size: 16px; line-height: 25px; }
+      .insight-wide p { font-size: 19px; line-height: 1.4; }
+      .two-cards { gap: 16px; margin-top: 32px; }
+      .two-cards div { padding: 22px 22px 24px; }
+      .two-cards h3 { font-size: 14px; }
+      .two-cards p { font-size: 17px; line-height: 27px; }
+      .stats { gap: 14px; }
+      .stats li { padding: 22px 22px 24px; }
+      .stats b { font-size: 32px; }
+      .stats p { font-size: 16px; line-height: 24px; }
+      .summary { padding: 24px 22px; font-size: 17px; line-height: 28px; }
+      .reflect div { padding: 24px 22px 26px; }
+      .reflect h3 { font-size: 14px; }
+      .reflect p { font-size: 16px; line-height: 26px; }
+    }
   </style>
 </head>
 <body class="case">
 
 <div class="splash" aria-hidden="true">
   <div class="splash-in">
-    <span class="splash-mark">M</span>
     <p class="splash-name"><span><b>Moran</b></span><span><b>Weinish</b></span></p>
     <i class="splash-bar"></i>
     <p class="splash-role"><span>Product &amp; UX/UI Designer</span><i></i></p>
@@ -189,7 +263,7 @@
 
     <div class="wrap">
       <p class="cs-brand bara-logo" role="img" aria-label="Bara Professional"><img src="/assets/img/bara/logo-icon.webp" alt="" width="62" height="70"><img src="/assets/img/bara/logo-word.webp" alt="" width="155" height="70"></p>
-      <h1>A Guided Experience for <br class="wide">Clinical Product Selection</h1>
+      <h1>A Guided Experience for <br class="wide"><span class="accent">Clinical</span> Product Selection</h1>
       <p class="lede">Clini-Kal is a tool designed for certified therapists using the Bara Professional platform.<br>It guides therapists through a simple step-by-step process, from choosing a treatment approach, system, symptom, and diagnosis to finding the most relevant herbal product and a complementary product for their patient.</p>
       <dl class="cs-meta">
         <div><dt>Role</dt><dd>Product Designer&nbsp;- UX/UI</dd></div>
@@ -248,7 +322,7 @@
         </ol>
         <div class="banner" style="background:#5889a8">
           <span class="cs-label">The challenge</span>
-          <p style="font-size:clamp(22px,2.1vw,40px);color:#f7f6f3">Help therapists find the right product by describing the patient through their treatment approach, body system, symptoms, and diagnosis, rather than expecting them to already know which product to look for.</p>
+          <p>Help therapists find the right product by describing the patient through their treatment approach, body system, symptoms, and diagnosis, rather than expecting them to already know which product to look for.</p>
         </div>
       </div>
     </div>
@@ -310,8 +384,8 @@
       <div class="cs-head reveal">
         <span class="cs-num">05 / AI-assisted process</span>
         <div>
-          <h2 class="cs-h2" style="font-size:clamp(28px,2.5vw,48px)">AI Supporting the UX Process</h2>
-          <div class="cs-body-text" style="font-size:clamp(17px,1.1vw,21px)"><p>AI was used as part of the UX process to help organize and explore large amounts of information. It supported tasks such as grouping research insights, structuring clinical content, exploring user needs, and testing different microcopy directions. The final structure, user flows, and design decisions were shaped through UX thinking and a clear understanding of the therapists’ needs.</p></div>
+          <h2 class="cs-h2">AI Supporting the UX Process</h2>
+          <div class="cs-body-text"><p>AI was used as part of the UX process to help organize and explore large amounts of information. It supported tasks such as grouping research insights, structuring clinical content, exploring user needs, and testing different microcopy directions. The final structure, user flows, and design decisions were shaped through UX thinking and a clear understanding of the therapists’ needs.</p></div>
         </div>
       </div>
       <ul class="chips indent reveal">
@@ -403,12 +477,6 @@
             <span style="background:#c0392b">Error</span>
             <span style="background:#fbe9d7;color:#c56a1e;border:1px solid #f2d6ba">Sale tag</span>
           </div>
-          <h3>Typography &amp; scale</h3>
-          <div class="panel type-sample">
-            <div class="face" style="font-family:'Open Sans',var(--sans)">Open Sans</div>
-            <div class="sub">Hebrew &amp; Latin · headings, body and data</div>
-            <div class="scale"><span>34</span><span>20</span><span>16</span><span>14</span><span>13 · caption</span></div>
-          </div>
         </div>
         <div>
           <h3>Components</h3>
@@ -430,6 +498,16 @@
               <b style="font-size:14px;color:#243b41">₪105.60</b>
             </div>
           </div>
+        </div>
+        <div>
+          <h3>Typography &amp; scale</h3>
+          <div class="panel type-sample">
+            <div class="face" style="font-family:'Open Sans',var(--sans)">Open Sans</div>
+            <div class="sub">Hebrew &amp; Latin · headings, body and data</div>
+            <div class="scale"><span>34</span><span>20</span><span>16</span><span>14</span><span>13 · caption</span></div>
+          </div>
+        </div>
+        <div>
           <h3>Field states</h3>
           <div class="panel fields">
             <div><label style="font-size:12px">Default</label><span style="color:#647a7e;border-color:#dce4e0">Choose system ▾</span></div>
@@ -477,8 +555,9 @@
         <div><h3 class="next">What I would explore next</h3><p>I would involve clinical experts even earlier when mapping the connections between the Chinese and Western approaches. Some of the more complex relationships between symptoms, diagnoses, and products became clearer as the system developed and therapists began testing it.<br>This could help identify edge cases earlier and make the structure behind the experience even stronger from the start.</p></div>
       </div>
       <nav class="cs-nav" aria-label="Case studies">
-        <a href="/#work">Back to portfolio</a>
-        <a class="next" href="/work/suzuki">Next case study <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+        <a class="prev" href="/work/travelhub"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9H4M8.5 4.5 4 9l4.5 4.5"/></svg><span class="l">Previous case study</span><span class="s">Previous</span></a>
+        <a href="/#work"><span class="l">Back to portfolio</span><span class="s">Portfolio</span></a>
+        <a class="next" href="/work/suzuki"><span class="l">Next case study</span><span class="s">Next</span> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
       </nav>
     </div>
   </section>
@@ -499,15 +578,14 @@
         <span class="label">Elsewhere</span>
         <ul>
           <li><a href="https://www.linkedin.com/in/moran-weinish" rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href="/assets/Moran-Weinish-CV.pdf" download>Resume (PDF)</a></li>
+          <li><a href="/assets/Moran-Weinish-CV.pdf?v=2026-09-29" download>Resume (PDF)</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.14</span></small>
+      <small>© 2026 · Created with Figma, Claude &amp; Claude Design<span class="ver" title="build">v1.0.15</span></small>
     </div>
-    <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>
 </footer>
 

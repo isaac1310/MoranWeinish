@@ -89,7 +89,8 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
      heading drops below the number rather than sharing its baseline. */
   .cs-head { grid-template-columns: calc(225 * var(--k)) minmax(0, 1fr); gap: calc(5 * var(--k)); align-items: start; }
   .cs-h2 { max-width: calc(1030 * var(--k)); }
-  .cs-body-text { max-width: calc(1030 * var(--k)); margin-top: calc(24 * var(--k)); }
+  /* Moran 2026-09-29: body text is 1250 wide on every case page (was 1030; KKL §07 in shot 3) */
+  .cs-body-text { max-width: calc(1250 * var(--k)); margin-top: calc(24 * var(--k)); }
   /* the label scales with the frame too, or at 1440 a 16px 'AI-ASSISTED'
      no longer fits the 225-wide column and breaks at the hyphen */
   .cs-num { justify-self: stretch; min-width: 0;
@@ -338,14 +339,29 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 }
 
 /* ---------- prev / next ---------- */
-.cs-nav { margin-top: 64px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+/* Previous on the left, Back + Next on the right (Figma 184:4078 / 188:4131);
+   on a phone all three sit in one compact row with short labels */
+.cs-nav { margin-top: 64px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; align-items: center; }
+.cs-nav a.prev { margin-right: auto; }
+.cs-nav .s { display: none; }
+@media (min-width: 1024px) { .cs-nav { margin-top: calc(70 * var(--k)); padding-top: calc(62 * var(--k)); } }
 .cs-nav a { border-radius: 100px; padding: 15px 30px; font-weight: 700; font-size: 17px; border: 2px solid #000; color: #000; display: inline-flex; gap: 13px; align-items: center; transition: transform .25s var(--ease), background .25s, color .25s; }
 .cs-nav a.next { background: #000; color: #fff; }
 .cs-nav a.next svg { transition: transform .25s var(--ease); }
+.cs-nav a.prev svg { transition: transform .25s var(--ease); }
+@media (max-width: 767px) {
+  .cs-nav { flex-wrap: nowrap; gap: 8px; justify-content: space-between; padding-top: 22px; margin-top: 40px; }
+  .cs-nav a { padding: 10px 15px; font-size: 14px; gap: 6px; border-width: 1.5px; white-space: nowrap; }
+  .cs-nav a svg { width: 14px; height: 14px; }
+  .cs-nav a.prev { margin-right: 0; }
+  .cs-nav .l { display: none; }
+  .cs-nav .s { display: inline; }
+}
 @media (hover: hover) {
   .cs-nav a:hover { background: var(--plum); border-color: var(--plum); color: var(--rose); }
   .cs-nav a.next:hover { background: var(--cs-accent); border-color: var(--cs-accent); color: #fff; }
   .cs-nav a.next:hover svg { transform: translateX(5px); }
+  .cs-nav a.prev:hover svg { transform: translateX(-5px); }
 }
 
 /* case-study footer variant: shorter bottom padding */
@@ -592,3 +608,39 @@ body.case .footer { padding-top: 64px; }
 .sw-big span { height: 116px; border-radius: 10px; padding: 14px; display: flex; align-items: flex-end; font-family: var(--mono); font-size: 15px; color: #fff; opacity: 1; }
 .sw-small { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
 .sw-small span { height: 86px; border-radius: 10px; padding: 13px; display: flex; align-items: flex-end; font-weight: 600; font-size: 15px; color: #fff; }
+
+/* ---------- decided with Moran, 2026-09-29 ---------- */
+/* §08–§09 blocks are one centred 1234 block on every case page (shot 2) */
+@media (min-width: 1024px) { .stats, .summary, .reflect { margin-inline: calc(220 * var(--k)); } }
+
+/* ---------- phones ----------
+   Headings and text a size down, and image groups become a swipe row: one
+   readable image at a time with the next one peeking in, instead of two or
+   three thumbnails too small to read (TravelHub's screens were 151px wide). */
+@media (max-width: 767px) {
+  .cs-hero h1 { font-size: clamp(30px, 8.6vw, 40px); line-height: 1.05; }
+  /* the section variants (.blue, .dark.navy) set their own clamp, so name them too or they stay big */
+  .cs-h2, .blue .cs-h2, .dark.navy .cs-h2 { font-size: clamp(24px, 6.8vw, 30px); line-height: 1.15; }
+  .cs-hero .lede, .cs-body-text, .blue .cs-body-text, .dark.navy .cs-body-text { font-size: 16px; line-height: 1.6; }
+
+  /* cards and boxes a size down too (the Bara pass found them oversized on every page) */
+  .ncards h3 { font-size: 19px; }
+  .ncards p, .stats p { font-size: 16px; line-height: 25px; }
+  .stats li { padding: 22px 24px; }
+  .stats b { font-size: 36px; }
+  .summary { font-size: 17px; line-height: 28px; padding: 24px 22px; }
+  .reflect div { padding: 24px 22px; }
+  .reflect p { font-size: 16px; line-height: 26px; }
+  .banner { padding: 28px 24px; }
+  .banner p { font-size: 19px; line-height: 1.45; }
+
+  .shots.two, .shots.three, .screens {
+    display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    gap: 14px; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter); scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .shots.two::-webkit-scrollbar, .shots.three::-webkit-scrollbar, .screens::-webkit-scrollbar { display: none; }
+  .shots.two > .shot, .shots.three > .shot { flex: 0 0 86%; min-width: 0; scroll-snap-align: start; }
+  .screens { justify-items: initial; gap: 18px; }
+  .screens .screen { flex: 0 0 min(72%, 280px); max-width: none; scroll-snap-align: start; }
+}

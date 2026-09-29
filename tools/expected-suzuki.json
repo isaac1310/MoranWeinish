@@ -80,9 +80,9 @@
     "fig": [
       null,
       null,
-      208
+      null
     ],
-    "node": "174:1267 components panel (S12)"
+    "node": "174:1267 components panel (S12). Height = its grid row since the 2 x 2 layout (Moran 2026-09-29)"
   },
   ".ds-select": {
     "fig": [
@@ -110,18 +110,43 @@
   },
   ".sz-stats li": {
     "fig": [
-      347,
-      395,
+      343,
+      398,
       null
     ],
-    "node": "174:1309, 3 x 395 in the 1226 inset block (S13)"
+    "node": "174:1309 cards in the shared 1234 block: (1234 - 2 x 20) / 3. Figma 395.3 in 1226"
   },
   ".summary": {
     "fig": [
-      347,
-      1226,
+      343,
+      1234,
       null
     ],
-    "node": "177:2980 (S13)"
+    "node": "177:2980 in the shared centred 1234 block (Figma 1226)"
+  },
+  "_why_2026-09-29b": "Phase 3 (Moran's answers): .sz-stats li / .summary follow the shared centred 1234 block (case.css, 220 inset each side) instead of Suzuki's own 1226; .ds is inset 79 both sides like KKL §07 (Moran), so .ds-comp is now as tall as its row (the palette beside it) and its height is no longer checked; the caption box and the slide-1 UI overlay were added. The live Figma frame 174:1060 still has the §06 grid gutter to gutter; the inset is Moran's call, not the file's.",
+  ".ds": {
+    "fig": [
+      202,
+      1516,
+      null
+    ],
+    "node": "§06 grid inset 79 on both sides of the 123 / 1674 column, as KKL §07 (Moran 2026-09-29)"
+  },
+  ".gallery .cap": {
+    "fig": [
+      278,
+      1365,
+      null
+    ],
+    "node": "226:3121 caption row, full width of the 1365 column now that the arrows sit on the image"
+  },
+  ".sz-ui": {
+    "fig": [
+      278,
+      1365,
+      687
+    ],
+    "node": "246:4209 slide-1 UI overlay, drawn over the whole 1365 x 687 stage"
   }
 }

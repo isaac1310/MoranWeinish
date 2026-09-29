@@ -56,17 +56,35 @@
     .ncards h3 { color: #243b41; }
     .ncards p { color: #647a7e; }
 
-    /* S5 / S6 / S18 — §04 carousel (component 226:3370) */
+    /* S5 / S18 — §04 carousel (component 226:3370) */
     .gallery .dots { gap: 10px; align-items: center; margin-top: 18px; }
     .gallery .dots i { width: 14px; height: 14px; background: #fff; border: 1px solid #0d3178; }
     .gallery .dots i.on { width: 18px; height: 18px; background: #2a2765; border-color: #2a2765; }
-    .gallery .bar { margin-top: 18px; align-items: flex-start; }
-    .gallery .cap { font-size: 15px; line-height: 1.31; min-height: 2.62em; color: #6b757d; }
+    /* Itzik 2026-09-29: arrows on the picture, swipe, and the caption gets the full width.
+       pan-y leaves vertical page scrolling to the browser; js/site.js §6 reads the swipe. */
+    .gallery .stage { touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+    .gallery .slide img { -webkit-user-drag: none; }
+    .gallery:focus-visible { outline: 2px solid #003399; outline-offset: 8px; border-radius: 16px; }
+    /* slide 1: the video is 654.2 of the 687 stage (246:4210); the scroll pill straddles its edge */
+    .gallery .slide video { height: 95.23%; }
+    .sz-ui { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    /* prev / next: a white arrow on a translucent navy disc reads on light and dark photos alike */
+    .gallery .nav-btn { position: absolute; top: 50%; z-index: 2; transform: translateY(-50%); width: 44px; height: 44px;
+                        display: grid; place-items: center; padding: 0; border: 1px solid rgba(255, 255, 255, .45); border-radius: 50%;
+                        background: rgba(29, 43, 69, .62); color: #fff; cursor: pointer; transition: background .2s;
+                        -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+    .gallery .nav-btn.prev { left: 8px; }
+    .gallery .nav-btn.next { right: 8px; }
+    .gallery .nav-btn svg { width: 50%; height: 50%; fill: none; stroke: currentColor; stroke-width: 2.67; stroke-linecap: round; stroke-linejoin: round; }
+    .gallery .nav-btn:focus-visible { outline: 3px solid #fff; outline-offset: 0; box-shadow: 0 0 0 6px #003399; }
+    @media (hover: hover) { .gallery .nav-btn:hover { background: rgba(29, 43, 69, .9); } }
+    /* the arrows only work once site.js has run; without it slide 1 and its caption stand alone */
+    .gallery:not(.ready) .nav-btn { display: none; }
+    /* every caption shares one grid cell, so the box keeps the longest one's height at any width */
+    .gallery .cap { display: grid; min-height: 0; margin-top: 18px; font-size: 15px; line-height: 1.31; color: #6b757d; }
+    .gallery .cap > span { grid-area: 1 / 1; visibility: hidden; }
+    .gallery .cap > span.on { visibility: visible; }
     .gallery .cap b { display: block; color: inherit; }
-    .gallery .ctrl { gap: 3px; }
-    .gallery .ctrl button { border: 0; border-radius: 0; background: none; color: #003399; }
-    .gallery .ctrl button svg { width: 82%; height: 82%; stroke-width: 2.67; }
-    @media (hover: hover) { .gallery .ctrl button:hover { background: none; color: #1d2b45; } }
 
     /* S10 / S16 — §05 before/after */
     /* S15 — "05 / The Transformation" stays on one line, and its rule runs under all of it */
@@ -96,6 +114,22 @@
 
     /* S13 — §07 stats (was an inline style) */
     .sz-stats { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    /* S23, Moran 2026-09-29 — the summary's red border (177:2974): 1px #c8102e, 5px on the left.
+       case.css already draws it 1px in --cs-accent (#c8102e); only the left side is wider. */
+    .summary { border-left-width: 5px; }
+
+    /* Phones (Itzik, 2026-09-29). The meta row has five cells: Role takes the full width so
+       "Product Designer - UX/UI" stays on one line, and the other four sit two by two. The
+       mobile before/after row was three 103px phones of uneven height; it becomes a swipe
+       row of phones at one height, like the image rows on the other case pages. */
+    @media (max-width: 767px) {
+      .cs-meta > div:first-child { grid-column: 1 / -1; }
+      .ba.mobile .phones3 { display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+                            margin-inline: calc(-1 * var(--gutter)); padding: 12px var(--gutter) 22px; scroll-padding-inline: var(--gutter);
+                            scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .ba.mobile .phones3::-webkit-scrollbar { display: none; }
+      .ba.mobile .phones3 img { flex: none; width: auto; height: 330px; scroll-snap-align: start; }
+    }
 
     @media (min-width: 1024px) {
       /* S9 — hero stack: logo, H1, lede, meta and shot 69 apart (Header 174:1061) */
@@ -127,10 +161,11 @@
       .gallery .dots { gap: calc(10 * var(--k)); margin-top: calc(18 * var(--k)); }
       .gallery .dots i { width: calc(14 * var(--k)); height: calc(14 * var(--k)); }
       .gallery .dots i.on { width: calc(18 * var(--k)); height: calc(18 * var(--k)); }
-      .gallery .bar { margin-top: calc(18 * var(--k)); padding: 0 calc(3 * var(--k)) 0 calc(5 * var(--k)); }
-      .gallery .cap { font-size: max(12px, calc(15 * var(--k))); }
-      .gallery .ctrl { gap: calc(3 * var(--k)); }
-      .gallery .ctrl button { width: max(28px, calc(39 * var(--k))); height: max(28px, calc(39 * var(--k))); }
+      /* the caption text box is 1354 at +5 in the 1365 column (226:3122) */
+      .gallery .cap { margin-top: calc(18 * var(--k)); padding: 0 calc(6 * var(--k)) 0 calc(5 * var(--k)); font-size: max(12px, calc(15 * var(--k))); }
+      .gallery .nav-btn { width: max(44px, calc(56 * var(--k))); height: max(44px, calc(56 * var(--k))); }
+      .gallery .nav-btn.prev { left: calc(24 * var(--k)); }
+      .gallery .nav-btn.next { right: calc(24 * var(--k)); }
 
       /* S16 / S19 — §05 titles and captions */
       .ba-title { font-size: max(12px, calc(16 * var(--k))); letter-spacing: calc(.78 * var(--k)); }
@@ -172,10 +207,18 @@
       .ds-icons img { width: calc(716.4 * var(--k)); max-width: 100%; }
 
       /* S13 / S19 — §07: a 1226 block, 3 x 395 cards (174:1308, 177:2980) */
-      .sz-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: calc(1226 * var(--k)); margin-inline: auto; }
+      /* width and inset come from case.css: one centred 1234 block on every case page */
+      .sz-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .sz-stats li { padding: calc(28 * var(--k)) calc(30 * var(--k)); }
       .sz-stats p { margin-top: calc(9 * var(--k)); font-size: max(13px, calc(17 * var(--k))); line-height: 1.5; }
-      .summary { max-width: calc(1226 * var(--k)); margin-inline: auto; margin-top: calc(32 * var(--k)); }
+      .summary { margin-top: calc(32 * var(--k)); }
+    }
+    /* Moran 2026-09-29 — §06 laid out like KKL §07: the grid is inset 79 on both sides and runs
+       2 x 2, Palette | Components over Type | Iconography, with each row's panels level */
+    @media (min-width: 1024px) {
+      .ds { margin-inline: calc(79 * var(--k)); row-gap: max(24px, calc(36 * var(--k))); }
+      .ds > div { display: flex; flex-direction: column; }
+      .ds > div > .panel { flex: 1; }
     }
     /* S11 — §06 columns 682 | 782 and swatches 212 / 155, only where the grid is two columns
        (css/case.css stacks it between 1024 and 1199) */
@@ -192,7 +235,6 @@
 
 <div class="splash" aria-hidden="true">
   <div class="splash-in">
-    <span class="splash-mark">M</span>
     <p class="splash-name"><span><b>Moran</b></span><span><b>Weinish</b></span></p>
     <i class="splash-bar"></i>
     <p class="splash-role"><span>Product &amp; UX/UI Designer</span><i></i></p>
@@ -314,7 +356,7 @@
         <span class="cs-num">04 / Design</span>
         <div>
           <h2 class="cs-h2">Bringing the New Visual Language to Life</h2>
-          <div class="cs-body-text"><p>Suzuki’s red is used with purpose, highlighting key actions and important elements without taking over the interface. The layouts combine strong vehicle imagery, clear typography, and generous spacing to create a clean, recognizable Suzuki experience across the site.</p></div>
+          <div class="cs-body-text"><p>Suzuki’s red is used with purpose and highlighting key actions and important elements without taking over the interface. The layouts combine strong vehicle imagery, clear typography, and generous spacing to create a clean, recognizable Suzuki experience across the site.</p></div>
         </div>
       </div>
       <div class="gallery reveal" aria-roledescription="carousel" aria-label="Refreshed Suzuki Israel screens">
@@ -323,28 +365,42 @@
              to complete them and are waiting for Moran to confirm:
                3: "a consistent [feed], connecting"   5: "dynamic product [page]."   6: "mileage[ and] location." -->
         <div class="stage">
-          <div class="slide on" data-cap="<b>Homepage / Brand Experience</b> A full width driving video creates an immediate sense of motion and brand experience, supported by a clear primary action that guides users to the next step.">
-            <video muted loop playsinline preload="metadata" poster="/assets/img/suzuki/home-new.webp" aria-label="Suzuki Swift driving video on the refreshed homepage">
+          <div class="slide on">
+            <video muted loop playsinline preload="metadata" poster="/assets/img/suzuki/slide-1.webp" aria-label="Suzuki Swift driving video on the refreshed homepage">
               <source src="/assets/video/suzuki-swift.mp4" type="video/mp4">
             </video>
+            <!-- The refreshed site's UI over the video, as in Figma 226:3369 (Frame 736 246:4209 minus
+                 the video): header bar with the Hebrew nav and logo, WhatsApp, the "לשירותך" badge
+                 (Component 26, a 0.71x instance of 246:3844) and the red scroll pill. Drawn from
+                 Portfolio.fig like gensvg.py, but with each node in its own transform, so the flipped
+                 arrows and the resized instance come out right. viewBox = the 1365 x 687 stage. -->
+            <svg class="sz-ui" viewBox="0 0 1365 687" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" font-family="'Open Sans', Assistant, sans-serif"><g><g transform="matrix(1 0 0 1 77.45 23.47)"><g transform="matrix(1 0 0 1 0 0)"><g transform="matrix(1 0 0 1 0 0)"><g transform="matrix(1 0 0 1 0 0)"><rect width="1211.5" height="43.4" rx="21.7" fill="#ffffff" fill-opacity="0.8"/></g><g transform="matrix(1 0 0 1 20.61 12.94)"><g transform="matrix(1 0 0 1 5.71 5.7)"><g transform="matrix(1 0 0 1 2.13 2.08)"><path d="M2.25 4.4C1.01 4.4 0.0 3.42 0.0 2.2C0.0 0.99 1.01 0.0 2.25 0.0C3.48 0.0 4.49 0.99 4.49 2.2C4.49 3.42 3.48 4.4 2.25 4.4ZM2.25 0.73C1.42 0.73 0.75 1.39 0.75 2.2C0.75 3.01 1.42 3.67 2.25 3.67C3.07 3.67 3.74 3.01 3.74 2.2C3.74 1.39 3.07 0.73 2.25 0.73Z" fill="#f55376"/></g><g transform="matrix(1 0 0 1 0 0)"><path d="M6.46 8.57L2.28 8.57C1.02 8.57 0.0 7.57 0.0 6.33L0.0 2.24C0.0 1.0 1.02 0.0 2.28 0.0L6.46 0.0C7.72 0.0 8.74 1.0 8.74 2.24L8.74 6.33C8.74 7.57 7.72 8.57 6.46 8.57ZM2.28 0.73C1.44 0.73 0.75 1.41 0.75 2.24L0.75 6.33C0.75 7.16 1.44 7.84 2.28 7.84L6.46 7.84C7.31 7.84 7.99 7.16 7.99 6.33L7.99 2.24C7.99 1.41 7.31 0.73 6.46 0.73L2.28 0.73Z" fill="#f55376"/></g><g transform="matrix(1 0 0 1 6.16 1.48)"><path d="M1.03 0.51C1.03 0.79 0.8 1.01 0.52 1.01C0.23 1.01 0.0 0.79 0.0 0.51C0.0 0.23 0.23 0.0 0.52 0.0C0.8 0.0 1.03 0.23 1.03 0.51Z" fill="#f55376"/></g></g><g transform="matrix(1 0 0 1 -0 0)"><path d="M10.18 19.96C4.57 19.96 0.0 15.49 0.0 9.98C0.0 4.48 4.57 0.0 10.18 0.0C15.8 0.0 20.36 4.48 20.36 9.98C20.36 15.49 15.8 19.96 10.18 19.96ZM10.18 1.02C5.14 1.02 1.04 5.04 1.04 9.98C1.04 14.92 5.14 18.94 10.18 18.94C15.22 18.94 19.32 14.92 19.32 9.98C19.32 5.04 15.22 1.02 10.18 1.02Z" fill="#bebebe"/></g></g><g transform="matrix(1 0 0 1 47.73 12.94)"><g transform="matrix(1 0 0 1 7.69 5.15)"><path d="M5.26 1.7L5.26 0.0L3.73 0.0C2.53 0.0 1.55 0.97 1.55 2.16L1.55 3.72L0.0 3.72L0.0 5.5L1.55 5.5L1.55 9.66L3.44 9.66L3.44 5.47L4.85 5.47L5.12 3.71L3.44 3.71L3.44 2.45C3.44 2.04 3.77 1.7 4.19 1.7L5.25 1.7L5.26 1.7Z" fill="#3b5999"/></g><g transform="matrix(1 0 0 1 0 0)"><path d="M10.18 19.96C4.57 19.96 0.0 15.49 0.0 9.98C0.0 4.48 4.57 0.0 10.18 0.0C15.8 0.0 20.36 4.48 20.36 9.98C20.36 15.49 15.8 19.96 10.18 19.96ZM10.18 1.02C5.14 1.02 1.04 5.04 1.04 9.98C1.04 14.92 5.14 18.94 10.18 18.94C15.22 18.94 19.32 14.92 19.32 9.98C19.32 5.04 15.22 1.02 10.18 1.02Z" fill="#bebebe"/></g></g><g transform="matrix(1 0 0 1 74.85 12.94)"><g transform="matrix(1 0 0 1 6.19 7.08)"><path d="M6.61 0.0L1.28 0.0C0.57 0.0 0.0 0.59 0.0 1.31L0.0 4.49C0.0 5.21 0.57 5.8 1.28 5.8L6.61 5.8C7.31 5.8 7.88 5.21 7.88 4.49L7.88 1.31C7.88 0.59 7.31 0.0 6.61 0.0ZM4.18 3.56L3.11 4.23L3.11 1.57L4.18 2.23L5.25 2.9L4.18 3.56Z" fill="#ff3d00"/></g><g transform="matrix(1 0 0 1 -0 0)"><path d="M10.18 19.96C4.57 19.96 0.0 15.49 0.0 9.98C0.0 4.48 4.57 0.0 10.18 0.0C15.8 0.0 20.36 4.48 20.36 9.98C20.36 15.49 15.8 19.96 10.18 19.96ZM10.18 1.02C5.14 1.02 1.04 5.04 1.04 9.98C1.04 14.92 5.14 18.94 10.18 18.94C15.22 18.94 19.32 14.92 19.32 9.98C19.32 5.04 15.22 1.02 10.18 1.02Z" fill="#bebebe"/></g></g></g></g><g transform="matrix(1 0 0 1 148.51 13.51)"><g transform="matrix(1 0 0 1 -0 0)"><g transform="matrix(1 0 0 1 859.79 -0)"><text x="15.5" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">דגמים</text></g><g transform="matrix(1 0 0 -1 844.15 14.93)"><g transform="matrix(1 0 -0 1 1.56 3.72)"><path d="M3.87 0.11L0.1 4.07C0.04 4.14 -0.0 4.23 0.0 4.32C0.0 4.41 0.04 4.5 0.1 4.56L0.1 4.57C0.13 4.6 0.17 4.63 0.21 4.64C0.25 4.66 0.3 4.67 0.34 4.67C0.38 4.67 0.43 4.66 0.47 4.64C0.51 4.63 0.55 4.6 0.58 4.57L4.13 0.84L7.68 4.57C7.71 4.6 7.75 4.63 7.79 4.64C7.83 4.66 7.87 4.67 7.92 4.67C7.96 4.67 8.01 4.66 8.05 4.64C8.09 4.63 8.12 4.6 8.15 4.57L8.16 4.56C8.22 4.5 8.26 4.41 8.26 4.32C8.26 4.23 8.22 4.14 8.16 4.07L4.39 0.11C4.35 0.08 4.31 0.05 4.27 0.03C4.22 0.01 4.18 0.0 4.13 0.0C4.08 0.0 4.03 0.01 3.99 0.03C3.94 0.05 3.9 0.08 3.87 0.11Z" fill="#003399"/></g></g><g transform="matrix(1 0 0 1 727.62 -0)"><text x="29" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">סוזוקי טרייד</text></g><g transform="matrix(1 0 0 1 582.66 -0)"><text x="35.5" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">אולמות תצוגה</text></g><g transform="matrix(1 0 0 1 478.92 -0)"><text x="15" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">שירות</text></g><g transform="matrix(1 0 0 1 328.28 -0)"><text x="38.5" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">שירותים נוספים</text></g><g transform="matrix(1 0 0 1 230.22 -0)"><text x="12" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">מגזין</text></g><g transform="matrix(1 0 0 1 114.4 -0)"><text x="21" y="7.5" fill="#003399" font-size="11.37" font-weight="700" text-anchor="middle" dominant-baseline="central">צור קשר</text></g><g transform="matrix(1 0 0 1 -0 0)"><text x="20.5" y="9.5" fill="#003399" font-size="14.22" font-weight="700" text-anchor="middle" dominant-baseline="central">*9955</text></g></g><g transform="matrix(1 0 0 -1 466.84 10.88)"><path d="M4.0 0.1L0.1 3.68C0.04 3.74 -0.0 3.82 0.0 3.9C0.0 3.98 0.04 4.06 0.1 4.12L0.11 4.13C0.14 4.16 0.18 4.18 0.22 4.19C0.26 4.21 0.3 4.22 0.35 4.22C0.4 4.22 0.44 4.21 0.48 4.19C0.53 4.18 0.56 4.16 0.6 4.13L4.26 0.76L7.93 4.13C7.96 4.16 8.0 4.18 8.04 4.19C8.09 4.21 8.13 4.22 8.18 4.22C8.22 4.22 8.27 4.21 8.31 4.19C8.35 4.18 8.39 4.16 8.42 4.13L8.43 4.12C8.49 4.06 8.53 3.98 8.53 3.9C8.53 3.82 8.49 3.74 8.43 3.68L4.53 0.1C4.49 0.07 4.45 0.04 4.41 0.03C4.36 0.01 4.31 0.0 4.26 0.0C4.21 0.0 4.16 0.01 4.12 0.03C4.07 0.04 4.03 0.07 4.0 0.1Z" fill="#003399"/></g><g transform="matrix(1 0 0 -1 314.07 10.88)"><path d="M4.0 0.1L0.1 3.68C0.04 3.74 -0.0 3.82 0.0 3.9C0.0 3.98 0.04 4.06 0.1 4.12L0.11 4.13C0.14 4.16 0.18 4.18 0.22 4.19C0.26 4.21 0.3 4.22 0.35 4.22C0.4 4.22 0.44 4.21 0.48 4.19C0.53 4.18 0.56 4.16 0.6 4.13L4.26 0.76L7.93 4.13C7.96 4.16 8.0 4.18 8.04 4.19C8.09 4.21 8.13 4.22 8.18 4.22C8.22 4.22 8.27 4.21 8.31 4.19C8.35 4.18 8.39 4.16 8.42 4.13L8.43 4.12C8.49 4.06 8.53 3.98 8.53 3.9C8.53 3.82 8.49 3.74 8.43 3.68L4.53 0.1C4.49 0.07 4.45 0.04 4.41 0.03C4.36 0.01 4.31 0.0 4.26 0.0C4.21 0.0 4.16 0.01 4.12 0.03C4.07 0.04 4.03 0.07 4.0 0.1Z" fill="#003399"/></g></g><g transform="matrix(1 0 0 1 1099.96 12.8)"><g transform="matrix(1 0 0 1 0 0)"><g transform="matrix(1 0 0 1 49.49 3.96)"><path d="M6.47 7.92L12.54 2.11L12.54 1.85L12.54 0.0L0.0 0.0L0.0 2.64L6.14 2.64L0.0 8.45L0.0 8.98L0.0 10.56L12.54 10.56L12.54 7.92L6.47 7.92Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 91.05 3.96)"><path d="M3.96 0.0L0.0 0.0L0.0 10.56L3.96 10.56L3.96 0.0Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 76.54 3.96)"><path d="M13.59 0.0L8.25 0.0L3.96 3.76L3.96 0.0L0.0 0.0L0.0 10.56L3.96 10.56L3.96 6.4L8.12 10.56L13.46 10.56L7.52 5.02L13.59 0.0Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 62.68 3.96)"><path d="M8.58 0.0L8.58 6.4C8.58 7.33 8.31 8.45 6.2 8.45C4.09 8.45 3.96 7.33 3.96 6.4L3.96 0.0L0.0 0.0L0.0 6.74C0.0 9.9 0.86 11.23 6.07 11.23C11.28 11.23 12.54 9.9 12.54 6.74L12.54 0.0L8.58 0.0Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 36.29 3.96)"><path d="M8.58 0.0L8.58 6.4C8.58 7.33 8.31 8.45 6.2 8.45C4.09 8.45 3.96 7.33 3.96 6.4L3.96 0.0L0.0 0.0L0.0 6.74C0.0 9.9 1.25 11.23 6.47 11.23C11.68 11.23 12.54 9.9 12.54 6.74L12.54 0.0L8.58 0.0Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 22.3 3.7)"><path d="M5.08 7.53C5.28 8.25 5.74 8.72 7.06 8.72C8.05 8.72 8.51 8.52 8.51 8.19C8.51 7.33 7.92 7.33 3.89 6.8C-0.07 6.27 0.07 3.76 0.07 3.37C0.07 0.0 4.82 0.0 6.47 0.0C9.44 0.0 12.67 0.92 12.67 3.5L8.05 3.5C7.92 2.97 7.26 2.44 6.07 2.44C5.08 2.44 4.55 2.64 4.55 3.04C4.55 3.76 4.88 3.7 8.78 4.29C12.73 4.89 13.13 6.8 13.13 7.86C13.13 11.36 8.25 11.16 6.6 11.16C2.64 11.16 0.13 10.3 0.0 7.46L5.08 7.46L5.08 7.53Z" fill="#003399"/></g><g transform="matrix(1 0 0 1 0 0)"><path d="M18.14 6.4C17.02 7.33 13.66 8.65 11.61 7.33L6.86 4.03L6.07 4.49L18.14 12.88C15.11 14.06 11.61 16.44 9.11 18.55L0.13 12.15C1.45 11.16 4.55 9.97 6.6 11.29L11.41 14.66L12.07 14.2L0.0 5.74C2.57 4.82 7.26 1.91 9.04 0.0L18.14 6.4Z" fill="#e20a17"/></g></g></g></g><g transform="matrix(1 0 0 1 664.15 622.58)"><rect width="38.3" height="63.8" rx="19.15" fill="#e20a17"/></g><g transform="matrix(-0 1 -1 -0 682.98 643.86)"><path d="" fill="#e20a17"/><path d="M22.03 0.75C22.45 0.34 22.45 -0.34 22.03 -0.75L15.25 -7.54C14.83 -7.96 14.15 -7.96 13.74 -7.54C13.32 -7.12 13.32 -6.45 13.74 -6.03L19.77 0.0L13.74 6.03C13.32 6.45 13.32 7.12 13.74 7.54C14.15 7.96 14.83 7.96 15.25 7.54L22.03 0.75ZM0.0 0.0L0.0 1.07L21.28 1.07L21.28 0.0L21.28 -1.07L0.0 -1.07L0.0 0.0Z" fill="#ffffff"/></g><g transform="matrix(1 0 0 1 34.11 460.78)"><g transform="matrix(1 0 0 1 -0 -0)"><g transform="matrix(1 0 0 1 -0 -0)"><path d="M23.8 47.64C10.66 47.64 0.0 36.98 0.0 23.82C0.0 10.67 10.66 0.0 23.8 0.0C36.95 0.0 47.61 10.67 47.61 23.82C47.61 36.98 36.95 47.64 23.8 47.64Z" fill="#25d366"/></g><g transform="matrix(1 0 0 1 12.7 11.91)"><g transform="matrix(1 0 0 1 0 0)"><g transform="matrix(1 0 0 1 0 0)"><g transform="matrix(1 0 0 1 0 0)"><path d="M20.43 3.5C18.18 1.24 15.19 0.0 12.01 0.0C5.44 0.0 0.1 5.35 0.1 11.92C0.1 14.02 0.65 16.07 1.69 17.87L0.0 24.05L6.31 22.39C8.05 23.34 10.01 23.84 12.0 23.84L12.01 23.84C18.57 23.84 23.91 18.5 23.91 11.93C23.92 8.74 22.68 5.75 20.43 3.5ZM12.01 21.83L12.01 21.83C10.23 21.83 8.49 21.35 6.97 20.45L6.61 20.23L2.86 21.22L3.86 17.56L3.62 17.19C2.63 15.61 2.11 13.79 2.11 11.92C2.11 6.45 6.55 2.01 12.01 2.01C14.66 2.01 17.14 3.05 19.01 4.92C20.88 6.79 21.91 9.28 21.9 11.92C21.9 17.39 17.46 21.83 12.01 21.83ZM17.44 14.41C17.14 14.26 15.68 13.54 15.4 13.44C15.13 13.34 14.93 13.29 14.73 13.59C14.53 13.89 13.97 14.56 13.79 14.76C13.62 14.96 13.44 14.98 13.15 14.84C12.85 14.69 11.89 14.37 10.75 13.36C9.87 12.57 9.27 11.59 9.1 11.29C8.93 10.99 9.08 10.83 9.23 10.68C9.36 10.55 9.53 10.33 9.68 10.16C9.82 9.99 9.87 9.86 9.97 9.66C10.07 9.46 10.02 9.29 9.95 9.14C9.87 8.99 9.28 7.53 9.03 6.93C8.79 6.35 8.54 6.43 8.36 6.42C8.19 6.41 7.99 6.41 7.79 6.41C7.59 6.41 7.27 6.48 7.0 6.78C6.73 7.08 5.96 7.8 5.96 9.27C5.96 10.73 7.02 12.15 7.17 12.34C7.32 12.54 9.27 15.55 12.26 16.84C12.97 17.15 13.52 17.33 13.95 17.47C14.66 17.7 15.31 17.66 15.82 17.59C16.4 17.5 17.59 16.87 17.83 16.17C18.08 15.48 18.08 14.88 18.01 14.76C17.93 14.64 17.73 14.56 17.44 14.41Z" fill="#ffffff"/></g></g></g></g></g></g><g transform="matrix(1 0 0 1 0 515.54)"><g transform="scale(0.71 0.71)"><g transform="matrix(1 0 0 1 29 24)"><g><g><path d="M105.0 52.5C105.0 81.49 81.49 105.0 52.5 105.0C23.51 105.0 0.0 81.49 0.0 52.5C0.0 23.51 23.51 0.0 52.5 0.0C81.49 0.0 105.0 23.51 105.0 52.5Z" fill="#ffffff" fill-opacity="0.8"/></g><g transform="matrix(1 0 0 1 35 24)"><path d="M34.0 12.08C31.9 13.83 25.59 16.32 21.76 13.83L12.86 7.6L11.37 8.47L34.0 24.29C28.31 26.53 21.76 31.01 17.06 35.0L0.25 22.92C2.72 21.05 8.53 18.81 12.36 21.3L21.39 27.65L22.63 26.78L0.0 10.84C4.82 9.09 13.6 3.61 16.94 0.0L34.0 12.08Z" fill="#e20a17"/></g><g transform="matrix(1 0 0 1 12 63)"><text x="43" y="7" fill="#003399" font-size="14" font-weight="700" letter-spacing="-0.28" text-anchor="middle" dominant-baseline="central">לשירותך</text></g></g></g></g></g></g></svg>
           </div>
-          <div class="slide" data-cap="<b>Model Range / Cars First</b> A product first layout puts each car at the center, with key specifications: engine, safety and emissions. Grouped into one clear, scannable strip for easier comparison."><img src="/assets/img/suzuki/slide-2.webp" alt="Model range: the Swift with its key specifications and price" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Suzuki Story / Social Content</b> Social content is brought into the website through a consistent feed, connecting the Suzuki community and lifestyle with the digital brand experience."><img src="/assets/img/suzuki/slide-3.webp" alt="Suzuki Story: a strip of social videos on the website" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Model Page / “What’s Your Color?”</b> Interactive configurator moments turn exploration into a more personal experience, allowing users to discover the model through colors, details and strong visual storytelling."><img src="/assets/img/suzuki/slide-4.webp" alt="Model page colour picker for the Swift" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Model Page / Visual Gallery</b> An editorial image grid replaces the traditional gallery approach, combining exterior, interior and lifestyle photography to create a richer and more dynamic product page."><img src="/assets/img/suzuki/slide-5.webp" alt="Model page editorial image grid" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Suzuki Trade In / Advanced Search</b> A streamlined used car search brings the key filters upfront, helping users quickly narrow hundreds of available vehicles by model, year, ownership, mileage and location."><img src="/assets/img/suzuki/slide-6.webp" alt="Suzuki Trade In used car search with filters" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Trade-In / Vehicle Results</b> A clean, consistent vehicle grid makes a large inventory easy to scan, surfacing the information that matters most: price, model, year, mileage and ownership before entering the vehicle details."><img src="/assets/img/suzuki/slide-6.webp" alt="Trade-in vehicle results grid" loading="lazy" style="object-position:50% 41.3%"></div>
-          <div class="slide" data-cap="<b>Trade-In / Vehicle Quick View</b> Vehicle details and lead generation are brought together in a focused modal, allowing users to explore a car and take action without losing their place in the search journey."><img src="/assets/img/suzuki/slide-8.webp" alt="Trade-in vehicle quick view modal with a lead form" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Service &amp; Contact / One Service Hub</b> High frequency customer actions are consolidated into one clear service hub, from finding a nearby showroom or service center to leaving details and accessing essential self-service actions."><img src="/assets/img/suzuki/slide-9.webp" alt="Service and contact hub with self-service actions and a contact form" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-2.webp" alt="Model range: the Swift with its key specifications and price" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-3.webp" alt="Suzuki Story: a strip of social videos on the website" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-4.webp" alt="Model page colour picker for the Swift" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-5.webp" alt="Model page editorial image grid" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-6.webp" alt="Suzuki Trade In used car search with filters" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-6.webp" alt="Trade-in vehicle results grid" loading="lazy" style="object-position:50% 41.3%"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-8.webp" alt="Trade-in vehicle quick view modal with a lead form" loading="lazy"></div>
+          <div class="slide"><img src="/assets/img/suzuki/slide-9.webp" alt="Service and contact hub with self-service actions and a contact form" loading="lazy"></div>
+          <button type="button" class="nav-btn prev" aria-label="Previous screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 6.67 16 16 25.33M6.67 16h18.66"/></svg></button>
+          <button type="button" class="nav-btn next" aria-label="Next screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 25.33 16 16 25.33M6.67 16h18.66"/></svg></button>
         </div>
         <div class="dots" aria-hidden="true"></div>
-        <div class="bar">
-          <p class="cap" aria-live="polite"></p>
-          <div class="ctrl">
-            <button type="button" class="prev" aria-label="Previous screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 6.67 16 16 25.33M6.67 16h18.66"/></svg></button>
-            <button type="button" class="next" aria-label="Next screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 25.33 16 16 25.33M6.67 16h18.66"/></svg></button>
-          </div>
-        </div>
+        <!-- All nine captions sit in one grid cell, so the box is always as tall as the longest
+             one and never jumps between slides; only .on is visible (the first, without JS). -->
+        <p class="cap" aria-live="polite">
+          <span class="on"><b>Homepage / Brand Experience</b> A full width driving video creates an immediate sense of motion and brand experience, supported by a clear primary action that guides users to the next step.</span>
+          <span><b>Model Range / Cars First</b> A product first layout puts each car at the center, with key specifications: engine, safety and emissions. Grouped into one clear, scannable strip for easier comparison.</span>
+          <span><b>Suzuki Story / Social Content</b> Social content is brought into the website through a consistent feed, connecting the Suzuki community and lifestyle with the digital brand experience.</span>
+          <span><b>Model Page / “What’s Your Color?”</b> Interactive configurator moments turn exploration into a more personal experience, allowing users to discover the model through colors, details and strong visual storytelling.</span>
+          <span><b>Model Page / Visual Gallery</b> An editorial image grid replaces the traditional gallery approach, combining exterior, interior and lifestyle photography to create a richer and more dynamic product page.</span>
+          <span><b>Suzuki Trade In / Advanced Search</b> A streamlined used car search brings the key filters upfront, helping users quickly narrow hundreds of available vehicles by model, year, ownership, mileage and location.</span>
+          <span><b>Trade-In / Vehicle Results</b> A clean, consistent vehicle grid makes a large inventory easy to scan, surfacing the information that matters most: price, model, year, mileage and ownership before entering the vehicle details.</span>
+          <span><b>Trade-In / Vehicle Quick View</b> Vehicle details and lead generation are brought together in a focused modal, allowing users to explore a car and take action without losing their place in the search journey.</span>
+          <span><b>Service &amp; Contact / One Service Hub</b> High frequency customer actions are consolidated into one clear service hub, from finding a nearby showroom or service center to leaving details and accessing essential self-service actions.</span>
+        </p>
       </div>
     </div>
   </section>
@@ -395,7 +451,7 @@
           <h3 style="color:#8a9199">Palette</h3>
           <div class="sw-big">
             <span style="background:#c8102e">#C8102E</span>
-            <span style="background:#1d2b45">#1F262E</span>
+            <span style="background:#1f262e">#1F262E</span>
             <span style="background:#003399">#003399</span>
           </div>
           <div class="sw-small">
@@ -403,12 +459,6 @@
             <span style="background:#e7e7e4;color:#56657d">Line</span>
             <span style="background:#f2f2f1;color:#56657d;border:1px solid #9e9e9e">Surface</span>
             <span style="background:#fff;color:#56657d;border:1px solid #e7e7e4">Paper</span>
-          </div>
-          <h3 style="color:#8a9199">Type &amp; scale</h3>
-          <div class="panel type-sample">
-            <div class="face" style="font-family:'Open Sans',var(--sans)">Open Sans</div>
-            <div class="sub" style="color:#8a9199">Hebrew-first · headings, body and data</div>
-            <div class="scale"><span style="color:#1d2b45">34</span><span style="color:#1d2b45">22</span><span style="color:#4d5860">16</span><span style="color:#6b757d">14</span><span>13 · caption</span></div>
           </div>
         </div>
         <div>
@@ -431,6 +481,16 @@
               <span class="ds-range" role="img" aria-label="Price range slider, 10,000 to 122,000"><i class="lo">10000</i><i class="hi">122000</i><b></b><u></u><u></u></span>
             </div>
           </div>
+        </div>
+        <div>
+          <h3 style="color:#8a9199">Type &amp; scale</h3>
+          <div class="panel type-sample">
+            <div class="face" style="font-family:'Open Sans',var(--sans)">Open Sans</div>
+            <div class="sub" style="color:#8a9199">Hebrew-first · headings, body and data</div>
+            <div class="scale"><span style="color:#1d2b45">34</span><span style="color:#1d2b45">22</span><span style="color:#4d5860">16</span><span style="color:#6b757d">14</span><span>13 · caption</span></div>
+          </div>
+        </div>
+        <div>
           <h3 style="color:#8a9199">Iconography</h3>
           <!-- The nine service icons are vectors in Portfolio.fig (frame 177:2367, 716.4 x 41). They are
                resized instances, so they are drawn from each instance's derived geometry and rasterised
@@ -455,10 +515,11 @@
         <li style="background:#fff"><b>AA</b><p>Accessibility considered across components, interactions, and screen sizes.</p></li>
         <li style="background:#fff"><b>1 System</b><p>One visual language connecting the experience from desktop to mobile.</p></li>
       </ul>
-      <p class="summary reveal" style="background:#fff;border-color:#e7e7e4;color:#1d2b45">The refresh gave Suzuki Israel a clearer and more consistent digital presence while keeping the brand familiar. Stronger hierarchy and clearer actions make it easier to explore models, find information, access services, and move between different areas of the site. The result is a responsive, accessible experience that feels recognizably Suzuki.</p>
+      <p class="summary reveal" style="background:#fff;color:#1d2b45">The refresh gave Suzuki Israel a clearer and more consistent digital presence while keeping the brand familiar. Stronger hierarchy and clearer actions make it easier to explore models, find information, access services, and move between different areas of the site. The result is a responsive, accessible experience that feels recognizably Suzuki.</p>
       <nav class="cs-nav" aria-label="Case studies">
-        <a href="/#work">Back to portfolio</a>
-        <a class="next" href="/work/kkl">Next case study <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+        <a class="prev" href="/work/bara"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9H4M8.5 4.5 4 9l4.5 4.5"/></svg><span class="l">Previous case study</span><span class="s">Previous</span></a>
+        <a href="/#work"><span class="l">Back to portfolio</span><span class="s">Portfolio</span></a>
+        <a class="next" href="/work/kkl"><span class="l">Next case study</span><span class="s">Next</span> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
       </nav>
     </div>
   </section>
@@ -479,15 +540,14 @@
         <span class="label">Elsewhere</span>
         <ul>
           <li><a href="https://www.linkedin.com/in/moran-weinish" rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href="/assets/Moran-Weinish-CV.pdf" download>Resume (PDF)</a></li>
+          <li><a href="/assets/Moran-Weinish-CV.pdf?v=2026-09-29" download>Resume (PDF)</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.14</span></small>
+      <small>© 2026 · Created with Figma, Claude &amp; Claude Design<span class="ver" title="build">v1.0.15</span></small>
     </div>
-    <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>
 </footer>
 

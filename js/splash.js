@@ -26,6 +26,6 @@
     document.addEventListener('click', skip, true);
     document.addEventListener('keydown', skip, true);
     // after the splash has lifted, clicks belong to the page again
-    window.setTimeout(off, 4000);
+    window.setTimeout(off, 5300);
   }
 })();

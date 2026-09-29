@@ -220,24 +220,56 @@
   });
 })();
 
-/* 6. simple gallery (Suzuki): prev/next, dots, plays the video only on its slide */
+/* 6. simple gallery (Suzuki): arrows on the image, swipe, ←/→, dots; loops.
+      Plays the video only on its slide. Without JS the first slide and its
+      caption are already in the markup (.on) and the arrows stay hidden. */
 (function () {
   'use strict';
   document.querySelectorAll('.gallery').forEach(function (g) {
-    var slides = g.querySelectorAll('.slide'), cap = g.querySelector('.cap'), dots = g.querySelector('.dots'), i = 0;
+    var slides = g.querySelectorAll('.slide'), dots = g.querySelector('.dots'), i = 0;
+    var stage = g.querySelector('.stage'), cap = g.querySelector('.cap');
+    var caps = cap ? cap.querySelectorAll(':scope > span') : [];
     if (!slides.length) return;
-    slides.forEach(function (_, k) { var d = document.createElement('i'); if (!k) d.className = 'on'; dots.appendChild(d); });
+    if (dots) slides.forEach(function (_, k) { var d = document.createElement('i'); if (!k) d.className = 'on'; dots.appendChild(d); });
     function show(n) {
       i = (n + slides.length) % slides.length;
       slides.forEach(function (s, k) {
         s.classList.toggle('on', k === i);
         var v = s.querySelector('video'); if (v) { if (k === i) { v.play().catch(function () {}); } else { v.pause(); } }
       });
-      dots.querySelectorAll('i').forEach(function (d, k) { d.classList.toggle('on', k === i); });
-      cap.innerHTML = slides[i].getAttribute('data-cap') || '';
+      if (dots) dots.querySelectorAll('i').forEach(function (d, k) { d.classList.toggle('on', k === i); });
+      if (caps.length) caps.forEach(function (c, k) { c.classList.toggle('on', k === i); });
+      else if (cap) cap.innerHTML = slides[i].getAttribute('data-cap') || '';
     }
-    g.querySelector('.prev').addEventListener('click', function () { show(i - 1); });
-    g.querySelector('.next').addEventListener('click', function () { show(i + 1); });
+    var prev = g.querySelector('.prev'), next = g.querySelector('.next');
+    if (prev) prev.addEventListener('click', function () { show(i - 1); });
+    if (next) next.addEventListener('click', function () { show(i + 1); });
+
+    // ←/→ while the carousel (or one of its arrows) has focus
+    if (!g.hasAttribute('tabindex')) g.setAttribute('tabindex', '0');
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); }
+    });
+
+    // swipe. The stage has touch-action: pan-y, so a vertical drag still scrolls
+    // the page; only a mostly-horizontal move past the threshold changes slide.
+    if (stage && window.PointerEvent) {
+      var sx = 0, sy = 0, id = null;
+      stage.addEventListener('pointerdown', function (e) {
+        if (e.button > 0 || e.target.closest('button')) return;
+        id = e.pointerId; sx = e.clientX; sy = e.clientY;
+      });
+      stage.addEventListener('pointerup', function (e) {
+        if (e.pointerId !== id) return;
+        id = null;
+        var dx = e.clientX - sx, dy = e.clientY - sy;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) show(dx < 0 ? i + 1 : i - 1);
+      });
+      stage.addEventListener('pointercancel', function () { id = null; });
+    }
+
+    g.classList.add('ready');
     show(0);
   });
 })();

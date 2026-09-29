@@ -36,11 +36,24 @@
     }
     /* "call for proposals." is the Fun Green style in Figma */
     .cs-hero h1 .accent { color: var(--cs-accent); }
-    /* section 08 sits in the Figma 1443-wide block, not the full wrap */
+    /* section 08: the 1234 centred block is shared (case.css) — only the gap is page-specific */
+    @media (min-width: 1024px) { .stats { margin-top: 60px; } }
+
+    /* ---- hero, fig 115:4418 / 226:1167 (checked against the live prototype 2026-09-29):
+       brand 220, h1 298, lede 520, meta 719, image 906 at 1920. The image is
+       1736 x 902 at x 135 — 12 in from the gutter and 74 past the column on the
+       right, off-centre as designed. ---- */
     @media (min-width: 1024px) {
-      .stats { margin-top: 60px; }
-      .stats, .summary { margin-inline: calc(230 * var(--k)); }
+      .cs-hero .wrap > .cs-brand { display: flex; width: max-content; margin-top: calc(59 * var(--k)); }  /* flex: no line box under the logo */
+      .cs-hero h1 { margin-top: calc(25 * var(--k)); }
+      .cs-hero .lede { margin-top: calc(19 * var(--k)); }
+      .cs-meta { margin-top: calc(43 * var(--k)); }
+      .cs-hero-shot { width: calc(1736 * var(--k)); margin: calc(81 * var(--k)) 0 calc(109 * var(--k)) calc(12 * var(--k)); }
+      .cs-hero-shot img { box-shadow: 0 calc(34 * var(--k)) calc(79 * var(--k)) rgba(20, 35, 38, .18); }
     }
+
+    /* ---- 02: the green banner sits 43 below the cards (fig 46:229 → 46:251) ---- */
+    @media (min-width: 1024px) { .banner { margin-top: calc(43 * var(--k)); } }
 
     /* ---- every section head: the label rule is 230 wide in shots 2 and 3,
        i.e. it runs through the 5px gap to where the heading column starts ---- */
@@ -120,9 +133,39 @@
     /* ---- 09: reflection, from shot 2 — 80 below the heading, a centred 1234
        block (cards 607), and the rule 70 below the cards ---- */
     @media (min-width: 1024px) {
-      .reflect { margin: calc(80 * var(--k)) calc(220 * var(--k)) 0; gap: calc(20 * var(--k)); }
+      .reflect { margin-top: calc(80 * var(--k)); gap: calc(20 * var(--k)); }   /* width: the shared 1234 block */
       .reflect div { padding: calc(32 * var(--k)) calc(36 * var(--k)); }   /* 177:3792 */
-      .cs-nav { margin-top: calc(70 * var(--k)); }
+    }
+
+    /* ---- 05: a size down from the other heads (was inline, which also beat the
+       shared phone sizes) ---- */
+    @media (min-width: 768px) {
+      .dark .cs-h2 { font-size: clamp(28px, 2.5vw, 48px); }
+      .dark .cs-body-text { font-size: clamp(17px, 1.1vw, 21px); }
+    }
+
+    /* ---- phones: the desktop card padding and type left the cards, banner and
+       §08–§09 blocks twice as tall as their text needed at 390 ---- */
+    @media (max-width: 767px) {
+      .cs-meta dd { font-size: 17px; line-height: 23px; }
+      .ncards { gap: 12px; }
+      .ncards li { padding: 22px 22px 24px; }
+      .ncards .n { font-size: 28px; }
+      .ncards h3 { margin-top: 8px; font-size: 19px; }
+      .ncards p { margin-top: 8px; font-size: 16px; line-height: 25px; }
+      .banner { padding: 28px 24px; }
+      .banner p { font-size: 19px; line-height: 1.45; }
+      .compare .pill { padding: 7px 10px; font-size: 13px; }
+      .compare .step.a ~ .step.a { margin-top: 12px; }   /* a gap between each Backstage → Onstage pair */
+      .type-sample .face { font-size: 30px; }
+      .stats { gap: 12px; }
+      .stats li { padding: 22px 24px; }
+      .stats b { font-size: 36px; }
+      .stats p { margin-top: 10px; font-size: 16px; line-height: 25px; }
+      .summary { padding: 24px 22px; font-size: 17px; line-height: 28px; }
+      .reflect { gap: 12px; }
+      .reflect div { padding: 24px 22px; }
+      .reflect p { margin-top: 12px; font-size: 17px; line-height: 28px; }
     }
   </style>
 </head>
@@ -130,7 +173,6 @@
 
 <div class="splash" aria-hidden="true">
   <div class="splash-in">
-    <span class="splash-mark">M</span>
     <p class="splash-name"><span><b>Moran</b></span><span><b>Weinish</b></span></p>
     <i class="splash-bar"></i>
     <p class="splash-role"><span>Product &amp; UX/UI Designer</span><i></i></p>
@@ -310,8 +352,8 @@
       <div class="cs-head reveal">
         <span class="cs-num">05 / AI‑assisted process</span>
         <div>
-          <h2 class="cs-h2" style="font-size:clamp(28px,2.5vw,48px)">Using AI to support the design process</h2>
-          <div class="cs-body-text" style="font-size:clamp(17px,1.1vw,21px)"><p>The project involved a large amount of documentation, requirements and complex business logic. I used AI throughout the process to organize information, explore directions and speed up repetitive work, while keeping the UX decisions, priorities and final design choices in my hands.</p></div>
+          <h2 class="cs-h2">Using AI to support the design process</h2>
+          <div class="cs-body-text"><p>The project involved a large amount of documentation, requirements and complex business logic. I used AI throughout the process to organize information, explore directions and speed up repetitive work, while keeping the UX decisions, priorities and final design choices in my hands.</p></div>
         </div>
       </div>
       <ul class="chips indent reveal">
@@ -424,7 +466,7 @@
           <div class="swatches">
             <span style="background:#006837">Green · primary</span>
             <span style="background:#37c56b;color:#053d22">Green · bright</span>
-            <span style="background:#01a7b4">Teal · Backstage</span>
+            <span style="background:#01a7b4">Green · primary</span>
             <span style="background:#f4f6f2;color:#8a9584;border:1px solid #8a9584">Surface</span>
             <span class="sm" style="background:#0d0d0d">Ink</span>
             <span style="background:#e2fadf;color:#006837;border:1px solid #bfe9ba">Success tint</span>
@@ -518,8 +560,9 @@
         <div><h3 class="next">What I would explore next</h3><p>I would expand user testing with real applicants across different entity types, using their feedback to further refine the language, guidance and more complex submission scenarios.</p></div>
       </div>
       <nav class="cs-nav" aria-label="Case studies">
-        <a href="/#work">Back to portfolio</a>
-        <a class="next" href="/work/travelhub">Next case study <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
+        <a class="prev" href="/work/suzuki"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9H4M8.5 4.5 4 9l4.5 4.5"/></svg><span class="l">Previous case study</span><span class="s">Previous</span></a>
+        <a href="/#work"><span class="l">Back to portfolio</span><span class="s">Portfolio</span></a>
+        <a class="next" href="/work/travelhub"><span class="l">Next case study</span><span class="s">Next</span> <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/></svg></a>
       </nav>
     </div>
   </section>
@@ -540,15 +583,14 @@
         <span class="label">Elsewhere</span>
         <ul>
           <li><a href="https://www.linkedin.com/in/moran-weinish" rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href="/assets/Moran-Weinish-CV.pdf" download>Resume (PDF)</a></li>
+          <li><a href="/assets/Moran-Weinish-CV.pdf?v=2026-09-29" download>Resume (PDF)</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.14</span></small>
+      <small>© 2026 · Created with Figma, Claude &amp; Claude Design<span class="ver" title="build">v1.0.15</span></small>
     </div>
-    <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>
 </footer>
 

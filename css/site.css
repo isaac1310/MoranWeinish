@@ -90,9 +90,16 @@ br.xwide { display: none; }
   display: none; border-top: 1px solid var(--border); background: #fff;
 }
 .nav.open .nav-drawer { display: block; }
-.nav-drawer ul { list-style: none; margin: 0; padding: 8px 0 20px; }
-.nav-drawer a { display: block; padding: 14px 0; font-weight: 600; font-size: 20px; color: var(--ink); }
-.nav-drawer .btn { display: inline-flex; margin-top: 8px; color: var(--on-plum); }
+.nav-drawer { box-shadow: 0 12px 24px -12px rgba(46, 26, 34, .18); }
+/* The list carries .wrap for its width, and `.nav .wrap` makes that a horizontal
+   flex row — which is what squeezed Work / About / Get in touch onto one line.
+   It is a vertical menu: full-width rows, one divider each, the button last. */
+.nav-drawer ul.wrap { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; min-height: 0; list-style: none; margin: 0 auto; padding: 6px 0 22px; }
+.nav-drawer li + li { border-top: 1px solid var(--border); }
+.nav-drawer li:last-child { border-top: 0; padding-top: 14px; }
+.nav-drawer a { display: flex; align-items: center; justify-content: space-between; padding: 16px 2px; font-weight: 600; font-size: 20px; line-height: 1.2; color: var(--ink); }
+.nav-drawer a:not(.btn)::after { content: "→"; font-weight: 400; color: var(--muted-2); }
+.nav-drawer .btn { display: flex; justify-content: center; width: 100%; padding: 15px 24px; margin-top: 4px; color: var(--on-plum); }
 @media (min-width: 1024px) {
   .nav .wrap { min-height: var(--nav-h); }
   .brand { font-size: 24px; }
@@ -101,13 +108,14 @@ br.xwide { display: none; }
 }
 
 /* ---------- hero ---------- */
-.hero { padding: 56px 0 64px; overflow: hidden; }
+.hero { padding: 48px 0 40px; overflow: hidden; }
 .hero .wrap { display: grid; gap: 40px; align-items: center; }
 .hero h1 {
   font-weight: 800; letter-spacing: -0.03em; line-height: 1.02;
-  font-size: clamp(44px, 4.7vw, 90px);
+  font-size: clamp(36px, 10.4vw, 44px); /* phones: 40 at 390, 39 at 375 */
   color: var(--ink);
 }
+@media (min-width: 768px) { .hero h1 { font-size: clamp(44px, 4.7vw, 90px); } }
 .hero h1 em { font-style: normal; color: var(--accent); }
 .hero .lede {
   margin-top: 29px; max-width: 640px;
@@ -119,10 +127,18 @@ br.xwide { display: none; }
 .hero .lede br.wide { display: none; }
 @media (min-width: 1440px) { .hero .lede br.wide { display: inline; } }
 .hero .actions { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
-.hero-art { width: min(100%, 547px); margin-inline: auto; aspect-ratio: 547 / 497; }
+/* at 375 the two pills are 14px too wide for one row and "About me" drops alone */
+@media (max-width: 479.98px) {
+  .hero .actions { margin-top: 32px; gap: 10px; }
+  .hero .actions .btn { padding-inline: 24px; }
+}
+/* on a phone the stacked illustration is decoration below the buttons — 300 keeps it
+   from taking a whole screen of its own */
+.hero-art { width: min(100%, 300px); margin-inline: auto; aspect-ratio: 547 / 497; }
 .hero-art img { width: 100%; height: auto; animation: card-in 1.5s var(--ease) .1s both, float 7s ease-in-out 1.6s infinite; }
 @media (min-width: 768px) {
   .hero .wrap { grid-template-columns: minmax(0, 1fr) minmax(280px, 40%); }
+  .hero-art { width: min(100%, 547px); }
 }
 @media (min-width: 1024px) {
   /* Figma: text column 960, gap 160, art 547 — of the 1660 content column.
@@ -146,16 +162,30 @@ br.xwide { display: none; }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-9px) rotate(-1deg); } }
 
 /* ---------- "what I do" strip ---------- */
-.strip { background: var(--plum); color: var(--on-plum); padding: 22px 0; }
-.strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 44px; }
-.strip .label { color: var(--rose); border: 0; padding: 0; font-size: 18px; }
-.strip ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; font-size: 18px; }
+/* Below 1024 the items wrap onto rows, and a "/" between them would end up
+   orphaned at a line's start or end (CSS can't tell where a row breaks). So
+   each item is its own outlined chip — separated on every row, centred under
+   the label. Moran 2026-09-29: "make spacers between each". */
+.strip { background: var(--plum); color: var(--on-plum); padding: 24px 0 26px; }
+.strip .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.strip .label { color: var(--rose); border: 0; padding: 0; font-size: 16px; }
+.strip ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 16px; }
+.strip li { padding: 5px 14px; line-height: 1.4; white-space: nowrap; border: 1px solid rgba(229, 163, 160, .42); border-radius: var(--r-pill); }
+/* tablet: six chips don't fit one row and wrapped 5 + 1, leaving "Figma" alone —
+   a zero-height full-width flex item after the third chip makes it 3 + 3 */
+@media (min-width: 480px) and (max-width: 1023.98px) {
+  .strip li:nth-child(n+4) { order: 2; }
+  .strip ul { row-gap: 0; }   /* the break line itself carries the 8 */
+  .strip ul::after { content: ""; order: 1; flex-basis: 100%; height: 8px; }
+}
 @media (min-width: 1024px) { .strip li + li::before { content: "/"; color: #fff; margin-right: calc(26 * var(--k)); } }
 @media (min-width: 1024px) {
   .strip { padding: calc(26 * var(--k)) 0; }
   /* Figma: the strip insets 146, not the 130 the rest of the page uses */
-  .strip .wrap { width: min(calc(1628 * var(--k)), 100% - 2 * calc(146 * var(--k))); flex-wrap: nowrap; gap: calc(44 * var(--k)); }
-  .strip ul { flex: 1; justify-content: center; gap: 8px calc(26 * var(--k)); }
+  .strip .wrap { width: min(calc(1628 * var(--k)), 100% - 2 * calc(146 * var(--k))); flex-direction: row; flex-wrap: nowrap; gap: calc(44 * var(--k)); }
+  .strip .label { font-size: 18px; }
+  .strip ul { flex: 1; justify-content: center; gap: 8px calc(26 * var(--k)); font-size: 18px; }
+  .strip li { padding: 0; line-height: inherit; white-space: normal; border: 0; border-radius: 0; }
 }
 @media (min-width: 1200px) {
   /* Figma 18:461: the list box runs 300→1712, 62 short of the strip's right
@@ -177,16 +207,19 @@ br.xwide { display: none; }
 /* ---------- case-study cards ---------- */
 .cards { display: grid; gap: 28px; grid-template-columns: 1fr; list-style: none; margin: 0; padding: 0; }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1200px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(28 * var(--k)); } }
+/* Moran 2026-09-29: inset as in Figma. 18:518 centres four 374.7 cards with a 28
+   gap in the 1660 column, so they sit 38.6 in from the heading (x 169 / 571 / 974 / 1377) */
+@media (min-width: 1200px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(28 * var(--k)); padding-inline: calc(38.6 * var(--k)); } }
 .card {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-card);
   overflow: hidden; display: flex; flex-direction: column;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
 }
 .card > a { display: flex; flex-direction: column; flex: 1; }
-/* Figma card is 394 x 472 with a 230-tall media band. A fixed 230px in a fluid
-   card tightens the crop as the card narrows, so it is a ratio instead. */
-.card-media { aspect-ratio: 394 / 230; overflow: hidden; position: relative; background: var(--bg); }
+/* Figma card is 374.7 x 472 with a 372.7 x 230 media band inside the 1px border.
+   A fixed 230px in a fluid card tightens the crop as the card narrows, so it is a
+   ratio instead — which also keeps the TravelHub date row (66:624) in frame. */
+.card-media { aspect-ratio: 372.7 / 230; overflow: hidden; position: relative; background: var(--bg); }
 .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
 .card-body { padding: 26px 28px; display: flex; flex-direction: column; flex: 1; }
 .card-meta { font-family: var(--mono); font-size: 14px; letter-spacing: .84px; text-transform: uppercase; color: var(--muted-2); margin-bottom: 12px; }
@@ -232,7 +265,7 @@ br.xwide { display: none; }
 .about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0 80px; }
 .about-grid { display: grid; gap: 40px; margin-top: 60px; align-items: start; }
 .about-photo { position: relative; width: min(340px, 100%); margin-inline: auto; }
-.about-photo::before { content: ""; position: absolute; inset: 12px -12px -12px 12px; border-radius: var(--r-photo); background: var(--bg); border: 1px solid var(--border); }
+/* Moran 2026-09-29: no backing card behind the photo (18:582 has none) */
 .about-photo img { position: relative; width: 100%; height: auto; aspect-ratio: 340 / 420; object-fit: cover; border-radius: var(--r-photo); }
 .about-text .h2 { font-size: clamp(32px, 2.6vw, 50px); line-height: 1.12; max-width: 835px; }
 .about-text p { margin-top: 32px; font-size: clamp(18px, 1.15vw, 22px); line-height: 1.6; color: var(--body); max-width: 1200px; }
@@ -241,25 +274,33 @@ br.xwide { display: none; }
 .skills { margin-top: 64px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr; }
 .skill { padding: 28px 0 0; }
 .skill dt { font-family: var(--mono); font-size: 14px; letter-spacing: .78px; text-transform: uppercase; color: var(--muted); }
-.skill dd { margin: 16px 0 0; font-size: 20px; line-height: 30px; color: var(--body-2); }
+.skill dd { margin: 16px 0 0; font-size: 18px; line-height: 28px; color: var(--body-2); }
 .skill dd span { white-space: nowrap; }
-@media (min-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); gap: 0 40px; } }
+@media (min-width: 640px) { .skills { grid-template-columns: repeat(2, 1fr); gap: 0 40px; }
+  .skill dd { font-size: 20px; line-height: 30px; } }
 @media (min-width: 1024px) {
   /* Figma 18:578: 159 from the skills row to the section's end (the dl's default
      1em margin is dropped so the number is the whole gap) */
   .about { padding: calc(96 * var(--k)) 0 calc(159 * var(--k)); }
   /* 18:579 → 18:581: 86 from the bottom of "About me" to the photo and heading */
-  .about-grid { grid-template-columns: calc(340 * var(--k)) minmax(0, 1fr); gap: calc(64 * var(--k)); align-items: start; margin-top: calc(86 * var(--k)); }
-  /* Figma: photo is exactly 340×420, top-aligned with the heading */
-  .about-photo img { width: calc(340 * var(--k)); height: calc(420 * var(--k)); }
+  /* 18:581 is 436 tall (not the photo's 420), so the skills rule sits 86 below that */
+  .about-grid { grid-template-columns: calc(340 * var(--k)) minmax(0, 1fr); gap: calc(64 * var(--k)); align-items: start; margin-top: calc(86 * var(--k)); min-height: calc(436 * var(--k)); }
+  /* Figma: photo is exactly 340×420; 18:583 sits at (+12, -12) in its column, so its
+     top is 12 above the heading's (Moran 2026-09-29) */
+  .about-photo img { width: calc(340 * var(--k)); height: calc(420 * var(--k)); left: calc(12 * var(--k)); top: calc(-12 * var(--k)); }
   /* 18:603 is one text box with a hard return, so the two paragraphs sit line on
      line; 40 below the heading, 18 above "Good design…" (73:587) */
   .about-text .h2 + p { margin-top: calc(40 * var(--k)); }
   .about-text p + p:not(.strong) { margin-top: 0; }
   .about-text .strong { margin-top: calc(18 * var(--k)); }
-  .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: calc(86 * var(--k)); margin-bottom: 0; }
-  /* Figma: the rule is on each column's right; text is padded 40 from it on both sides */
-  .skill { padding: calc(36 * var(--k)) calc(40 * var(--k)) 0 0; }
+  /* Moran 2026-09-29: inset as in Figma. 18:606's rule spans the full 1660, but its
+     four 393.3 columns are centred inside it, 43 in — first text at x 173 */
+  .skills { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: calc(86 * var(--k)); margin-bottom: 0; padding-inline: calc(43.4 * var(--k)); }
+  /* 18:607 / 18:617 / 18:612 / 28:2: text 40 after each divider; 40 before the
+     divider only on columns 1 and 3 — 2 and 4 run to their edge (text 353 wide),
+     which keeps "Information architecture · Prioritization" on one line */
+  .skill { padding: calc(36 * var(--k)) 0 0 0; }
+  .skill:nth-child(odd) { padding-right: calc(40 * var(--k)); }
   .skill + .skill { padding-left: calc(40 * var(--k)); }
   .skill:not(:last-child) { border-right: 1px solid var(--border); }
   .skill dd { margin-top: calc(16 * var(--k)); font-size: max(16px, calc(20 * var(--k))); line-height: 1.5; }
@@ -286,8 +327,10 @@ br.xwide { display: none; }
 .footer-bottom .ver { margin-left: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .5px; opacity: .55; }
 @media (min-width: 1024px) {
   /* Figma: 103 below the bottom row, of which 30 is already .footer-bottom's padding-top */
-  .footer { padding: calc(155 * var(--k)) 0 calc(73 * var(--k)); }
-  .footer-top { grid-template-columns: minmax(0, 1fr) auto; gap: calc(196 * var(--k)); padding-bottom: calc(70 * var(--k)); }
+  /* Moran 2026-09-29: the full height from 18:623 / 255:6135 — 283 from the email button to the rule,
+     153 under the brand row */
+  .footer { padding: calc(155 * var(--k)) 0 calc(153 * var(--k)); }
+  .footer-top { grid-template-columns: minmax(0, 1fr) auto; gap: calc(196 * var(--k)); padding-bottom: calc(283 * var(--k)); }
   .footer-bottom small { font-size: 22px; }
   /* 18:624 / 18:633: 22 / 30 around the h2, 20 label→links, 16 between links */
   .footer .h2 { margin: calc(22 * var(--k)) 0 calc(30 * var(--k)); }
@@ -332,13 +375,6 @@ br.xwide { display: none; }
 .reveal-ready .reveal[data-delay="2"] { transition-delay: .2s; }
 .reveal-ready .reveal[data-delay="3"] { transition-delay: .3s; }
 
-/* ---------- footer credit ---------- */
-.credit {
-  margin: 22px 0 0; font-family: var(--mono); font-size: 13px; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--rose-muted);
-}
-@media (min-width: 1024px) { .credit { text-align: right; margin-top: calc(22 * var(--k)); } }
-
 /* ---------- splash ----------
    Plays on the first page of a visit and on every refresh (js/splash.js adds
    .splash-seen when moving between pages
@@ -350,38 +386,34 @@ br.xwide { display: none; }
 .splash {
   position: fixed; inset: 0; z-index: 1000;
   display: grid; place-items: center;
-  background: var(--plum); color: var(--on-plum);
+  background: var(--bg); color: var(--ink); /* Moran: plum was too strong — the page's own cream */
+  box-shadow: 0 24px 48px -24px rgba(46, 26, 34, .22); /* so the lift reads against the cream page */
   visibility: hidden;
-  animation: splash-out 3.9s var(--ease) both;
+  animation: splash-out 5.2s var(--ease) both;
 }
-.splash-in { display: grid; justify-items: center; gap: 22px; padding: 0 24px; text-align: center; animation: splash-lift 3.9s var(--ease) both; }
-.splash-mark {
-  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--rose); color: var(--plum); font-weight: 800; font-size: 30px; line-height: 1;
-  animation: splash-pop .9s var(--ease) both;
-}
+.splash-in { display: grid; justify-items: center; gap: 22px; padding: 0 24px; text-align: center; animation: splash-lift 5.2s var(--ease) both; }
 .splash-name {
   margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .26em;
   font-weight: 800; font-size: clamp(40px, 6vw, 104px); line-height: 1.05; letter-spacing: -0.03em;
 }
 .splash-name > span { display: inline-block; overflow: hidden; padding-bottom: .06em; }
-.splash-name b { display: inline-block; font-weight: inherit; animation: splash-rise 1.2s var(--ease) .27s both; }
-.splash-name > span + span b { animation-delay: .45s; }
+.splash-name b { display: inline-block; font-weight: inherit; animation: splash-rise 1.6s var(--ease) .35s both; }
+.splash-name > span + span b { animation-delay: .6s; }
 .splash-bar {
-  display: block; width: min(420px, 70vw); height: 1px; background: var(--rose);
-  transform-origin: center; animation: splash-bar 1.35s var(--ease) .8s both;
+  display: block; width: min(420px, 70vw); height: 1px; background: var(--accent);
+  transform-origin: center; animation: splash-bar 1.8s var(--ease) 1.1s both;
 }
 .splash-role {
   margin: 0; display: flex; align-items: center;
   font-family: var(--mono); font-size: clamp(13px, 1.05vw, 18px); letter-spacing: .12em;
-  text-transform: uppercase; color: var(--rose);
+  text-transform: uppercase; color: var(--accent);
 }
 /* mono, so every glyph is 1ch + the tracking: typing is a width animation in 24 steps */
 .splash-role span {
   display: inline-block; overflow: hidden; white-space: nowrap;
-  width: calc(24 * (1ch + .12em)); animation: splash-type 1.1s steps(24, end) 1.2s both;
+  width: calc(24 * (1ch + .12em)); animation: splash-type 1.5s steps(24, end) 1.6s both;
 }
-.splash-role i { display: inline-block; width: 2px; height: 1.2em; margin-left: 4px; background: var(--rose); animation: splash-caret .6s steps(1) 1.2s 5 both; }
+.splash-role i { display: inline-block; width: 2px; height: 1.2em; margin-left: 4px; background: var(--accent); animation: splash-caret .6s steps(1) 1.6s 7 both; }
 .splash-seen .splash, .splash-skip .splash { display: none; }
 
 @keyframes splash-out {
@@ -392,14 +424,13 @@ br.xwide { display: none; }
   0%, 68% { opacity: 1; transform: none; }
   100% { opacity: 0; transform: translateY(-48px); }
 }
-@keyframes splash-pop { from { opacity: 0; transform: scale(.4) rotate(-20deg); } to { opacity: 1; transform: none; } }
 @keyframes splash-rise { from { transform: translateY(110%); } to { transform: none; } }
 @keyframes splash-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes splash-type { from { width: 0; } }
 @keyframes splash-caret { 50% { opacity: 0; } }
 
 /* the home hero art would otherwise play its entrance behind the splash */
-html:not(.splash-seen):not(.splash-skip) .hero-art img { animation-delay: 3s, 4.5s; }
+html:not(.splash-seen):not(.splash-skip) .hero-art img { animation-delay: 4s, 5.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   .splash { display: none; }

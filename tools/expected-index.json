@@ -1,0 +1,47 @@
+{
+  "_source": "Portfolio.fig, frame 'main page' (18:457), decoded 2026-09-06 and checked against the live Figma prototype 2026-09-29. [x, width, height] at 1920; null = don't check.",
+  "_viewport": 1920,
+  "_widths": "Check at 1920 and 1440. Below 1200 the cards are two-across (not the Figma layout), so .card / .card-media / .mock-th x and width won't match at 1024 by design.",
+  "#work .label": {
+    "fig": [130, null, null],
+    "node": "73:320"
+  },
+  ".card": {
+    "fig": [169, 375, 472],
+    "node": "66:960 (18:518 centres four 374.7 cards, 28 gap, in the 1660 column)",
+    "_why": "Moran 2026-09-29: cards inset as in Figma, not aligned with the heading. Live Figma checked: KKL card at 169.",
+    "height_floored_below": 1920
+  },
+  ".card-media": {
+    "fig": [170, 373, 230],
+    "node": "66:375 (372.7 x 230 inside the card's 1px border)"
+  },
+  ".mock-th": {
+    "fig": [572, 373, 230],
+    "node": "66:520 — TravelHub card art; the 38-days date row sits at the bottom edge (live Figma checked)"
+  },
+  ".about-photo img": {
+    "fig": [142, 340, 420],
+    "node": "18:583 at (+12, -12) in 18:582",
+    "_why": "Moran 2026-09-29: no backing card, photo offset +12 / -12 so its top is 12 above the heading. Live Figma checked."
+  },
+  ".about-text .h2": {
+    "fig": [534, null, null],
+    "node": "18:601 (the 835 max-width is a px cap, not scaled — at 1440 the column is wider than 835*k, which is fine: the <br class=wide> sets the break)"
+  },
+  ".skills": {
+    "fig": [130, 1660, 134],
+    "node": "18:606 — the top rule spans the full 1660",
+    "height_floored_below": 1920
+  },
+  ".skill": {
+    "fig": [173, 393, 133],
+    "node": "18:607",
+    "_why": "Moran 2026-09-29: columns inset 43 as in Figma (first text at x 173). Live Figma checked.",
+    "height_floored_below": 1920
+  },
+  ".skill dt": {
+    "fig": [173, 352, null],
+    "node": "18:609"
+  }
+}

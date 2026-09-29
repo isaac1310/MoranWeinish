@@ -129,22 +129,57 @@
   },
   ".swatches span": {
     "fig": [
-      123,
-      134,
+      202,
+      null,
       88
     ],
-    "node": "153:1582 — 4 per row, 134.4 x 88 (B2)",
+    "node": "153:1582 — 4 per row, 134.4 x 88 (B2); x moved 123 → 202 with the KKL §07 layout",
     "height_floored_below": 1200,
-    "_why": "was 5 per row; below ~1200 the 12px label wraps and the swatch grows (min-height)"
+    "_why": "width not checked: at 1024–1199 the palette spans the stacked top row and its four swatches share 640px so the 12px labels stay on one line; 134.4 wide at ≥1200. Below ~1200 the swatch grows (min-height)"
   },
   ".bara-icons img": {
     "fig": [
-      206,
-      767,
-      90
+      243,
+      729,
+      86
     ],
-    "node": "153:1659 — buttons strip first, then filters (B6)",
-    "_why": "order swapped and widths scale with --k"
+    "node": "153:1659 — buttons strip first, then filters (B6), scaled 0.95 into the 1436 content box of the 1516 panel",
+    "_why": "was 767 x 90 at x206 in the 1660 panel; the two strips keep their 767:754 ratio and 12 overlap"
   },
-  "_revised_2026-09-29": "Phase-2 Bara pass (REVIEW.md §6 B1–B21): entries above added with the node they come from. All from the decoded .fig (Sep 6 export); B12 rhythm is from the same export and should be confirmed against a fresh one."
+  "_revised_2026-09-29": "Phase-2 Bara pass (REVIEW.md §6 B1–B21): entries above added with the node they come from. All from the decoded .fig (Sep 6 export); B12 rhythm is from the same export and should be confirmed against a fresh one.",
+  ".ds": {
+    "fig": [
+      202,
+      1516,
+      null
+    ],
+    "node": "Moran 2026-09-29: match KKL's §07 (kkl.html .sec-ds) — grid inset 79 each side, 202 → 1718",
+    "_why": "was the full 1674 column in Bara's own 822 | 56 | 782 (153:1485 / 153:1524); height not checked, the panel type is unscaled"
+  },
+  ".ds > div:nth-child(3)": {
+    "fig": [
+      202,
+      722,
+      null
+    ],
+    "node": "Typography & scale, row 2 col 1 — 722 (153:1508 is 722 in the .fig too)"
+  },
+  ".ds > div:nth-child(4)": {
+    "fig": [
+      1026,
+      692,
+      null
+    ],
+    "node": "Field states, row 2 col 2 — KKL's 692 column, rows level (was 782 at x1008, 133:9120)"
+  },
+  ".bara-icons": {
+    "fig": [
+      202,
+      1516,
+      null
+    ],
+    "node": "153:1664 iconography panel, inset 79 like the grid (KKL .icons.ico)",
+    "_why": "was 1660 at the gutter"
+  },
+  "_revised_2026-09-29b": "Phase-3 Bara pass (Moran's answers): §07 moved to KKL's layout, entries .ds / .ds > div / .bara-icons / .swatches span / .bara-icons img. Source: Moran's instruction + kkl.html, checked against the live Figma prototype (frame 133:8706) for the 2 × 2 order and 4-up palette."
 }

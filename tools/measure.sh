@@ -54,6 +54,9 @@ print(f"{'selector':<26}{'rendered':<24}{'expected @%d':<20}" % int(os.environ.g
 for sel, spec in exp.items():
     if sel.startswith('_'): continue
     r = m.get(sel)
+    # below this width the block deliberately takes another layout (e.g. stacks), so there is nothing to compare
+    if spec.get('layout_changes_below') and int(os.environ.get('WIDTH', 1920)) < spec['layout_changes_below']:
+        print(f"{sel:<26}{'(other layout)':<24}{'':<20}skip"); continue
     f = [None if v is None else round(v * k) for v in spec['fig']]
     # text inside has a legibility floor below this width, so the box may grow
     if spec.get('height_floored_below') and int(os.environ.get('WIDTH', 1920)) < spec['height_floored_below']: f[2] = None

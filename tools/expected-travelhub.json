@@ -45,11 +45,12 @@
   "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head.",
   ".th-phone": {
     "fig": [
-      1339,
-      330,
-      678
+      1239,
+      426,
+      719
     ],
-    "node": "18:1290 hero phone (TH9: 128 left of the column edge, 21.5 higher)"
+    "node": "18:1289 \u2192 73:633 \u2192 18:1290, rotated 5.95\u00b0 + 2.5\u00b0 = 8.45\u00b0: the rotated bounding box (getBoundingClientRect), centre x 1452.3 y 486.6",
+    "_why": "Moran 2026-09-29: 'should be rotated to the right a bit \u2026 match figma'. Was the unrotated 330x678 at x 1339. Live prototype checked 2026-09-29: it reads ~8.5\u00b0, and the screen's darkness matches the composited fills (photo \u00d7 0.2)"
   },
   ".cs-hero .lede": {
     "fig": [
@@ -125,20 +126,22 @@
   },
   ".swatches.th span": {
     "fig": [
-      123,
-      256,
+      202,
+      null,
       88
     ],
-    "node": "18:1025 (TH21)"
+    "node": "18:1025; 171.5 wide in the 722 column at \u22651200 (4 across, gap 12) \u2014 width not checked because 1024\u20131199 stacks the top row full width, as KKL",
+    "_why": "Moran 2026-09-29: \u00a706 follows KKL \u00a707 (inset 2\u00d72); was 256 at 123"
   },
   ".panel.type-sample": {
     "fig": [
-      123,
-      1060,
+      202,
+      722,
       118
     ],
-    "node": "18:1044 (TH25); its 40/19px type is not scaled, so the height is only checked at 1920",
-    "height_floored_below": 1920
+    "node": "18:1044 in the KKL-style grid; its 40/19px type is not scaled, so the height is only checked at 1920",
+    "height_floored_below": 1920,
+    "_why": "Moran 2026-09-29: \u00a706 follows KKL \u00a707; was 1060 at 123"
   },
   ".obs": {
     "fig": [
@@ -165,5 +168,37 @@
     ],
     "node": "226:2945 (TH27)"
   },
-  "_why_2026-09-29": "TravelHub 🟢 pass (TH5-TH28). All values read from Portfolio.fig (Sep 6 export), node ids per entry. Blocks the .fig draws at 1180 (x 370) map to the site's 353 / 1214 content block, as .cs-content already does. Not listed because they cannot scale straight to 1024: the §07 screens (3-column grid below 1200; fig 18:1334 x 446/802/1158, 18:1609 x 268/624/980/1336), the meta row (fixed 16/20px type; fig 793), and the §06 right-column panels (489, floored at 400px so the buttons keep one row at 1440)."
+  "_why_2026-09-29": "TravelHub \ud83d\udfe2 pass (TH5-TH28). All values read from Portfolio.fig (Sep 6 export), node ids per entry. Blocks the .fig draws at 1180 (x 370) map to the site's 353 / 1214 content block, as .cs-content already does. Not listed because they cannot scale straight to 1024: the \u00a707 screens (3-column grid below 1200; fig 18:1334 x 446/802/1158, 18:1609 x 268/624/980/1336), the meta row (fixed 16/20px type; fig 793), and the \u00a706 right-column panels (489, floored at 400px so the buttons keep one row at 1440).",
+  ".ds.th": {
+    "fig": [
+      202,
+      1516,
+      null
+    ],
+    "node": "\u00a706 grid inset 79 each side, 202 \u2192 1718 (the KKL \u00a707 layout)",
+    "_why": "Moran 2026-09-29: 'match KKL's new \u00a707 layout'"
+  },
+  ".ds.th .panel.comp": {
+    "fig": [
+      1026,
+      692,
+      212
+    ],
+    "node": "18:1054 (212 tall) in the 692 right column; the buttons are fixed px, so the height is only checked at 1920",
+    "height_floored_below": 1920,
+    "_why": "Moran 2026-09-29: \u00a706 follows KKL \u00a707; was 489 at 1232",
+    "layout_changes_below": 1200
+  },
+  ".ds.th .panel.icons": {
+    "fig": [
+      1026,
+      692,
+      118
+    ],
+    "node": "18:1080 (117) levelled with the typography panel; icons are floored at 24px, so the height is only checked at 1920",
+    "height_floored_below": 1920,
+    "_why": "Moran 2026-09-29: \u00a706 follows KKL \u00a707",
+    "layout_changes_below": 1200
+  },
+  "_revised_2026-09-29": "Moran's answers applied: hero phone tilted 8.45\u00b0 with the darker composited screen, \u00a703 persona icons from the Figma vectors, \u00a706 as KKL's inset 2\u00d72, \u00a707 copy (Day 3 \u00b7 18 \u00b7 Fri, Add item). Hero, \u00a703, \u00a706 and \u00a707 compared against the live prototype on 2026-09-29."
 }

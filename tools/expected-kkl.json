@@ -47,7 +47,7 @@
       1214,
       null
     ],
-    "node": "46:251, inside the revised content block"
+    "node": "46:251, inside the revised content block; 43 below the cards (46:229 → 46:251, Moran 2026-09-29 K26 — vertical, not checked here)"
   },
   ".compare .step": {
     "fig": [
@@ -69,19 +69,21 @@
   },
   ".stats": {
     "fig": [
-      353,
-      1214,
+      343,
+      1234,
       null
     ],
-    "node": "46:671, aligned to the text column"
+    "node": "shared 1234 centred block for §08–§09 (case.css)",
+    "_why": "Moran 2026-09-29 (K25): §08 follows §09's 1234 block; was 1214 at 353"
   },
   ".stats li": {
     "fig": [
-      353,
-      288,
+      343,
+      294,
       null
     ],
-    "node": "(1214 - 3*20) / 4, gap scales with --k"
+    "node": "(1234 - 3*20) / 4, gap scales with --k",
+    "_why": "follows the 1234 block (was 288 in 1214)"
   },
   ".reflect": {
     "fig": [
@@ -138,5 +140,24 @@
     "height_floored_below": 1920,
     "_why": "shot 3: right column starts at 1026. Labels and inputs are fixed px (16/13, 37 tall), so the height is only checked at 1920"
   },
-  "_revised_2026-09-29": "Sections 07 and 09 re-measured from Itzik's screenshots 2 and 3 (newer than the export): .reflect, .reflect div, .ds, .fields, .icons.solid are 'from screenshot', not decoded."
+  "_revised_2026-09-29": "Sections 07 and 09 re-measured from Itzik's screenshots 2 and 3 (newer than the export): .reflect, .reflect div, .ds, .fields, .icons.solid are 'from screenshot', not decoded.",
+  ".summary": {
+    "fig": [
+      343,
+      1234,
+      null
+    ],
+    "node": "shared 1234 centred block (case.css)",
+    "_why": "Moran 2026-09-29 (K25)"
+  },
+  ".cs-hero-shot": {
+    "fig": [
+      135,
+      1736,
+      902
+    ],
+    "node": "226:1167 (1736 x 902, crop m11 .642 of the 1404-tall file)",
+    "_why": "Moran 2026-09-29 (K27): match Figma — off-centre at x135, 74 past the column on the right. Decode and the live prototype agree (checked 2026-09-29)"
+  },
+  "_revised_2026-09-29b": "Moran's answers applied: hero matches 115:4418/226:1167 (brand 220, h1 298, lede 520, meta 719, image 906 at 1920 — y is not checked by this file), §02 banner 43 below the cards, §08 stats/summary in the shared 1234 block. Hero, §02 and the §07 palette were compared against the live prototype on 2026-09-29 and match the Sep 6 decode."
 }
