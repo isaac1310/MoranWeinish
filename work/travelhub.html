@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.21">
+  <meta name="build" content="v1.0.22">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -224,8 +224,9 @@
       .outcome2 p { font-size: 17px; line-height: 27px; }
       .takeaway p { font-size: 23px; }
     }
-      /* live Figma + decode (18:1265, characters 9+): "whole trip." is the coral accent */
-    .cs-hero h1 .accent { color: #ef8e7f; }
+      /* live Figma + decode (18:1265, characters 9+): "whole trip." is the coral accent — a darker coral than
+       Figma's #ef8e7f (2.1:1), which fails contrast even for large text; #d0604a is 3.4:1 (Itzik 2026-09-29) */
+    .cs-hero h1 .accent { color: #d0604a; }
   </style>
 </head>
 <body class="case">
