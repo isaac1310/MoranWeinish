@@ -43,8 +43,9 @@ RAW=$("$CHROME" --headless=new --disable-gpu --hide-scrollbars --virtual-time-bu
 kill "$(cat "$WORK/.pid")" 2>/dev/null || true
 
 EXPECTED="$EXPECTED" WIDTH="$WIDTH" python3 - "$RAW" <<'PY'
-import json, os, sys
-m = json.loads(sys.argv[1])
+import json, os, sys, html
+# --dump-dom escapes the title, so a selector with '>' comes back as '&gt;'
+m = json.loads(html.unescape(sys.argv[1]))
 exp = json.load(open(os.environ['EXPECTED']))
 k = int(os.environ.get('WIDTH', 1920)) / 1920.0
 tol = max(3, round(4 * k))

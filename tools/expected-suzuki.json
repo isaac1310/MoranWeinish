@@ -34,5 +34,94 @@
     ],
     "node": "Back / Next, 76x22 at y=117"
   },
-  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head."
+  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head.",
+  "_why_2026-09-29": "Entries below added with the REVIEW §7 pass (S2, S3, S4, S12, S13, S18). Each is the decoded Portfolio.fig value at 1920, re-based onto the 123/1674 case column (the Suzuki frame itself is 130/1660, S24). Only boxes that scale cleanly were added: the meta columns (S14), .ds columns/swatches (S11) and the carousel buttons have type or tap-size floors, or a single-column layout at 1024-1199, so they can only be checked at 1920 and are left out on purpose.",
+  ".cs-logo": {
+    "fig": [
+      123,
+      193,
+      38
+    ],
+    "node": "175:1399 vector logo, 192.8 x 37.6 (S2)"
+  },
+  ".cs-hero h1": {
+    "fig": [
+      123,
+      null,
+      184
+    ],
+    "node": "174:1065, two lines of 92 — 'Refreshing Suzuki’s Digital / Experience' (S8)"
+  },
+  ".gallery .stage": {
+    "fig": [
+      278,
+      1365,
+      687
+    ],
+    "node": "226:3120, the centred 1365 carousel column: 123 + (1674 - 1365) / 2 (S3)"
+  },
+  ".gallery .dots i.on": {
+    "fig": [
+      null,
+      18,
+      18
+    ],
+    "node": "246:4731 active dot (S5)"
+  },
+  ".ba.mobile .phones3 img": {
+    "fig": [
+      123,
+      185,
+      399
+    ],
+    "node": "255:5302, phones 399 tall (S4)"
+  },
+  ".ds-comp": {
+    "fig": [
+      null,
+      null,
+      208
+    ],
+    "node": "174:1267 components panel (S12)"
+  },
+  ".ds-select": {
+    "fig": [
+      null,
+      261,
+      36
+    ],
+    "node": "177:2408 dropdown (S12)"
+  },
+  ".ds-range b": {
+    "fig": [
+      null,
+      235,
+      null
+    ],
+    "node": "177:2394 price-slider track (S12)"
+  },
+  ".approach li": {
+    "fig": [
+      347,
+      398,
+      null
+    ],
+    "node": "246:3782, 3 x 398 in a 1226 block; height 175 is not checked because the card text does not scale (S18)"
+  },
+  ".sz-stats li": {
+    "fig": [
+      347,
+      395,
+      null
+    ],
+    "node": "174:1309, 3 x 395 in the 1226 inset block (S13)"
+  },
+  ".summary": {
+    "fig": [
+      347,
+      1226,
+      null
+    ],
+    "node": "177:2980 (S13)"
+  }
 }

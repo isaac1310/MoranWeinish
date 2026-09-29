@@ -42,5 +42,128 @@
     ],
     "node": "18:1334 phone instances"
   },
-  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head."
+  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head.",
+  ".th-phone": {
+    "fig": [
+      1339,
+      330,
+      678
+    ],
+    "node": "18:1290 hero phone (TH9: 128 left of the column edge, 21.5 higher)"
+  },
+  ".cs-hero .lede": {
+    "fig": [
+      123,
+      893,
+      null
+    ],
+    "node": "18:1267 (TH14)"
+  },
+  ".findings li": {
+    "fig": [
+      808,
+      577,
+      null
+    ],
+    "node": "18:733 number 27 + text 550 (TH16)"
+  },
+  ".th-plane": {
+    "fig": [
+      1450,
+      327,
+      293
+    ],
+    "node": "95:856 vectors 95:846 + 95:848, cropped to the stroke bounds (TH15)"
+  },
+  ".personas": {
+    "fig": [
+      353,
+      1214,
+      null
+    ],
+    "node": "133:7595, inset like .cs-content (TH17)"
+  },
+  ".inter": {
+    "fig": [
+      353,
+      1214,
+      null
+    ],
+    "node": "18:1107, inset like .cs-content (TH17)"
+  },
+  ".outcome2": {
+    "fig": [
+      353,
+      1214,
+      null
+    ],
+    "node": "226:2931, inset like .cs-content (TH17)"
+  },
+  ".tabs5": {
+    "fig": [
+      123,
+      1601,
+      null
+    ],
+    "node": "18:870 (TH18)"
+  },
+  ".flow4": {
+    "fig": [
+      123,
+      1601,
+      null
+    ],
+    "node": "18:914 (TH18)"
+  },
+  ".changes li": {
+    "fig": [
+      915,
+      730,
+      null
+    ],
+    "node": "18:998 (TH20)"
+  },
+  ".swatches.th span": {
+    "fig": [
+      123,
+      256,
+      88
+    ],
+    "node": "18:1025 (TH21)"
+  },
+  ".panel.type-sample": {
+    "fig": [
+      123,
+      1060,
+      118
+    ],
+    "node": "18:1044 (TH25); its 40/19px type is not scaled, so the height is only checked at 1920",
+    "height_floored_below": 1920
+  },
+  ".obs": {
+    "fig": [
+      538,
+      1186,
+      null
+    ],
+    "node": "18:1175 (TH26)"
+  },
+  ".takeaway": {
+    "fig": [
+      123,
+      1674,
+      303
+    ],
+    "node": "226:2942 (TH27)",
+    "height_floored_below": 1200
+  },
+  ".takeaway p": {
+    "fig": [
+      645,
+      900,
+      null
+    ],
+    "node": "226:2945 (TH27)"
+  },
+  "_why_2026-09-29": "TravelHub 🟢 pass (TH5-TH28). All values read from Portfolio.fig (Sep 6 export), node ids per entry. Blocks the .fig draws at 1180 (x 370) map to the site's 353 / 1214 content block, as .cs-content already does. Not listed because they cannot scale straight to 1024: the §07 screens (3-column grid below 1200; fig 18:1334 x 446/802/1158, 18:1609 x 268/624/980/1336), the meta row (fixed 16/20px type; fig 793), and the §06 right-column panels (489, floored at 400px so the buttons keep one row at 1440)."
 }

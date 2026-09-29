@@ -30,7 +30,9 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   margin-top: 25px;
   font-weight: 600; letter-spacing: -0.015em; line-height: 0.98;
   font-size: clamp(42px, 5.4vw, 104px);
-  color: var(--ink); max-width: 1206px;
+  /* each frame colours its h1 with the page ink (kkl 46:... #1c2a22, suzuki 174:1065 #1d2b45);
+     --cs-h1 is for a page whose h1 differs from its body ink (Bara) */
+  color: var(--cs-h1, var(--cs-ink, var(--ink))); max-width: 1206px;
 }
 .cs-hero .lede { margin-top: 25px; max-width: 1011px; font-size: clamp(18px, 1.3vw, 25px); line-height: 1.56; color: var(--cs-body, var(--body)); }
 .cs-meta { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--cs-line); margin-top: 32px; }
@@ -49,7 +51,9 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
   /* only Role wraps, after the dash — the other columns stay on one line */
   .cs-meta > div:first-child dd { max-width: calc(170 * var(--k)); }
   .cs-meta > div:first-child { padding-left: 0; border-left: 0; }
-  .cs-hero-shot { margin-top: calc(90 * var(--k)); transform: translateY(calc(60 * var(--k))); margin-bottom: calc(60 * var(--k)); }
+  /* no transform here: .reveal-ready .reveal.in { transform: none } outranks it once JS runs, so it only
+     ever applied with JS off and the two layouts differed by 60px */
+  .cs-hero-shot { margin-top: calc(90 * var(--k)); margin-bottom: calc(60 * var(--k)); }
   .cs-hero-shot img { border-radius: calc(16 * var(--k)); }
 }
 
@@ -130,11 +134,11 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 
 /* ---------- challenge banner ---------- */
 .banner { position: relative; overflow: hidden; margin-top: 24px; border-radius: 14px; padding: 44px 52px; background: var(--cs-accent); color: #fff; }
-@media (min-width: 1024px) { .banner { margin-top: calc(24 * var(--k)); border-radius: calc(14 * var(--k)); padding: calc(44 * var(--k)) calc(52 * var(--k)); }
-  .banner img { width: calc(476 * var(--k)); } }
+@media (min-width: 1024px) { .banner { margin-top: calc(24 * var(--k)); border-radius: calc(14 * var(--k)); padding: calc(44 * var(--k)) calc(52 * var(--k)); } }
 .banner .cs-label { color: #fff; letter-spacing: 1.56px; font-size: 13px; }
 .banner p { margin-top: 16px; font-weight: 600; font-size: clamp(22px, 1.9vw, 36px); line-height: 1.45; color: var(--cs-bg); max-width: 1050px; position: relative; }
 .banner img { position: absolute; right: -10px; bottom: -8px; width: 476px; max-width: 45%; height: auto; pointer-events: none; }
+@media (min-width: 1024px) { .banner img { width: calc(476 * var(--k)); } } /* after the base rule (CLAUDE.md §5) */
 
 /* ---------- two-column comparison (backstage / onstage) ----------
    Figma 46:266 — two 580 columns with a 56px separator column between
@@ -268,18 +272,18 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 
 /* ---------- design system panels ---------- */
 .ds { display: grid; gap: 40px; margin-top: 34px; }
-@media (min-width: 1024px) { .ds { grid-template-columns: 49.5% minmax(0, 1fr); gap: 0 9.14%; margin-top: calc(34 * var(--k)); }
-  .ds h3 { margin: calc(36 * var(--k)) 0 calc(12 * var(--k)); }
-  .panel { padding: calc(24 * var(--k)) calc(26 * var(--k)); } }
+@media (min-width: 1024px) { .ds { grid-template-columns: 49.5% minmax(0, 1fr); gap: 0 9.14%; margin-top: calc(34 * var(--k)); } }
 /* must stay after the rule above, or it never applies (CLAUDE.md §5) */
 @media (min-width: 1024px) and (max-width: 1199px) { .ds, .ds.th { grid-template-columns: 1fr; gap: 40px; } }
 .ds h3 { font-family: var(--mono); font-weight: 400; font-size: 16px; letter-spacing: 1.04px; text-transform: uppercase; color: var(--cs-label-2, #7d8a80); margin: 36px 0 12px; }
 .ds h3:first-child { margin-top: 0; }
+@media (min-width: 1024px) { .ds h3 { margin: calc(36 * var(--k)) 0 calc(12 * var(--k)); } .ds h3:first-child { margin-top: 0; } }
 .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
 .swatches span { height: 88px; border-radius: 10px; padding: 12px 10px; display: flex; align-items: flex-end; font-weight: 600; font-size: clamp(13px, 1.05vw, 16px); line-height: 1.25; color: #fff; }
 @media (min-width: 1024px) { .swatches { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: calc(722 * var(--k)); gap: calc(12 * var(--k)); }
   .swatches span { height: calc(88 * var(--k)); border-radius: calc(10 * var(--k)); padding: calc(12 * var(--k)) calc(10 * var(--k)); } }
 .panel { background: var(--surface); border: 1px solid var(--cs-line); border-radius: 10px; padding: 24px 26px; }
+@media (min-width: 1024px) { .panel { padding: calc(24 * var(--k)) calc(26 * var(--k)); } } /* after the base rule (CLAUDE.md §5) */
 .type-sample .face { font-weight: 700; font-size: 40px; letter-spacing: -0.01em; line-height: 1.05; color: var(--cs-ink); }
 .type-sample .sub { margin-top: 8px; font-size: 15px; color: #8a9584; }
 .type-sample .scale { margin-top: 16px; padding-top: 18px; border-top: 1px solid var(--cs-line); display: flex; align-items: baseline; gap: 14px; }
@@ -308,11 +312,7 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 /* ---------- impact stats ---------- */
 .stats { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 32px; list-style: none; padding: 0; }
 @media (max-width: 479px) { .stats { grid-template-columns: 1fr; } }
-@media (min-width: 1024px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(20 * var(--k)); }
-  .stats li { padding: calc(29 * var(--k)) calc(31 * var(--k)); border-radius: calc(12 * var(--k)); }
-  .reflect { gap: calc(20 * var(--k)); }
-  .reflect div { padding: calc(33 * var(--k)) calc(37 * var(--k)); border-radius: calc(12 * var(--k)); }
-  .summary { padding: calc(34 * var(--k)) calc(40 * var(--k)); border-radius: calc(12 * var(--k)); } }
+@media (min-width: 1024px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(20 * var(--k)); } }
 .stats li { border: 1px solid var(--cs-line); border-radius: 12px; padding: 29px 31px; }
 .stats b { display: block; font-weight: 600; font-size: 46px; line-height: 1; color: var(--cs-accent); }
 @media (min-width: 1024px) { .stats b { font-size: max(28px, calc(46 * var(--k))); } }
@@ -329,6 +329,13 @@ body.case .nav-links a:not(.btn) { color: var(--nav); }
 .reflect h3 { font-family: var(--mono); font-weight: 400; font-size: 16px; letter-spacing: 1.3px; text-transform: uppercase; color: var(--cs-accent); }
 .reflect h3.next { color: #c05621; }
 .reflect p { margin-top: 15px; font-size: 19px; line-height: 31px; color: var(--cs-body); }
+/* after the base rules above, or the fixed px win at every width (CLAUDE.md §5) */
+@media (min-width: 1024px) {
+  .stats li { padding: calc(29 * var(--k)) calc(31 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .reflect { gap: calc(20 * var(--k)); }
+  .reflect div { padding: calc(33 * var(--k)) calc(37 * var(--k)); border-radius: calc(12 * var(--k)); }
+  .summary { padding: calc(34 * var(--k)) calc(40 * var(--k)); border-radius: calc(12 * var(--k)); }
+}
 
 /* ---------- prev / next ---------- */
 .cs-nav { margin-top: 64px; padding-top: 30px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }

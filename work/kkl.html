@@ -17,7 +17,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Space+Mono&family=Open+Sans:wght@700&display=swap">
   <script src="/js/splash.js"></script>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/site.css">
@@ -36,10 +36,93 @@
     }
     /* "call for proposals." is the Fun Green style in Figma */
     .cs-hero h1 .accent { color: var(--cs-accent); }
-    /* sections 08 + 09 sit in the Figma 1443-wide block, not the full wrap */
+    /* section 08 sits in the Figma 1443-wide block, not the full wrap */
     @media (min-width: 1024px) {
       .stats { margin-top: 60px; }
-      .stats, .summary, .reflect { margin-inline: calc(230 * var(--k)); }
+      .stats, .summary { margin-inline: calc(230 * var(--k)); }
+    }
+
+    /* ---- every section head: the label rule is 230 wide in shots 2 and 3,
+       i.e. it runs through the 5px gap to where the heading column starts ---- */
+    @media (min-width: 1024px) { .cs-num { margin-right: calc(-5 * var(--k)); } }
+
+    /* ---- 03: screenshot pair — fig 46:345, 64 below the compare grid, gap 31 ---- */
+    .shots.idea { margin-top: 48px; }
+    @media (min-width: 1024px) { .shots.idea { margin-top: calc(64 * var(--k)); gap: calc(31 * var(--k)); } }
+
+    /* ---- 04: research chips — fig 133:7232: 37.5 tall, 8/16 padding, gap 25.
+       The row is 1221 wide from x 350, 3px past the text column on each side. ---- */
+    @media (min-width: 1024px) {
+      .chips:not(.indent) { gap: calc(25 * var(--k)); margin-inline: calc(-3 * var(--k)) calc(-4 * var(--k)); }
+      .chips:not(.indent) li { padding: calc(8 * var(--k)) calc(16 * var(--k)); font-size: max(12.5px, calc(14.23 * var(--k))); line-height: 1.37; }
+    }
+
+    /* ---- 06: each screenshot shows the Figma paint crop. --x/--y are the crop
+       offset, --w/--h the visible fraction (paint transform m02/m12, m00/m11);
+       the frame keeps the node's aspect, so the image is sized up by 1/--w and
+       1/--h and shifted by the offset. The file itself stays full, so the
+       lightbox (img.currentSrc) still opens the whole screen. ---- */
+    .shot .frame.crop { position: relative; }
+    .shot .frame.crop img {
+      position: absolute; max-width: none; object-fit: cover;
+      width: calc(100% / var(--w, 1)); height: calc(100% / var(--h, 1));
+      left: calc(var(--x, 0) / var(--w, 1) * -100%); top: calc(var(--y, 0) / var(--h, 1) * -100%);
+    }
+    /* 46:472 is a FILL paint: Figma centres it rather than pinning the top */
+    .shot .frame.fill img { object-position: 50% 50%; }
+
+    /* ---- 07: design system, from shot 3 (newer than the export) ---- */
+    .swatches .sm { font-size: 13px; }
+    .type-sample .face .os { font-family: "Open Sans", var(--sans); font-weight: 700; }
+    .ds .comp .ds-btn { line-height: 20px; }            /* 40 tall, 42 with a border (46:584/586) */
+    .ds .comp .ds-tag { line-height: 18px; }            /* 28 tall (46:593) */
+    .fields label { line-height: 21px; }
+    .fields span { line-height: 17px; }                 /* 37 tall (46:619) */
+    .fields span.focus { padding: 8px 11px; }           /* 2px border, same 37 */
+    .ico-label { font-weight: 400; letter-spacing: 1.04px; color: #7d8a80; margin-top: 30px; }
+    .icons.ico { margin-top: 14px; }
+    .icons.ico .note { text-transform: uppercase; letter-spacing: 0; }
+    @media (min-width: 1024px) {
+      .sec-ds .cs-body-text { max-width: calc(1250 * var(--k)); }   /* 46:538, 4 lines */
+      /* the grid, the iconography label and its panel are inset 79 on both sides:
+         202 → 1718 at 1920, columns 722 | 692 */
+      .ds { margin: calc(83 * var(--k)) calc(79 * var(--k)) 0; }
+      .ds h3 { margin-bottom: calc(14 * var(--k)); }
+      .swatches span { padding: calc(12 * var(--k)); }
+      .swatches .sm { font-size: max(12px, calc(13 * var(--k))); }
+      .type-sample { padding: calc(28 * var(--k)) calc(30 * var(--k)) calc(26 * var(--k)); }
+      .type-sample .face { font-size: max(28px, calc(40 * var(--k))); letter-spacing: -0.4px; }
+      .type-sample .sub { margin-top: calc(21 * var(--k)); line-height: 20px; }
+      .type-sample .scale { margin-top: calc(37 * var(--k)); padding-top: calc(5 * var(--k)); }
+      .type-sample .scale span { line-height: 1; }
+      .ds .comp { min-height: calc(212 * var(--k)); }
+      .fields { padding: calc(24 * var(--k)) calc(26 * var(--k)) calc(27 * var(--k)); gap: calc(34 * var(--k)) calc(16 * var(--k)); }
+      .ico-label { margin: calc(56 * var(--k)) calc(79 * var(--k)) 0; }
+      .icons.ico { margin: calc(20 * var(--k)) calc(79 * var(--k)) 0; padding: calc(22.5 * var(--k)) calc(40 * var(--k)) calc(22.5 * var(--k)) calc(48 * var(--k));
+                   justify-content: space-between; gap: calc(24 * var(--k)); flex-wrap: nowrap; }
+      .icons.ico .note { margin-left: 0; }
+    }
+    .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }   /* 2 × 2, fig 46:615 */
+    @media (min-width: 1024px) {
+      /* 2 × 2: Palette | Components over Typography | Field states, rows level */
+      .ds { grid-template-columns: calc(722 * var(--k)) calc(692 * var(--k)); justify-content: space-between; gap: calc(36 * var(--k)) 0; }
+      .ds > div { display: flex; flex-direction: column; }
+      .ds > div > .panel { flex: 1; }
+    }
+    /* 1024–1199: too narrow for five swatches beside the components panel, so the
+       top row stacks (case.css collapses .ds here too); Typography | Field states
+       still fit side by side at their design widths */
+    @media (min-width: 1024px) and (max-width: 1199px) {
+      .ds { grid-template-columns: calc(722 * var(--k)) calc(692 * var(--k)); gap: 40px 0; }
+      .ds > div:nth-child(-n+2) { grid-column: 1 / -1; }
+    }
+
+    /* ---- 09: reflection, from shot 2 — 80 below the heading, a centred 1234
+       block (cards 607), and the rule 70 below the cards ---- */
+    @media (min-width: 1024px) {
+      .reflect { margin: calc(80 * var(--k)) calc(220 * var(--k)) 0; gap: calc(20 * var(--k)); }
+      .reflect div { padding: calc(32 * var(--k)) calc(36 * var(--k)); }   /* 177:3792 */
+      .cs-nav { margin-top: calc(70 * var(--k)); }
     }
   </style>
 </head>
@@ -184,7 +267,7 @@
         </div>
       </div>
 
-      <div class="cs-content full shots two reveal" style="margin-top:80px">
+      <div class="cs-content full shots two idea reveal">
         <div class="shot"><figure>
           <div class="frame h360"><img src="/assets/img/kkl/idea-backstage.webp" alt="Backstage: call builder, general details tab" loading="lazy"></div>
           <figcaption><b>Backstage.</b> Call builder - details, stages, budget and quality.</figcaption>
@@ -254,31 +337,31 @@
       <h3 class="shots-title">Onstage — the applicant's journey</h3>
       <div class="shots two reveal">
         <div class="shot"><figure>
-          <div class="frame h460 raised"><img src="/assets/img/kkl/onstage-entity.webp" alt="Entity identification: type and legal registration number" loading="lazy"></div>
+          <div class="frame h460 raised crop" style="--x:.1066;--w:.8403;--y:.051;--h:.4107"><img src="/assets/img/kkl/onstage-entity.webp" alt="Entity identification: type and legal registration number" loading="lazy"></div>
           <figcaption>Entity identification - Applicant details are verified and used to shape the relevant submission flow.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h460 raised"><img src="/assets/img/kkl/onstage-guided.webp" alt="Guided five-step submission wizard" loading="lazy"></div>
+          <div class="frame h460 raised crop" style="--x:.0713;--w:.8991;--y:.052;--h:.5023"><img src="/assets/img/kkl/onstage-guided.webp" alt="Guided five-step submission wizard" loading="lazy"></div>
           <figcaption>Guided submission - A five step process with draft saving and real time validation.</figcaption>
         </figure></div>
       </div>
       <div class="shots reveal">
         <div class="shot"><figure>
-          <div class="frame h586"><img src="/assets/img/kkl/onstage-funding.webp" alt="Requested funding step with live validation against the call's budget rules" loading="lazy"></div>
+          <div class="frame h586 crop" style="--x:.0691;--w:.931;--y:.0703;--h:.2544"><img src="/assets/img/kkl/onstage-funding.webp" alt="Requested funding step with live validation against the call's budget rules" loading="lazy"></div>
           <figcaption>Requested funding - Funding amounts are checked in real time against the rules defined for the call.</figcaption>
         </figure></div>
       </div>
       <div class="shots three reveal">
         <div class="shot"><figure>
-          <div class="frame h260"><img src="/assets/img/kkl/onstage-documents.webp" alt="My Documents: required documents by entity type" loading="lazy"></div>
+          <div class="frame h260 crop" style="--y:.042;--h:.3603"><img src="/assets/img/kkl/onstage-documents.webp" alt="My Documents: required documents by entity type" loading="lazy"></div>
           <figcaption>My Documents - Required documents are shown based on the applicant’s entity type, with options to upload, replace or remove files throughout the submission.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h260"><img src="/assets/img/kkl/onstage-summary.webp" alt="Summary before submitting" loading="lazy"></div>
+          <div class="frame h260 crop" style="--y:.0453;--h:.2878"><img src="/assets/img/kkl/onstage-summary.webp" alt="Summary before submitting" loading="lazy"></div>
           <figcaption>Before submitting - A clear summary highlights anything that still needs attention.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h260"><img src="/assets/img/kkl/onstage-submissions.webp" alt="My Submissions list with statuses" loading="lazy"></div>
+          <div class="frame h260 crop" style="--y:.1491;--h:.5949"><img src="/assets/img/kkl/onstage-submissions.webp" alt="My Submissions list with statuses" loading="lazy"></div>
           <figcaption>My Submissions - Manage drafts and submissions, track their status, and edit or withdraw when available.</figcaption>
         </figure></div>
       </div>
@@ -292,29 +375,29 @@
       </div>
       <div class="shots three reveal">
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-calls.webp" alt="Calls table with search, status filters and budgets" loading="lazy"></div>
+          <div class="frame h300 crop" style="--w:.9399;--y:.2702;--h:.391"><img src="/assets/img/kkl/backstage-calls.webp" alt="Calls table with search, status filters and budgets" loading="lazy"></div>
           <figcaption>Calls workspace - Search, filter and sort calls by status, dates, process manager and other key details.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-management.webp" alt="Call management: KPIs, recent submissions, upcoming dates" loading="lazy"></div>
+          <div class="frame h300 fill"><img src="/assets/img/kkl/backstage-management.webp" alt="Call management: KPIs, recent submissions, upcoming dates" loading="lazy"></div>
           <figcaption>Call management - track submissions and statuses, handle clarification questions, manage reviews, follow pending actions and monitor key dates and budgets.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-builder.webp" alt="Call builder: general details, templates" loading="lazy"></div>
+          <div class="frame h300 crop" style="--y:.039;--h:.3157"><img src="/assets/img/kkl/backstage-builder.webp" alt="Call builder: general details, templates" loading="lazy"></div>
           <figcaption>Call builder - Define the call’s general details, type, template, dates and overall structure.</figcaption>
         </figure></div>
       </div>
       <div class="shots three reveal">
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-budget.webp" alt="Budget setup: funding models and limits" loading="lazy"></div>
+          <div class="frame h300 crop" style="--y:.0243;--h:.194"><img src="/assets/img/kkl/backstage-budget.webp" alt="Budget setup: funding models and limits" loading="lazy"></div>
           <figcaption>Budget setup - Set funding models, limits, funding percentages and budget rules for each call.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-criteria.webp" alt="Evaluation criteria with weights and data sources" loading="lazy"></div>
+          <div class="frame h300 crop" style="--y:.029;--h:.263"><img src="/assets/img/kkl/backstage-criteria.webp" alt="Evaluation criteria with weights and data sources" loading="lazy"></div>
           <figcaption>Evaluation criteria - Define how proposals will be evaluated, including criteria, sub-criteria, scoring weights and data sources.</figcaption>
         </figure></div>
         <div class="shot"><figure>
-          <div class="frame h300"><img src="/assets/img/kkl/backstage-form.webp" alt="Form builder: stages, fields and requirements" loading="lazy"></div>
+          <div class="frame h300 crop" style="--y:.0366;--h:.3205"><img src="/assets/img/kkl/backstage-form.webp" alt="Form builder: stages, fields and requirements" loading="lazy"></div>
           <figcaption>Form Builder - Build the submission form by defining its stages, fields, requirements and order.</figcaption>
         </figure></div>
       </div>
@@ -322,7 +405,7 @@
   </section>
 
   <!-- ============ 07 DESIGN SYSTEM ============ -->
-  <section class="cs-section">
+  <section class="cs-section sec-ds">
     <div class="wrap">
       <div class="cs-head reveal">
         <span class="cs-num">07 / Design system</span>
@@ -343,21 +426,15 @@
             <span style="background:#37c56b;color:#053d22">Green · bright</span>
             <span style="background:#01a7b4">Teal · Backstage</span>
             <span style="background:#f4f6f2;color:#8a9584;border:1px solid #8a9584">Surface</span>
-            <span style="background:#0d0d0d">Ink</span>
+            <span class="sm" style="background:#0d0d0d">Ink</span>
             <span style="background:#e2fadf;color:#006837;border:1px solid #bfe9ba">Success tint</span>
             <span style="background:#c0392b">Error</span>
             <span style="background:#f0a13a">Action</span>
           </div>
-          <h3>Typography &amp; scale</h3>
-          <div class="panel type-sample">
-            <div class="face">Open Sans, Assistant</div>
-            <div class="sub">Hebrew &amp; Latin · headings, body and data</div>
-            <div class="scale"><span>34</span><span>20</span><span>16</span><span>14</span><span>13 · caption</span></div>
-          </div>
         </div>
         <div>
           <h3>Components</h3>
-          <div class="panel">
+          <div class="panel comp">
             <div class="ds-row">
               <span class="ds-btn" style="background:#006837;color:#fff">Primary</span>
               <span class="ds-btn" style="border:1px solid #006837;color:#006837">Secondary</span>
@@ -377,18 +454,28 @@
               <i style="border:2px solid #d7e0d5;color:#a8b0a2">4</i>
             </div>
           </div>
+        </div>
+        <div>
+          <h3>Typography &amp; scale</h3>
+          <div class="panel type-sample">
+            <div class="face"><span class="os">Open Sans</span>, Assistant</div>
+            <div class="sub">Hebrew &amp; Latin · headings, body and data</div>
+            <div class="scale"><span>34</span><span>20</span><span>16</span><span>14</span><span>13 · caption</span></div>
+          </div>
+        </div>
+        <div>
           <h3>Field states</h3>
           <div class="panel fields">
             <div><label>Default</label><span>580123456</span></div>
-            <div><label style="color:#01838d">Focus</label><span style="border:2px solid #01838d">580123456</span></div>
+            <div><label style="color:#01838d">Focus</label><span class="focus" style="border:2px solid #01838d">580123456</span></div>
             <div><label style="color:#c0392b">Error</label><span style="border-color:#c0392b;color:#c0392b">Invalid number</span></div>
             <div><label style="color:#a8b0a2">Disabled</label><span style="background:#f0f2ee;border-color:#e2e6e0;color:#a8b0a2">Locked field</span></div>
           </div>
         </div>
       </div>
 
-      <h3 class="cs-label reveal" style="margin-top:30px">Iconography</h3>
-      <div class="panel icons solid reveal" style="margin-top:14px">
+      <h3 class="cs-label ico-label reveal">Iconography</h3>
+      <div class="panel icons solid ico reveal">
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M17.5 3.75L18.25 3.0C18.05 2.8 17.78 2.69 17.5 2.69L17.5 3.75ZM7.5 3.75L7.5 2.69L7.5 3.75ZM5.0 6.25L3.94 6.25L5.0 6.25ZM5.0 23.75L3.94 23.75L5.0 23.75ZM25.0 11.25L26.06 11.25C26.06 10.97 25.95 10.7 25.75 10.5L25.0 11.25ZM17.5 3.75L17.5 2.69L7.5 2.69L7.5 3.75L7.5 4.81L17.5 4.81L17.5 3.75ZM7.5 3.75L7.5 2.69C6.56 2.69 5.65 3.06 4.98 3.73L5.73 4.48L6.48 5.23C6.75 4.96 7.12 4.81 7.5 4.81L7.5 3.75ZM5.73 4.48L4.98 3.73C4.31 4.4 3.94 5.31 3.94 6.25L5.0 6.25L6.06 6.25C6.06 5.87 6.21 5.5 6.48 5.23L5.73 4.48ZM5.0 6.25L3.94 6.25L3.94 23.75L5.0 23.75L6.06 23.75L6.06 6.25L5.0 6.25ZM5.0 23.75L3.94 23.75C3.94 24.69 4.31 25.6 4.98 26.27L5.73 25.52L6.48 24.77C6.21 24.5 6.06 24.13 6.06 23.75L5.0 23.75ZM5.73 25.52L4.98 26.27C5.65 26.94 6.56 27.31 7.5 27.31L7.5 26.25L7.5 25.19C7.12 25.19 6.75 25.04 6.48 24.77L5.73 25.52ZM7.5 26.25L7.5 27.31L22.5 27.31L22.5 26.25L22.5 25.19L7.5 25.19L7.5 26.25ZM22.5 26.25L22.5 27.31C23.44 27.31 24.35 26.94 25.02 26.27L24.27 25.52L23.52 24.77C23.25 25.04 22.88 25.19 22.5 25.19L22.5 26.25ZM24.27 25.52L25.02 26.27C25.69 25.6 26.06 24.69 26.06 23.75L25.0 23.75L23.94 23.75C23.94 24.13 23.79 24.5 23.52 24.77L24.27 25.52ZM25.0 23.75L26.06 23.75L26.06 11.25L25.0 11.25L23.94 11.25L23.94 23.75L25.0 23.75ZM25.0 11.25L25.75 10.5L18.25 3.0L17.5 3.75L16.75 4.5L24.25 12.0L25.0 11.25Z"/><path d="M18.56 3.75C18.56 3.16 18.09 2.69 17.5 2.69C16.91 2.69 16.44 3.16 16.44 3.75L17.5 3.75L18.56 3.75ZM17.5 11.25L16.44 11.25C16.44 11.84 16.91 12.31 17.5 12.31L17.5 11.25ZM25.0 12.31C25.59 12.31 26.06 11.84 26.06 11.25C26.06 10.66 25.59 10.19 25.0 10.19L25.0 11.25L25.0 12.31ZM17.5 3.75L16.44 3.75L16.44 11.25L17.5 11.25L18.56 11.25L18.56 3.75L17.5 3.75ZM17.5 11.25L17.5 12.31L25.0 12.31L25.0 11.25L25.0 10.19L17.5 10.19L17.5 11.25Z"/></svg>
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M6.88 5.62L6.88 6.69L23.12 6.69L23.12 5.62L23.12 4.56L6.88 4.56L6.88 5.62ZM23.12 5.62L23.12 6.69C24.26 6.69 25.19 7.61 25.19 8.75L26.25 8.75L27.31 8.75C27.31 6.44 25.44 4.56 23.12 4.56L23.12 5.62ZM26.25 8.75L25.19 8.75L25.19 22.5L26.25 22.5L27.31 22.5L27.31 8.75L26.25 8.75ZM26.25 22.5L25.19 22.5C25.19 23.64 24.26 24.56 23.12 24.56L23.12 25.62L23.12 26.69C25.44 26.69 27.31 24.81 27.31 22.5L26.25 22.5ZM23.12 25.62L23.12 24.56L6.88 24.56L6.88 25.62L6.88 26.69L23.12 26.69L23.12 25.62ZM6.88 25.62L6.88 24.56C5.74 24.56 4.81 23.64 4.81 22.5L3.75 22.5L2.69 22.5C2.69 24.81 4.56 26.69 6.88 26.69L6.88 25.62ZM3.75 22.5L4.81 22.5L4.81 8.75L3.75 8.75L2.69 8.75L2.69 22.5L3.75 22.5ZM3.75 8.75L4.81 8.75C4.81 7.61 5.74 6.69 6.88 6.69L6.88 5.62L6.88 4.56C4.56 4.56 2.69 6.44 2.69 8.75L3.75 8.75Z"/><path d="M3.75 10.19C3.16 10.19 2.69 10.66 2.69 11.25C2.69 11.84 3.16 12.31 3.75 12.31L3.75 11.25L3.75 10.19ZM26.25 12.31C26.84 12.31 27.31 11.84 27.31 11.25C27.31 10.66 26.84 10.19 26.25 10.19L26.25 11.25L26.25 12.31ZM11.06 3.12C11.06 2.54 10.59 2.06 10.0 2.06C9.41 2.06 8.94 2.54 8.94 3.12L10.0 3.12L11.06 3.12ZM8.94 8.12C8.94 8.71 9.41 9.19 10.0 9.19C10.59 9.19 11.06 8.71 11.06 8.12L10.0 8.12L8.94 8.12ZM21.06 3.12C21.06 2.54 20.59 2.06 20.0 2.06C19.41 2.06 18.94 2.54 18.94 3.12L20.0 3.12L21.06 3.12ZM18.94 8.12C18.94 8.71 19.41 9.19 20.0 9.19C20.59 9.19 21.06 8.71 21.06 8.12L20.0 8.12L18.94 8.12ZM3.75 11.25L3.75 12.31L26.25 12.31L26.25 11.25L26.25 10.19L3.75 10.19L3.75 11.25ZM10.0 3.12L8.94 3.12L8.94 8.12L10.0 8.12L11.06 8.12L11.06 3.12L10.0 3.12ZM20.0 3.12L18.94 3.12L18.94 8.12L20.0 8.12L21.06 8.12L21.06 3.12L20.0 3.12Z"/></svg>
         <svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3.94 26.25C3.94 26.84 4.41 27.31 5.0 27.31C5.59 27.31 6.06 26.84 6.06 26.25L5.0 26.25L3.94 26.25ZM6.06 17.5C6.06 16.91 5.59 16.44 5.0 16.44C4.41 16.44 3.94 16.91 3.94 17.5L5.0 17.5L6.06 17.5ZM3.94 12.5C3.94 13.09 4.41 13.56 5.0 13.56C5.59 13.56 6.06 13.09 6.06 12.5L5.0 12.5L3.94 12.5ZM6.06 3.75C6.06 3.16 5.59 2.69 5.0 2.69C4.41 2.69 3.94 3.16 3.94 3.75L5.0 3.75L6.06 3.75ZM13.94 26.25C13.94 26.84 14.41 27.31 15.0 27.31C15.59 27.31 16.06 26.84 16.06 26.25L15.0 26.25L13.94 26.25ZM16.06 15.0C16.06 14.41 15.59 13.94 15.0 13.94C14.41 13.94 13.94 14.41 13.94 15.0L15.0 15.0L16.06 15.0ZM13.94 10.0C13.94 10.59 14.41 11.06 15.0 11.06C15.59 11.06 16.06 10.59 16.06 10.0L15.0 10.0L13.94 10.0ZM16.06 3.75C16.06 3.16 15.59 2.69 15.0 2.69C14.41 2.69 13.94 3.16 13.94 3.75L15.0 3.75L16.06 3.75ZM23.94 26.25C23.94 26.84 24.41 27.31 25.0 27.31C25.59 27.31 26.06 26.84 26.06 26.25L25.0 26.25L23.94 26.25ZM26.06 20.0C26.06 19.41 25.59 18.94 25.0 18.94C24.41 18.94 23.94 19.41 23.94 20.0L25.0 20.0L26.06 20.0ZM23.94 15.0C23.94 15.59 24.41 16.06 25.0 16.06C25.59 16.06 26.06 15.59 26.06 15.0L25.0 15.0L23.94 15.0ZM26.06 3.75C26.06 3.16 25.59 2.69 25.0 2.69C24.41 2.69 23.94 3.16 23.94 3.75L25.0 3.75L26.06 3.75ZM1.25 16.44C0.66 16.44 0.19 16.91 0.19 17.5C0.19 18.09 0.66 18.56 1.25 18.56L1.25 17.5L1.25 16.44ZM8.75 18.56C9.34 18.56 9.81 18.09 9.81 17.5C9.81 16.91 9.34 16.44 8.75 16.44L8.75 17.5L8.75 18.56ZM11.25 8.94C10.66 8.94 10.19 9.41 10.19 10.0C10.19 10.59 10.66 11.06 11.25 11.06L11.25 10.0L11.25 8.94ZM18.75 11.06C19.34 11.06 19.81 10.59 19.81 10.0C19.81 9.41 19.34 8.94 18.75 8.94L18.75 10.0L18.75 11.06ZM21.25 18.94C20.66 18.94 20.19 19.41 20.19 20.0C20.19 20.59 20.66 21.06 21.25 21.06L21.25 20.0L21.25 18.94ZM28.75 21.06C29.34 21.06 29.81 20.59 29.81 20.0C29.81 19.41 29.34 18.94 28.75 18.94L28.75 20.0L28.75 21.06ZM5.0 26.25L6.06 26.25L6.06 17.5L5.0 17.5L3.94 17.5L3.94 26.25L5.0 26.25ZM5.0 12.5L6.06 12.5L6.06 3.75L5.0 3.75L3.94 3.75L3.94 12.5L5.0 12.5ZM15.0 26.25L16.06 26.25L16.06 15.0L15.0 15.0L13.94 15.0L13.94 26.25L15.0 26.25ZM15.0 10.0L16.06 10.0L16.06 3.75L15.0 3.75L13.94 3.75L13.94 10.0L15.0 10.0ZM25.0 26.25L26.06 26.25L26.06 20.0L25.0 20.0L23.94 20.0L23.94 26.25L25.0 26.25ZM25.0 15.0L26.06 15.0L26.06 3.75L25.0 3.75L23.94 3.75L23.94 15.0L25.0 15.0ZM1.25 17.5L1.25 18.56L8.75 18.56L8.75 17.5L8.75 16.44L1.25 16.44L1.25 17.5ZM11.25 10.0L11.25 11.06L18.75 11.06L18.75 10.0L18.75 8.94L11.25 8.94L11.25 10.0ZM21.25 20.0L21.25 21.06L28.75 21.06L28.75 20.0L28.75 18.94L21.25 18.94L21.25 20.0Z"/></svg>
@@ -459,7 +546,7 @@
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.11</span></small>
+      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.12</span></small>
     </div>
     <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>

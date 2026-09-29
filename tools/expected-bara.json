@@ -34,5 +34,117 @@
     ],
     "node": "indented content block (bara's first one is .full)"
   },
-  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head."
+  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head.",
+  ".cs-hero .lede": {
+    "fig": [
+      123,
+      1206,
+      null
+    ],
+    "node": "133:8713 — 1206 wide, 3 lines at 1920 (B10)",
+    "_why": "was 1011 and ran to 4 lines; height not checked, the type floors at 18px"
+  },
+  ".cs-meta > div": {
+    "fig": [
+      128,
+      196,
+      null
+    ],
+    "node": "133:9389 — first of the fixed 196/218/245/169/168 columns, inset 5 from the 1006 rule (B11)",
+    "_why": "the other columns carry unscaled 20px values, so only the first track is stable at every width"
+  },
+  ".cs-hero-shot img": {
+    "fig": [
+      135,
+      1650,
+      815
+    ],
+    "node": "165:961 — 1650 wide, centred (B19)",
+    "_why": "was the full 1674 column"
+  },
+  ".bara-flow span": {
+    "fig": [
+      null,
+      193,
+      60
+    ],
+    "node": "153:967…983 — five equal 193x60 pills (B13)",
+    "height_floored_below": 1440,
+    "_why": "pill type floors at 13px and wraps to two lines, so the height floors at 44 below 1440"
+  },
+  ".ncards.problem li": {
+    "fig": [
+      353,
+      391,
+      293
+    ],
+    "node": "177:2621 — 293 tall (B21)",
+    "height_floored_below": 1920,
+    "_why": "was 305; body text is unscaled 18px, so the card only matches in height at 1920"
+  },
+  ".banner": {
+    "fig": [
+      353,
+      1214,
+      319
+    ],
+    "node": "153:1097 — lh 52, 63 below the cards (B14/B21)",
+    "height_floored_below": 1920,
+    "_why": "label and body line-heights are fixed px, so height only matches at 1920"
+  },
+  ".two-cards > div": {
+    "fig": [
+      278,
+      662,
+      221
+    ],
+    "node": "133:8840 — the two cards are a 1364 block at x278, 41 apart (B1/B17)",
+    "height_floored_below": 1920,
+    "_why": "was full column; card text is unscaled 20px so height only matches at 1920"
+  },
+  ".shots.picker .frame": {
+    "fig": [
+      278,
+      1364,
+      675
+    ],
+    "node": "168:973"
+  },
+  ".chips.indent": {
+    "fig": [
+      353,
+      null,
+      null
+    ],
+    "node": "153:1168 — AI chips start under the text column (B8)"
+  },
+  ".bara-thumbs .frame": {
+    "fig": [
+      123,
+      830,
+      302
+    ],
+    "node": "133:8951 / 133:8956 — 14 apart (B16)",
+    "_why": "was 57 apart (809 wide); 830 = (1674 - 14) / 2 in our 1674 column vs the frame's 823 in 1660"
+  },
+  ".swatches span": {
+    "fig": [
+      123,
+      134,
+      88
+    ],
+    "node": "153:1582 — 4 per row, 134.4 x 88 (B2)",
+    "height_floored_below": 1200,
+    "_why": "was 5 per row; below ~1200 the 12px label wraps and the swatch grows (min-height)"
+  },
+  ".bara-icons img": {
+    "fig": [
+      206,
+      767,
+      90
+    ],
+    "node": "153:1659 — buttons strip first, then filters (B6)",
+    "_why": "order swapped and widths scale with --k"
+  },
+  "_revised_2026-09-29": "Phase-2 Bara pass (REVIEW.md §6 B1–B21): entries above added with the node they come from. All from the decoded .fig (Sep 6 export); B12 rhythm is from the same export and should be confirmed against a fresh one."
 }

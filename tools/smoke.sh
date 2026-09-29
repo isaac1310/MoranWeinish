@@ -14,6 +14,7 @@
 #                have a computed opacity above 0. Elements below the fold are
 #                meant to stay hidden until scrolled to; content you can see
 #                must never be invisible.
+#   1b. order  — tools/cssorder.py: no @media rule lost to a later base rule.
 #   3. overflow — no page scrolls sideways at 375, 390 or 1024.
 #
 #   python3 -m http.server 8787 &
@@ -30,6 +31,9 @@ if grep -nE '(^|[^-])\.reveal[^-a-z]*\{[^}]*opacity:\s*0' css/*.css | grep -v 'r
 else
   echo "   ok    .reveal is visible by default"
 fi
+
+echo "1b. static: no desktop rule is shadowed by a later base rule (CLAUDE.md §5)"
+python3 tools/cssorder.py || FAIL=1
 
 echo "2. rendered: every .reveal element ends up visible"
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"; lsof -ti:8798 | xargs kill 2>/dev/null || true' EXIT

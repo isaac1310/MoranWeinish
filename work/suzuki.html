@@ -35,7 +35,157 @@
     .ncards .n { color: #003399; }
     .stats b { color: #c8102e; }
     .cs-section.grey { background: #f2f2f1; }
-    .jp { position: absolute; right: 0; top: -20px; width: 173px; opacity: .25; display: none; } @media (min-width: 1200px) { .jp { display: block; } }
+    .jp { position: absolute; right: 0; top: -20px; width: 173px; opacity: .16; display: none; } @media (min-width: 1200px) { .jp { display: block; } }
+
+    /* ===== Figma-matched details (REVIEW.md §7). Numbers are Figma px at 1920 (frame 174:1060);
+       anything inside a >=1024 rule is scaled with --k (CLAUDE.md §4). Mobile-first: base rules
+       come before the media queries that override them (CLAUDE.md §5). ===== */
+
+    /* S2 — the vector logo (175:1399, 192.8 x 37.6) */
+    .cs-hero .wrap > .cs-brand { display: block; line-height: 0; }
+    .cs-logo { display: block; width: auto; height: 30px; }
+    /* S18 — hero screenshot: centre crop (FILL), radius 14 */
+    .cs-hero-shot img { border-radius: 14px; }
+
+    /* S17 — the glyph sits beside the body text, 209 below the section's content top */
+    @media (min-width: 1200px) { .jp { top: calc(209 * var(--k)); } }
+    /* S18 — §01: the .fig has an empty line before the third paragraph (174:1092) */
+    .cs-body-text p.gap { margin-top: 1.6em; }
+    /* S18 — §02 card colours (190:4349) */
+    .ncards li { border-color: #e2e6e0; }
+    .ncards h3 { color: #243b41; }
+    .ncards p { color: #647a7e; }
+
+    /* S5 / S6 / S18 — §04 carousel (component 226:3370) */
+    .gallery .dots { gap: 10px; align-items: center; margin-top: 18px; }
+    .gallery .dots i { width: 14px; height: 14px; background: #fff; border: 1px solid #0d3178; }
+    .gallery .dots i.on { width: 18px; height: 18px; background: #2a2765; border-color: #2a2765; }
+    .gallery .bar { margin-top: 18px; align-items: flex-start; }
+    .gallery .cap { font-size: 15px; line-height: 1.31; min-height: 2.62em; color: #6b757d; }
+    .gallery .cap b { display: block; color: inherit; }
+    .gallery .ctrl { gap: 3px; }
+    .gallery .ctrl button { border: 0; border-radius: 0; background: none; color: #003399; }
+    .gallery .ctrl button svg { width: 82%; height: 82%; stroke-width: 2.67; }
+    @media (hover: hover) { .gallery .ctrl button:hover { background: none; color: #1d2b45; } }
+
+    /* S10 / S16 — §05 before/after */
+    /* S15 — "05 / The Transformation" stays on one line, and its rule runs under all of it */
+    .cs-num { white-space: nowrap; }
+    .ba-title { font-weight: 400; letter-spacing: .78px; }
+    .ba figcaption b { color: #003399; }
+    .ba figcaption b.new { color: #e20a17; }
+
+    /* S12 — §06 components panel; --u is 1px on mobile and one design px (--k) from 1024 */
+    .ds-comp { --u: 1px; }
+    .ds-pill { width: calc(49.5 * var(--u)); height: calc(72.3 * var(--u)); flex: none; }
+    .ds-select { display: flex; align-items: center; width: calc(261 * var(--u)); max-width: 100%; height: calc(36 * var(--u));
+                 padding-left: calc(13 * var(--u)); background: #fff; border: 1px solid #b9b9b9; border-radius: calc(6.6 * var(--u)); }
+    .ds-select svg { width: calc(12.7 * var(--u)); height: calc(7.2 * var(--u)); display: block; }
+    .ds-badge { width: calc(54 * var(--u)); height: calc(54 * var(--u)); flex: none; border-radius: 50%;
+                filter: drop-shadow(0 calc(-.5 * var(--u)) calc(3 * var(--u)) rgba(0, 0, 0, .25)); }
+    .ds-range { position: relative; flex: none; width: calc(254 * var(--u)); height: calc(34 * var(--u)); }
+    .ds-range i { position: absolute; top: 0; font-style: normal; font-size: max(12px, calc(14 * var(--u))); line-height: 1; color: #000; }
+    .ds-range .lo { right: calc(213.9 * var(--u)); }
+    .ds-range .hi { right: 0; }
+    .ds-range b { position: absolute; left: calc(8 * var(--u)); top: calc(22.6 * var(--u)); width: calc(235 * var(--u)); height: calc(6.77 * var(--u)); border-radius: 99px; background: #003399; }
+    .ds-range u { position: absolute; left: 0; top: calc(18.9 * var(--u)); width: calc(15.2 * var(--u)); height: calc(15.2 * var(--u));
+                  border-radius: 50%; background: #fff; border: calc(1.7 * var(--u)) solid #bebebe; }
+    .ds-range u + u { left: calc(235 * var(--u)); }
+    .type-sample .scale span:nth-child(5) { color: #8a9199; }
+    .ds-icons img { width: 100%; height: auto; }
+
+    /* S13 — §07 stats (was an inline style) */
+    .sz-stats { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    @media (min-width: 1024px) {
+      /* S9 — hero stack: logo, H1, lede, meta and shot 69 apart (Header 174:1061) */
+      .cs-hero .wrap > .cs-brand { margin-top: calc(4 * var(--k)); }
+      .cs-logo { height: calc(37.6 * var(--k)); }
+      .cs-hero h1 { margin-top: calc(69 * var(--k)); }
+      .cs-hero .lede { margin-top: calc(69 * var(--k)); }
+      .cs-hero-shot { margin-top: calc(101 * var(--k)); }
+      .cs-hero-shot img { border-radius: calc(14 * var(--k)); }
+      /* S14 — meta row: fixed columns 196/218/245/169/168, 1.5px rules (175:1687) */
+      .cs-meta { margin-top: calc(69 * var(--k)); border-top-width: 1.5px; }
+      .cs-meta > div { flex: none; min-width: max-content; border-left: 0; border-right: 1.5px solid; padding: calc(22 * var(--k)) calc(34 * var(--k)) 0; }
+      .cs-meta > div:nth-child(1) { width: calc(196 * var(--k)); padding-left: 0; padding-right: calc(3 * var(--k)); }
+      .cs-meta > div:nth-child(2) { width: calc(218 * var(--k)); }
+      .cs-meta > div:nth-child(3) { width: calc(245 * var(--k)); }
+      .cs-meta > div:nth-child(4) { width: calc(169 * var(--k)); }
+      .cs-meta > div:nth-child(5) { width: calc(168 * var(--k)); border-right: 0; }
+
+      /* S18 — §03: section padding 100, cards 398 x 175 in a 1226 block (174:1124, 246:3781) */
+      .cs-section.navy { padding: calc(100 * var(--k)) 0; }
+      .approach { margin-inline: calc(224 * var(--k)); gap: calc(16 * var(--k)); }
+      .approach li { min-height: calc(175 * var(--k)); padding: calc(26 * var(--k)) calc(28 * var(--k)) calc(15 * var(--k)); border-radius: calc(12 * var(--k)); }
+      .approach h3 { line-height: 1.3; }
+      .approach p { margin-top: calc(7 * var(--k)); line-height: 1.55; }
+
+      /* S3 / S5 / S19 — §04 carousel: a centred 1365 column */
+      .cs-num { min-width: max-content; }
+      .gallery { max-width: calc(1365 * var(--k)); margin-inline: auto; }
+      .gallery .dots { gap: calc(10 * var(--k)); margin-top: calc(18 * var(--k)); }
+      .gallery .dots i { width: calc(14 * var(--k)); height: calc(14 * var(--k)); }
+      .gallery .dots i.on { width: calc(18 * var(--k)); height: calc(18 * var(--k)); }
+      .gallery .bar { margin-top: calc(18 * var(--k)); padding: 0 calc(3 * var(--k)) 0 calc(5 * var(--k)); }
+      .gallery .cap { font-size: max(12px, calc(15 * var(--k))); }
+      .gallery .ctrl { gap: calc(3 * var(--k)); }
+      .gallery .ctrl button { width: max(28px, calc(39 * var(--k))); height: max(28px, calc(39 * var(--k))); }
+
+      /* S16 / S19 — §05 titles and captions */
+      .ba-title { font-size: max(12px, calc(16 * var(--k))); letter-spacing: calc(.78 * var(--k)); }
+      .ba figcaption { margin-top: calc(12 * var(--k)); font-size: max(12px, calc(16 * var(--k))); line-height: 1.31; }
+      /* S4 — mobile row: phones 399 tall, gaps 95 / 87, radius 29 (255:5383, 255:5596). The new
+         row starts 33 left of its column in the frame (x 943 vs 976), so both captions line up. */
+      .ba.mobile .phones3 { display: flex; gap: calc(95 * var(--k)); padding: calc(7 * var(--k)) 0 0; }
+      .ba.mobile figure + figure { margin-left: calc(-33 * var(--k)); }
+      .ba.mobile figure + figure .phones3 { gap: calc(87 * var(--k)); }
+      .ba.mobile .phones3 img { flex: 0 1 auto; min-width: 0; width: auto; height: calc(399 * var(--k)); object-fit: cover;
+                                border-radius: calc(29 * var(--k)); box-shadow: 0 calc(4.64 * var(--k)) calc(13.8 * var(--k)) rgba(0, 0, 0, .25); }
+      .ba.mobile figcaption { margin-top: calc(27 * var(--k)); }
+
+      /* S12 / S18 / S19 — §06 panels */
+      .ds-comp { --u: var(--k); min-height: calc(208 * var(--k)); padding: calc(42 * var(--k)) calc(26 * var(--k)) calc(24 * var(--k)); }
+      .ds-comp .ds-row { flex-wrap: nowrap; gap: calc(17 * var(--k)); }
+      .ds-comp .ds-row + .ds-row { margin-top: calc(32 * var(--k)); gap: calc(7.7 * var(--k)); }
+      .ds-comp .ds-btn { padding: calc(11 * var(--k)) calc(24 * var(--k)); font-size: max(12px, calc(15 * var(--k))); line-height: max(15px, calc(20 * var(--k))); }
+      .ds-comp .ds-tag { padding: calc(5 * var(--k)) calc(14 * var(--k)); font-size: max(12px, calc(14 * var(--k))); line-height: max(14px, calc(18 * var(--k))); }
+      .ds-pill { margin: calc(-15 * var(--k)) 0 calc(-15 * var(--k)) calc(2 * var(--k)); }
+      .ds-select { margin-left: calc(7 * var(--k)); }
+      .ds-badge { margin-left: calc(28.3 * var(--k)); }
+      .ds-range { margin-left: calc(18.7 * var(--k)); }
+      /* S18 — type panel in one row: face + note on the left, the scale beside them (174:1248) */
+      .type-sample { display: grid; grid-template-columns: minmax(max-content, calc(257 * var(--k))) minmax(0, 1fr);
+                     padding: calc(27.3 * var(--k)) calc(29.25 * var(--k)) calc(25.35 * var(--k)); border-radius: calc(9.75 * var(--k)); }
+      /* the padding keeps the note clear of the scale once the note hits its 12px floor */
+      .type-sample .face, .type-sample .sub { padding-right: 12px; }
+      .type-sample .face { font-size: max(24px, calc(39 * var(--k))); }
+      .type-sample .sub { margin-top: calc(4 * var(--k)); font-size: max(12px, calc(14.6 * var(--k))); }
+      .type-sample .scale { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0; padding: 0; border: 0; gap: calc(13.7 * var(--k)); line-height: 1; }
+      .type-sample .scale span:nth-child(1) { font-size: max(20px, calc(31.2 * var(--k))); }
+      .type-sample .scale span:nth-child(2) { font-size: max(15px, calc(21.45 * var(--k))); }
+      .type-sample .scale span:nth-child(3) { font-size: max(13px, calc(16.6 * var(--k))); }
+      .type-sample .scale span:nth-child(4) { font-size: max(12px, calc(13.65 * var(--k))); }
+      .ds h3 { font-size: max(12px, calc(16 * var(--k))); }
+      /* the icon panel (174:1284): icons 29 in and 48 down, 716.4 wide */
+      .ds-icons { padding: calc(48 * var(--k)) calc(28 * var(--k)) calc(25 * var(--k)) calc(29 * var(--k)); }
+      .ds-icons img { width: calc(716.4 * var(--k)); max-width: 100%; }
+
+      /* S13 / S19 — §07: a 1226 block, 3 x 395 cards (174:1308, 177:2980) */
+      .sz-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: calc(1226 * var(--k)); margin-inline: auto; }
+      .sz-stats li { padding: calc(28 * var(--k)) calc(30 * var(--k)); }
+      .sz-stats p { margin-top: calc(9 * var(--k)); font-size: max(13px, calc(17 * var(--k))); line-height: 1.5; }
+      .summary { max-width: calc(1226 * var(--k)); margin-inline: auto; margin-top: calc(32 * var(--k)); }
+    }
+    /* S11 — §06 columns 682 | 782 and swatches 212 / 155, only where the grid is two columns
+       (css/case.css stacks it between 1024 and 1199) */
+    @media (min-width: 1200px) {
+      .ds { grid-template-columns: calc(682 * var(--k)) calc(782 * var(--k)); justify-content: space-between; column-gap: 0; }
+      .sw-big { grid-template-columns: repeat(3, calc(212 * var(--k))); gap: calc(14.5 * var(--k)); }
+      .sw-big span { height: calc(116.3 * var(--k)); padding: calc(14.5 * var(--k)); border-radius: calc(12.1 * var(--k)); font-size: max(12px, calc(15.7 * var(--k))); }
+      .sw-small { grid-template-columns: repeat(4, calc(155 * var(--k))); gap: calc(13.9 * var(--k)); margin-top: calc(12 * var(--k)); }
+      .sw-small span { height: calc(85.6 * var(--k)); padding: calc(12.7 * var(--k)); border-radius: calc(11.6 * var(--k)); font-size: max(12px, calc(15.7 * var(--k))); }
+    }
   </style>
 </head>
 <body class="case">
@@ -78,8 +228,9 @@
   </nav>
 
     <div class="wrap">
-      <p class="cs-brand" style="color:#c8102e;font-family:'Open Sans',var(--sans);font-weight:700;letter-spacing:.12em;font-size:22px">SUZUKI</p>
-      <h1>Refreshing Suzuki’s<br>Digital Experience</h1>
+      <!-- Figma 175:1399, rendered with tools/figdecode/gensvg.py -->
+      <p class="cs-brand"><svg class="cs-logo" viewBox="0 0 192.8 37.6" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Suzuki"><path d="M113.53 24.09L125.85 12.31L125.85 11.78L125.85 8.03L100.41 8.03L100.41 13.38L112.86 13.38L100.41 25.17L100.41 26.24L100.41 29.45L125.85 29.45L125.85 24.09L113.53 24.09Z" fill="#003399"/><path d="M192.78 8.03L184.75 8.03L184.75 29.45L192.78 29.45L192.78 8.03Z" fill="#003399"/><path d="M182.87 8.03L172.02 8.03L163.32 15.66L163.32 8.03L155.29 8.03L155.29 29.45L163.32 29.45L163.32 21.02L171.76 29.45L182.6 29.45L170.55 18.2L182.87 8.03Z" fill="#003399"/><path d="M144.58 8.03L144.58 21.02C144.58 22.89 144.05 25.17 139.76 25.17C135.48 25.17 135.21 22.89 135.21 21.02L135.21 8.03L127.18 8.03L127.18 21.69C127.18 28.11 128.92 30.79 139.5 30.79C150.07 30.79 152.62 28.11 152.62 21.69L152.62 8.03L144.58 8.03Z" fill="#003399"/><path d="M91.03 8.03L91.03 21.02C91.03 22.89 90.5 25.17 86.21 25.17C81.93 25.17 81.66 22.89 81.66 21.02L81.66 8.03L73.63 8.03L73.63 21.69C73.63 28.11 76.17 30.79 86.75 30.79C97.33 30.79 99.07 28.11 99.07 21.69L99.07 8.03L91.03 8.03Z" fill="#003399"/><path d="M55.56 22.76C55.96 24.23 56.9 25.17 59.57 25.17C61.58 25.17 62.52 24.77 62.52 24.1C62.52 22.36 61.31 22.36 53.15 21.29C45.12 20.22 45.38 15.13 45.38 14.33C45.38 7.5 55.02 7.5 58.37 7.5C64.39 7.5 70.95 9.37 70.95 14.6L61.58 14.6C61.31 13.52 59.98 12.45 57.57 12.45C55.56 12.45 54.49 12.85 54.49 13.66C54.49 15.13 55.16 15.0 63.06 16.2C71.09 17.41 71.89 21.29 71.89 23.43C71.89 30.53 61.98 30.12 58.64 30.12C50.6 30.12 45.52 28.38 45.25 22.63L55.56 22.63L55.56 22.76Z" fill="#003399"/><path d="M36.82 12.99C34.54 14.86 27.71 17.54 23.56 14.86L13.92 8.17L12.32 9.1L36.82 26.11C30.66 28.52 23.56 33.33 18.47 37.62L0.27 24.63C2.95 22.62 9.24 20.22 13.39 22.89L23.16 29.72L24.5 28.78L0.0 11.65C5.22 9.77 14.73 3.88 18.34 0.0L36.82 12.99Z" fill="#e20a17"/></svg></p>
+      <h1>Refreshing Suzuki’s Digital <br class="wide">Experience</h1>
       <p class="lede">A visual refresh of Suzuki Israel’s website, designed to bring the brand’s digital presence up to date while staying true to its familiar identity. The new UI creates a cleaner, more consistent experience across pages, components, and screen sizes, with a stronger focus on clarity, usability, and the cars themselves.</p>
       <dl class="cs-meta">
         <div><dt>Role</dt><dd>Product Designer&nbsp;- UX/UI</dd></div>
@@ -89,7 +240,7 @@
         <div><dt>Tools</dt><dd>Figma</dd></div>
       </dl>
       <div class="cs-hero-shot reveal">
-        <img src="/assets/img/suzuki/hero.webp" alt="Suzuki Israel homepage after the refresh" width="1660" height="937" style="aspect-ratio:1660/817;object-fit:cover;object-position:top">
+        <img src="/assets/img/suzuki/hero.webp" alt="Suzuki Israel homepage after the refresh" width="1660" height="937" style="aspect-ratio:1660/817;object-fit:cover;object-position:center">
       </div>
     </div>
   </header>
@@ -105,7 +256,7 @@
           <div class="cs-body-text">
             <p>As part of the Comrax team, I led the visual refresh of Suzuki Israel’s website, with the goal of creating a more modern, clear, and consistent digital experience while keeping the brand familiar and recognizable.</p>
             <p>The project covered the visual language across the full website. From the homepage and model pages to trade-in, services, forms, content, and mobile. The challenge was to bring all these different areas together under one design approach, while giving the vehicles a stronger presence and making information and key actions easier to find.</p>
-            <p>The new UI builds on Suzuki’s practical and approachable character through clear hierarchy, strong imagery, focused use of the brand colors, and a consistent set of components that works across pages and screen sizes.</p>
+            <p class="gap">The new UI builds on Suzuki’s practical and approachable character through clear hierarchy, strong imagery, focused use of the brand colors, and a consistent set of components that works across pages and screen sizes.</p>
           </div>
         </div>
       </div>
@@ -167,29 +318,33 @@
         </div>
       </div>
       <div class="gallery reveal" aria-roledescription="carousel" aria-label="Refreshed Suzuki Israel screens">
+        <!-- Captions are the Figma copy from the variants of 226:3370 (title, then description).
+             Slides 3, 5 and 6 are unfinished in the file; the words in [brackets] below were added
+             to complete them and are waiting for Moran to confirm:
+               3: "a consistent [feed], connecting"   5: "dynamic product [page]."   6: "mileage[ and] location." -->
         <div class="stage">
           <div class="slide on" data-cap="<b>Homepage / Brand Experience</b> A full width driving video creates an immediate sense of motion and brand experience, supported by a clear primary action that guides users to the next step.">
             <video muted loop playsinline preload="metadata" poster="/assets/img/suzuki/home-new.webp" aria-label="Suzuki Swift driving video on the refreshed homepage">
               <source src="/assets/video/suzuki-swift.mp4" type="video/mp4">
             </video>
           </div>
-          <div class="slide" data-cap="<b>Homepage</b> Model highlights and clear entry points to the main sections."><img src="/assets/img/suzuki/slide-2.webp" alt="Refreshed homepage: model highlights" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Model page</b> Bold imagery with the key facts up front."><img src="/assets/img/suzuki/slide-3.webp" alt="Refreshed model page" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Model page</b> Specifications and comparisons designed to be explored."><img src="/assets/img/suzuki/slide-4.webp" alt="Model page: specifications" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Content</b> Editorial layouts for services and magazine content."><img src="/assets/img/suzuki/slide-5.webp" alt="Content page" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Services</b> One consistent structure for trade-in, service and forms."><img src="/assets/img/suzuki/slide-6.webp" alt="Services page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Model Range / Cars First</b> A product first layout puts each car at the center, with key specifications: engine, safety and emissions. Grouped into one clear, scannable strip for easier comparison."><img src="/assets/img/suzuki/slide-2.webp" alt="Model range: the Swift with its key specifications and price" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Suzuki Story / Social Content</b> Social content is brought into the website through a consistent feed, connecting the Suzuki community and lifestyle with the digital brand experience."><img src="/assets/img/suzuki/slide-3.webp" alt="Suzuki Story: a strip of social videos on the website" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Model Page / “What’s Your Color?”</b> Interactive configurator moments turn exploration into a more personal experience, allowing users to discover the model through colors, details and strong visual storytelling."><img src="/assets/img/suzuki/slide-4.webp" alt="Model page colour picker for the Swift" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Model Page / Visual Gallery</b> An editorial image grid replaces the traditional gallery approach, combining exterior, interior and lifestyle photography to create a richer and more dynamic product page."><img src="/assets/img/suzuki/slide-5.webp" alt="Model page editorial image grid" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Suzuki Trade In / Advanced Search</b> A streamlined used car search brings the key filters upfront, helping users quickly narrow hundreds of available vehicles by model, year, ownership, mileage and location."><img src="/assets/img/suzuki/slide-6.webp" alt="Suzuki Trade In used car search with filters" loading="lazy"></div>
           <div class="slide" data-cap="<b>Trade-In / Vehicle Results</b> A clean, consistent vehicle grid makes a large inventory easy to scan, surfacing the information that matters most: price, model, year, mileage and ownership before entering the vehicle details."><img src="/assets/img/suzuki/slide-6.webp" alt="Trade-in vehicle results grid" loading="lazy" style="object-position:50% 41.3%"></div>
-          <div class="slide" data-cap="<b>Showrooms</b> Locations and contact made easy to find."><img src="/assets/img/suzuki/slide-8.webp" alt="Showrooms page" loading="lazy"></div>
-          <div class="slide" data-cap="<b>Forms</b> Clear, accessible forms across the site."><img src="/assets/img/suzuki/slide-9.webp" alt="Forms page" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Trade-In / Vehicle Quick View</b> Vehicle details and lead generation are brought together in a focused modal, allowing users to explore a car and take action without losing their place in the search journey."><img src="/assets/img/suzuki/slide-8.webp" alt="Trade-in vehicle quick view modal with a lead form" loading="lazy"></div>
+          <div class="slide" data-cap="<b>Service &amp; Contact / One Service Hub</b> High frequency customer actions are consolidated into one clear service hub, from finding a nearby showroom or service center to leaving details and accessing essential self-service actions."><img src="/assets/img/suzuki/slide-9.webp" alt="Service and contact hub with self-service actions and a contact form" loading="lazy"></div>
         </div>
+        <div class="dots" aria-hidden="true"></div>
         <div class="bar">
           <p class="cap" aria-live="polite"></p>
           <div class="ctrl">
-            <button type="button" class="prev" aria-label="Previous screen"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-            <button type="button" class="next" aria-label="Next screen"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+            <button type="button" class="prev" aria-label="Previous screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 6.67 16 16 25.33M6.67 16h18.66"/></svg></button>
+            <button type="button" class="next" aria-label="Next screen"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6.67 25.33 16 16 25.33M6.67 16h18.66"/></svg></button>
           </div>
         </div>
-        <div class="dots" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -213,12 +368,12 @@
 
       <h3 class="ba-title reveal">02 / Model Page - Making Vehicle Information Easier to Explore</h3>
       <div class="ba shot reveal">
-        <figure><div class="frame"><img src="/assets/img/suzuki/model-old.webp" alt="Old model page" loading="lazy"></div><figcaption><b>Old Website.</b> The model page presented the essential vehicle information in a more traditional, functional layout.</figcaption></figure>
+        <figure><div class="frame"><img src="/assets/img/suzuki/model-old.webp" alt="Old model page" loading="lazy" style="object-position:50% 4.3%"></div><figcaption><b>Old Website.</b> The model page presented the essential vehicle information in a more traditional, functional layout.</figcaption></figure>
         <figure><div class="frame"><img src="/assets/img/suzuki/model-new.webp" alt="Refreshed model page" loading="lazy"></div><figcaption><b class="new">Refreshed Website.</b> A more visual and interactive experience brings the model to life, combining bold imagery, intuitive interactions, and engaging moments throughout the journey.</figcaption></figure>
       </div>
 
       <h3 class="ba-title reveal">03 / Mobile - Designed for the Mobile Experience</h3>
-      <div class="ba shot reveal">
+      <div class="ba mobile shot reveal">
         <figure><div class="phones3"><img src="/assets/img/suzuki/mobile-old-1.webp" alt="Old mobile screen 1" loading="lazy"><img src="/assets/img/suzuki/mobile-old-2.webp" alt="Old mobile screen 2" loading="lazy"><img src="/assets/img/suzuki/mobile-old-3.webp" alt="Old mobile screen 3" loading="lazy"></div><figcaption><b>Old Website.</b> The mobile experience felt closer to a scaled down desktop layout, with limited consideration for touch, spacing, and content flow.</figcaption></figure>
         <figure><div class="phones3"><img src="/assets/img/suzuki/mobile-new-1.webp" alt="Refreshed mobile screen 1" loading="lazy"><img src="/assets/img/suzuki/mobile-new-2.webp" alt="Refreshed mobile screen 2" loading="lazy"><img src="/assets/img/suzuki/mobile-new-3.webp" alt="Refreshed mobile screen 3" loading="lazy"></div><figcaption><b class="new">Refreshed Website.</b> A mobile first approach creates a more intuitive experience, with clearer content hierarchy, optimized spacing, and touch-friendly interactions.</figcaption></figure>
       </div>
@@ -258,24 +413,30 @@
         </div>
         <div>
           <h3 style="color:#8a9199">Buttons &amp; Components</h3>
-          <div class="panel">
+          <!-- Figma 174:1267. Row 1: two buttons, the scroll-down pill (177:2372) and a
+               dropdown (177:2411). Row 2: tags, the "לשירותך" service badge (177:1903) and
+               the price range slider (177:2398). Vector paths from tools/figdecode/gensvg.py. -->
+          <div class="panel ds-comp">
             <div class="ds-row">
               <span class="ds-btn" style="background:#e20a17;color:#fff;border-radius:11px">Search</span>
-              <span class="ds-btn" style="background:#003399;color:#fff;border-radius:12px">Book a drive</span>
-              <span class="ds-btn" style="border:1px solid #b9b9b9;color:#1d2b45;border-radius:8px">Model comparison</span>
+              <span class="ds-btn" style="background:#003399;color:#fff;border-radius:12.5px">Book a drive</span>
+              <svg class="ds-pill" viewBox="0 0 49.5 72.3" role="img" aria-label="Scroll-down button"><rect width="49.5" height="72.3" rx="24.75" fill="#fff"/><rect x="8.15" y="8.5" width="33.2" height="55.3" rx="16.6" fill="#e20a17"/><path transform="translate(24.89 27.26) rotate(90)" d="M19.08 0.65C19.44 0.29 19.44 -0.29 19.08 -0.65L13.2 -6.53C12.84 -6.89 12.26 -6.89 11.9 -6.53C11.53 -6.17 11.53 -5.59 11.9 -5.23L17.12 0L11.9 5.23C11.53 5.59 11.53 6.17 11.9 6.53C12.26 6.89 12.84 6.89 13.2 6.53L19.08 0.65ZM0 0L0 0.92L18.43 0.92L18.43 -0.92L0 -0.92Z" fill="#fff"/></svg>
+              <span class="ds-select" role="img" aria-label="Dropdown"><svg viewBox="0 0 12.7 7.2" aria-hidden="true"><path transform="matrix(1 0 0 -1 0 7.2)" d="M5.94 0.17L0.15 6.24C0.05 6.34 0 6.48 0 6.62C0 6.76 0.05 6.89 0.15 7L0.16 7C0.2 7.05 0.26 7.09 0.32 7.12C0.39 7.14 0.45 7.16 0.52 7.16C0.59 7.16 0.66 7.14 0.72 7.12C0.78 7.09 0.84 7.05 0.88 7L6.33 1.28L11.78 7C11.83 7.05 11.88 7.09 11.95 7.12C12.01 7.14 12.08 7.16 12.14 7.16C12.21 7.16 12.28 7.14 12.34 7.12C12.4 7.09 12.46 7.05 12.51 7L12.51 7C12.61 6.89 12.66 6.76 12.66 6.62C12.66 6.48 12.61 6.34 12.51 6.24L6.73 0.17C6.68 0.12 6.61 0.07 6.55 0.04C6.48 0.01 6.41 0 6.33 0C6.26 0 6.19 0.01 6.12 0.04C6.05 0.07 5.99 0.12 5.94 0.17Z" fill="#e20a17"/></svg></span>
             </div>
             <div class="ds-row">
               <span class="ds-tag" style="background:#fdeaed;color:#c8102e;font-weight:700">New</span>
               <span class="ds-tag" style="background:#eef1f3;color:#4d5860">Hybrid</span>
               <span class="ds-tag" style="background:#003399;color:#fff;font-weight:700">₪91,000</span>
-              <span style="margin-left:auto;width:49px;height:72px;border-radius:6px;background:#fff;box-shadow:0 4px 8px rgba(0,0,0,.15);display:grid;place-items:center"><span style="width:33px;height:55px;border-radius:4px;background:#e20a17;display:block"></span></span>
+              <svg class="ds-badge" viewBox="0 0 54 54" role="img" aria-label="לשירותך service badge"><circle cx="27" cy="27" r="27" fill="#fff"/><path transform="translate(18 12.34)" d="M17.49 6.21C16.4 7.11 13.16 8.39 11.19 7.11L6.61 3.91L5.85 4.36L17.49 12.49C14.56 13.64 11.19 15.95 8.77 18L0.13 11.79C1.4 10.83 4.39 9.67 6.36 10.95L11 14.22L11.64 13.77L0 5.57C2.48 4.68 6.99 1.86 8.71 0L17.49 6.21Z" fill="#e20a17"/><text x="27" y="38.6" text-anchor="middle" fill="#003399" font-family="Assistant, sans-serif" font-weight="700" font-size="7.2" letter-spacing="-.14">לשירותך</text></svg>
+              <span class="ds-range" role="img" aria-label="Price range slider, 10,000 to 122,000"><i class="lo">10000</i><i class="hi">122000</i><b></b><u></u><u></u></span>
             </div>
           </div>
           <h3 style="color:#8a9199">Iconography</h3>
-          <!-- The nine service icons are vectors in Portfolio.fig (frame 1739340856,
-               716x41). Rendered from the decoded node tree at 2x rather than exported. -->
-          <div class="panel" style="display:flex;align-items:center;padding:20px 26px">
-            <img src="/assets/img/suzuki/icons.png" alt="Suzuki service icon set: documents, licence, vehicle, parts catalogue, accident, service call, recommendations, warranty and customer service" width="1432" height="82" style="width:100%;height:auto" loading="lazy">
+          <!-- The nine service icons are vectors in Portfolio.fig (frame 177:2367, 716.4 x 41). They are
+               resized instances, so they are drawn from each instance's derived geometry and rasterised
+               at 2x. (icons.png used the unresized symbols and cut every icon off at the bottom.) -->
+          <div class="panel ds-icons">
+            <img src="/assets/img/suzuki/service-icons.png" alt="Suzuki service icon set: documents, licence, vehicle, parts catalogue, accident, service call, recommendations, warranty and customer service" width="1433" height="82" loading="lazy">
           </div>
         </div>
       </div>
@@ -289,7 +450,7 @@
         <span class="cs-num">07 / Impact</span>
         <div><h2 class="cs-h2">A Clearer Digital Experience</h2></div>
       </div>
-      <ul class="stats reveal" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <ul class="stats sz-stats reveal">
         <li style="background:#fff"><b>Live</b><p>Designed, developed, and running on <a href="https://www.suzuki.co.il" rel="noopener" target="_blank" style="text-decoration:underline">suzuki.co.il</a>.</p></li>
         <li style="background:#fff"><b>AA</b><p>Accessibility considered across components, interactions, and screen sizes.</p></li>
         <li style="background:#fff"><b>1 System</b><p>One visual language connecting the experience from desktop to mobile.</p></li>
@@ -324,7 +485,7 @@
     </div>
     <div class="footer-bottom">
       <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">M</span><span>Moran Weinish</span></a>
-      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.11</span></small>
+      <small>© 2026 · Designed &amp; built by me<span class="ver" title="build">v1.0.12</span></small>
     </div>
     <p class="credit">Created with Claude, Claude Design &amp; Figma MCP</p>
   </div>

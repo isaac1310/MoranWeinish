@@ -85,11 +85,12 @@
   },
   ".reflect": {
     "fig": [
-      353,
-      1214,
+      343,
+      1234,
       null
     ],
-    "node": "177:3802, aligned to the text column"
+    "node": "screenshot 2 (export 177:3836 is 1444 @238 — stale)",
+    "_why": "shot 2 (2026-09-29) is newer than the Sep 6 export: a centred 1234 block, 80 below the heading"
   },
   ".swatches span": {
     "fig": [
@@ -101,11 +102,41 @@
   },
   ".icons.solid": {
     "fig": [
-      123,
-      1674,
+      202,
+      1516,
+      77
+    ],
+    "node": "screenshot 3 (export 46:638 is 1674 @123, 84 tall — stale)",
+    "height_floored_below": 1920,
+    "_why": "shot 3: inset 79 each side like the .ds grid; 77 tall with padding 22.5/40/22.5/48. Icons (30) and caption (16px) are fixed size, so the height only scales at 1920"
+  },
+  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head.",
+  ".reflect div": {
+    "fig": [
+      343,
+      607,
       null
     ],
-    "node": "46:638"
+    "node": "screenshot 2 (export 177:3792 is 712 wide — stale); padding 32/36 from 177:3792"
   },
-  "_revised": "Section-head layout revised 2026-09-11: number and rule at the gutter, heading column starts at 353 (gutter + 225 rule + 5), and the content block keeps its symmetric 230 / 1214 / 230 inset. Read from the designer's screenshots; Portfolio.fig here is the Sep 6 export and still has the old head."
+  ".ds": {
+    "fig": [
+      202,
+      1516,
+      null
+    ],
+    "node": "screenshot 3 — grid inset 79 each side (export 46:539 is 1674 @123)",
+    "_why": "shot 3: 202 → 1718, columns 722 | 692"
+  },
+  ".fields": {
+    "fig": [
+      1026,
+      692,
+      215
+    ],
+    "node": "46:615 (215 tall, 2 × 2) at the shot-3 x",
+    "height_floored_below": 1920,
+    "_why": "shot 3: right column starts at 1026. Labels and inputs are fixed px (16/13, 37 tall), so the height is only checked at 1920"
+  },
+  "_revised_2026-09-29": "Sections 07 and 09 re-measured from Itzik's screenshots 2 and 3 (newer than the export): .reflect, .reflect div, .ds, .fields, .icons.solid are 'from screenshot', not decoded."
 }
