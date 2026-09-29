@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="build" content="v1.0.30">
+  <meta name="build" content="v1.0.31">
   <title>TravelHub — plan the whole trip · Moran Weinish</title>
   <meta name="description" content="Case study: TravelHub, an end-to-end mobile trip planner that unifies itineraries, bookings, people and budgets in one place. UX/UI by Moran Weinish.">
   <link rel="canonical" href="https://moran-weinish.vercel.app/work/travelhub">
@@ -56,6 +56,8 @@
        (330·cos + 678·sin), so on a phone it scales down to fit the screen with
        16 to spare each side instead of pushing the page sideways */
     @media (max-width: 1023px) { .th-phone { --u: min(1px, calc((100vw - 32px) / 426)); } }
+    /* phones: the hero phone a touch smaller than full width (Itzik 2026-09-29) — about 11% */
+    @media (max-width: 767px) { .th-phone { --u: min(.89px, calc((100vw - 32px) / 480)); } }
     /* phone contents placed from the top of the screen, fig 18:1292 (screen = phone + 12) */
     .th-phone .status { position: absolute; inset: 0 0 auto; height: calc(42 * var(--u)); padding: 0; }
     .th-phone .status span { position: absolute; left: calc(26 * var(--u)); top: calc(12 * var(--u)); line-height: calc(18 * var(--u)); }
