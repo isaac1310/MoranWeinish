@@ -279,6 +279,79 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .reveal-ready .reveal[data-delay="2"] { transition-delay: .2s; }
 .reveal-ready .reveal[data-delay="3"] { transition-delay: .3s; }
 
+/* ---------- footer credit ---------- */
+.credit {
+  margin: 22px 0 0; font-family: var(--mono); font-size: 13px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--rose-muted);
+}
+@media (min-width: 1024px) { .credit { text-align: right; margin-top: calc(22 * var(--k)); } }
+
+/* ---------- splash ----------
+   Plays once per browser session (js/splash.js adds .splash-seen on repeat
+   visits). It must never be able to hide the page, so the *declared* state is
+   hidden and the animation owns the visible phase — if the animation does not
+   run (reduced motion, old browser, CSS error) the splash simply is not there,
+   and if JS does not run it still lifts itself after ~2.6s. Same rule as
+   .reveal in CLAUDE.md §6: the un-animated fallback is the readable page. */
+.splash {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center;
+  background: var(--plum); color: var(--on-plum);
+  visibility: hidden;
+  animation: splash-out 2.6s var(--ease) both;
+}
+.splash-in { display: grid; justify-items: center; gap: 22px; padding: 0 24px; text-align: center; animation: splash-lift 2.6s var(--ease) both; }
+.splash-mark {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--rose); color: var(--plum); font-weight: 800; font-size: 30px; line-height: 1;
+  animation: splash-pop .6s var(--ease) both;
+}
+.splash-name {
+  margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .26em;
+  font-weight: 800; font-size: clamp(40px, 6vw, 104px); line-height: 1.05; letter-spacing: -0.03em;
+}
+.splash-name > span { display: inline-block; overflow: hidden; padding-bottom: .06em; }
+.splash-name b { display: inline-block; font-weight: inherit; animation: splash-rise .8s var(--ease) .18s both; }
+.splash-name > span + span b { animation-delay: .3s; }
+.splash-bar {
+  display: block; width: min(420px, 70vw); height: 1px; background: var(--rose);
+  transform-origin: center; animation: splash-bar .9s var(--ease) .55s both;
+}
+.splash-role {
+  margin: 0; display: flex; align-items: center;
+  font-family: var(--mono); font-size: clamp(13px, 1.05vw, 18px); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--rose);
+}
+/* mono, so every glyph is 1ch + the tracking: typing is a width animation in 24 steps */
+.splash-role span {
+  display: inline-block; overflow: hidden; white-space: nowrap;
+  width: calc(24 * (1ch + .12em)); animation: splash-type .75s steps(24, end) .8s both;
+}
+.splash-role i { display: inline-block; width: 2px; height: 1.2em; margin-left: 4px; background: var(--rose); animation: splash-caret .5s steps(1) .8s 4 both; }
+.splash-seen .splash, .splash-skip .splash { display: none; }
+
+@keyframes splash-out {
+  0%, 72% { visibility: visible; transform: none; }
+  100% { visibility: hidden; transform: translateY(-100%); }
+}
+@keyframes splash-lift {
+  0%, 68% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-48px); }
+}
+@keyframes splash-pop { from { opacity: 0; transform: scale(.4) rotate(-20deg); } to { opacity: 1; transform: none; } }
+@keyframes splash-rise { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes splash-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes splash-type { from { width: 0; } }
+@keyframes splash-caret { 50% { opacity: 0; } }
+
+/* the home hero art would otherwise play its entrance behind the splash */
+html:not(.splash-seen):not(.splash-skip) .hero-art img { animation-delay: 2s, 3.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .splash { display: none; }
+  html:not(.splash-seen):not(.splash-skip) .hero-art img { animation-delay: 0s, 0s; }
+}
+
 /* ---------- reduced motion: everything static ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
